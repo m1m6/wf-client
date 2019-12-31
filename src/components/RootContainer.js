@@ -19,13 +19,8 @@ import LogoutPage from "./LogoutPage";
 import { AUTH_TOKEN } from "../constants";
 import { isTokenExpired } from "../helper/jwtHelper";
 import {ME_QUERY} from './test'
-const ProtectedRoute = ({ component: Component, token, ...rest }) => {
-	return token ? (
-		<Route {...rest} render={matchProps => <Component {...matchProps} />} />
-	) : (
-		<Redirect to="/login" />
-	);
-};
+import ProtectedRoute from "./ProtectedRoute";
+
 
 const RootContainer = props => {
 	const [token, setToken] = useState(props.token);
