@@ -1,27 +1,33 @@
 import React from "react";
 import { Layout, Menu, Icon } from "antd";
+import headerLogo from "../assets/imgs/sidebar/header-logo@3x.png";
+import { Link } from "react-router-dom";
+// import Link from "../form/components/Link";
 
 const { Sider } = Layout;
 
+const HeaderLogo = () => (
+	<div className="header-logo">
+		<img src={headerLogo} />
+	</div>
+);
+
 const Sidebar = () => {
 	return (
-		<Sider
-			style={{
-				overflow: "auto",
-				height: "100vh",
-				position: "fixed",
-				left: 0
-			}}
-		>
-			<div className="logo" />
+		<Sider width={270} className="sidebar-wrapper">
+			<HeaderLogo />
 			<Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
 				<Menu.Item key="1">
 					<Icon type="user" />
-					<span className="nav-text">Notifications</span>
+					<Link to="notifications">
+						<span className="nav-text">Notifications</span>
+					</Link>
 				</Menu.Item>
 				<Menu.Item key="2">
 					<Icon type="video-camera" />
-					<span className="nav-text">Dashboard</span>
+					<Link to="influencers">
+						<span className="nav-text">Influencers</span>
+					</Link>
 				</Menu.Item>
 				<Menu.Item key="3">
 					<Icon type="upload" />

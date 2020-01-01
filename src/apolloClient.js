@@ -5,12 +5,12 @@ import { ApolloLink, split } from "apollo-link";
 import { getMainDefinition } from "apollo-utilities";
 import { WebSocketLink } from "apollo-link-ws";
 
-import { AUTH_TOKEN } from "./constants";
+import { ACCESS_TOKEN } from "./constants";
 
 const httpLink = createHttpLink({ uri: "http://localhost:4000" });
 
 const middlewareLink = new ApolloLink((operation, forward) => {
-	const tokenValue = localStorage.getItem(AUTH_TOKEN);
+	const tokenValue = localStorage.getItem(ACCESS_TOKEN);
 	operation.setContext({
 		headers: {
 			Authorization: tokenValue ? `Bearer ${tokenValue}` : ""
@@ -24,7 +24,7 @@ const wsLink = new WebSocketLink({
 	options: {
 		reconnect: true,
 		connectionParams: {
-			Authorization: `Bearer ${localStorage.getItem(AUTH_TOKEN)}`
+			Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`
 		}
 	}
 });

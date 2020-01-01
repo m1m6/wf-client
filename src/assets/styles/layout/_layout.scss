@@ -1,0 +1,24 @@
+.ant-layout-has-sider,
+.ant-layout {
+	height: 100%;
+	margin-left: 270px;
+
+	&.app-page-wrapper,
+	&.ant-layout-content {
+		height: 100%;
+		width: 100%;
+		background-color: $pale-grey;
+	}
+
+	.page-layout {
+		margin-left: 67px;
+		margin-top: 40px;
+
+		.page-title {
+			font-family: AvenirMedium;
+			font-size: 32px;
+			font-weight: 500;
+			color: $dark-slate-blue;
+		}
+	}
+}

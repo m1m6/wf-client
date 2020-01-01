@@ -1,0 +1,15 @@
+.btn-link {
+	font-family: Montserrat;
+	font-size: 14px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: $bright-sky-blue;
+    text-decoration: underline;
+    
+    &:hover{
+        color: $bright-sky-blue;
+    }
+}

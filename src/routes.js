@@ -4,6 +4,10 @@ import Home from "./components/Home";
 import PageNotFound from "./components/PageNotFound";
 import SignupPage from "./components/SignupPage";
 import LoginPage from "./components/LoginPage";
+import PageLayout from "./components/PageLayout";
+import AuthPageLayout from "./components/AuthPageLayout";
+import Login from "./signupLogin/login/components/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export const ROUTE_PATHS = {
 	home: "/",
@@ -23,9 +27,31 @@ export const ROUTE_PATHS = {
 
 const Routes = () => (
 	<Switch>
-		<Route path={ROUTE_PATHS.home} exact component={Home} />
-		<Route path={ROUTE_PATHS.auth.signup} exact component={SignupPage} />
-		<Route path={ROUTE_PATHS.auth.login} exact component={LoginPage} />
+		<ProtectedRoute
+			path={ROUTE_PATHS.home}
+			exact
+			component={matchProps => (
+				<PageLayout Component={Home} {...matchProps} title="Home page" />
+			)}
+		/>
+		<Route
+			path={ROUTE_PATHS.auth.signup}
+			exact
+			render={matchProps => (
+				<AuthPageLayout
+					Component={SignupPage}
+					title="Sign up"
+					{...matchProps}
+				/>
+			)}
+		/>
+		<Route
+			path={ROUTE_PATHS.auth.login}
+			exact
+			render={matchProps => (
+				<AuthPageLayout Component={Login} title="Log in" {...matchProps} />
+			)}
+		/>
 		{/* <ProtectedRoute
       path={ROUTE_PATHS.blog.create}
       exact

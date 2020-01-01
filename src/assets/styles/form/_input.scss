@@ -1,0 +1,40 @@
+.input-field-wrapper {
+	.ant-input {
+		border-radius: 0 !important;
+		border: solid 1px #dbdbdb;
+		font-family: Montserrat;
+		font-size: 14px;
+		font-weight: 500;
+		color: $black;
+		height: 50px;
+		&:-webkit-autofill {
+			-webkit-box-shadow: 0 0 0 50px #f3f7fa inset;
+			-webkit-text-fill-color: #333;
+		}
+
+		&:-webkit-autofill:focus {
+			-webkit-box-shadow: 0 0 0 50px #f3f7fa inset;
+			-webkit-text-fill-color: #333;
+		}
+	}
+
+	.form-label {
+		font-family: Montserrat;
+		@include font-size(14px);
+		font-weight: 500;
+		color: $black;
+		display: inline-flex;
+	}
+
+	.error-message {
+		color: red;
+		font-size: 12px;
+		margin-left: 5px;
+	}
+
+	.required {
+		> input {
+			border: 1px solid red;
+		}
+	}
+}

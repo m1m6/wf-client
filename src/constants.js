@@ -1,3 +1,3 @@
 export const USER_ID = 'user-id'
 
-export const AUTH_TOKEN = 'AUTH_TOKEN'
+export const ACCESS_TOKEN = 'ACCESS_TOKEN'

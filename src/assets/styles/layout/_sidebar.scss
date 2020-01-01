@@ -1,0 +1,41 @@
+.sidebar-wrapper {
+	overflow: auto;
+	height: 100vh;
+	position: fixed;
+	left: 0;
+	background-color: $dark-slate-blue;
+
+    .header-logo{
+        margin-left: 1.6vw;
+        margin-top: 43px;
+        margin-bottom: 45px;
+    }
+
+	.ant-menu-dark {
+		background-color: $dark-slate-blue;
+		padding-left: 1.6vw;
+		padding-right: 1.6vw;
+		.ant-menu-item {
+			height: 50px;
+			align-items: center;
+			display: flex;
+			color: $white;
+		}
+		.ant-menu-item-selected {
+			background-color: $light-navy-blue;
+			padding-left: 0px;
+		}
+		.ant-menu-item,
+		.ant-menu-item-selected {
+			.nav-text {
+				margin-left: 1.3vw;
+				font-family: Montserrat;
+				font-size: 16px;
+				font-weight: 300;
+				line-height: 3.75;
+				letter-spacing: normal;
+				color: $white;
+			}
+		}
+	}
+}
