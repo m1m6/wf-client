@@ -18,15 +18,15 @@ const Sidebar = () => {
 			<HeaderLogo />
 			<Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
 				<Menu.Item key="1">
-					<Icon type="user" />
+					<Icon type="bell" />
 					<Link to="notifications">
 						<span className="nav-text">Notifications</span>
 					</Link>
 				</Menu.Item>
 				<Menu.Item key="2">
-					<Icon type="video-camera" />
-					<Link to="influencers">
-						<span className="nav-text">Influencers</span>
+					<Icon type="profile" />
+					<Link to="discover">
+						<span className="nav-text">Discover</span>
 					</Link>
 				</Menu.Item>
 				<Menu.Item key="3">

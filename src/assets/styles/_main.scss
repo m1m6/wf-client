@@ -11,6 +11,10 @@
 @import "./layout/layout";
 @import "./layout/sidebar";
 
+@import "./wfluence/discover/discover";
+
+@import "./core/filter/commonFilters";
+
 @font-face {
 	font-family: "AvenirMedium";
 	src: url("../fonts/AvenirLT-Medium.eot");

@@ -20,6 +20,7 @@
     "node-sass": "^4.13.0",
     "react": "16.12.0",
     "react-apollo": "2.5.8",
+    "react-busy-indicator": "1.0.0",
     "react-dom": "16.12.0",
     "react-modal": "3.11.1",
     "react-router-dom": "4.4.0-beta.8",

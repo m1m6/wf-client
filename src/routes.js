@@ -8,12 +8,13 @@ import PageLayout from "./components/PageLayout";
 import AuthPageLayout from "./components/AuthPageLayout";
 import Login from "./signupLogin/login/components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Discover from "./wfluence/discover/components/Discover";
 
 export const ROUTE_PATHS = {
 	home: "/",
 	notFound: "*",
 	app: {
-		main: "/main"
+		discover: "/discover"
 	},
 	auth: {
 		me: "/me", // TODO add
@@ -34,6 +35,15 @@ const Routes = () => (
 				<PageLayout Component={Home} {...matchProps} title="Home page" />
 			)}
 		/>
+
+		<ProtectedRoute
+			path={ROUTE_PATHS.app.discover}
+			exact
+			component={matchProps => (
+				<PageLayout Component={Discover} {...matchProps} title="Discover" />
+			)}
+		/>
+
 		<Route
 			path={ROUTE_PATHS.auth.signup}
 			exact

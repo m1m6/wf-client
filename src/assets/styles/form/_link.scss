@@ -7,9 +7,15 @@
 	line-height: normal;
 	letter-spacing: normal;
 	color: $bright-sky-blue;
-    text-decoration: underline;
-    
-    &:hover{
-        color: $bright-sky-blue;
-    }
+	text-decoration: underline;
+
+	&:hover {
+		color: $bright-sky-blue;
+	}
+
+	&.black {
+		font-size: 12px;
+		font-weight: 500;
+		color: $black;
+	}
 }
