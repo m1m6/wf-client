@@ -1,10 +1,25 @@
 import React from "react";
 import { Menu, Dropdown, Divider } from "antd";
 import Link from "../../../form/components/Link";
+import capitalize from "lodash/capitalize";
+import { FILTER_KEYS } from "../constants";
+import { GENDER_LIST, getCheckboxMenu, getSliderMenu } from "../utils";
+import { getCountriesList } from "../../../assets/js/countries";
 
-const CommonFilter = () => {
-	const menu = (
-		<Menu className="filter-options">
+const getMenuOptions = (filterName,filterKey) => {
+	switch (filterKey) {
+		case FILTER_KEYS.gender:
+			return getCheckboxMenu(filterName, GENDER_LIST);
+
+		case FILTER_KEYS.country:
+            return getCheckboxMenu(filterName, getCountriesList());
+            
+            case FILTER_KEYS.followers:
+                return getSliderMenu(filterName)
+	}
+
+	return (
+		<Menu className="filter-options" key={filterKey}>
 			<Menu.Item key="0">
 				<a href="http://www.alipay.com/">1st menu item</a>
 			</Menu.Item>
@@ -13,7 +28,7 @@ const CommonFilter = () => {
 			</Menu.Item>
 
 			<div className="filter-options-footer-wrapper">
-				<Divider className="filter-footer-divider"/>
+				<Divider className="filter-footer-divider" />
 				<div className="filter-options-footer">
 					<Link label="Clear" blackLink />
 					<button className="save-btn">SAVE</button>
@@ -21,12 +36,18 @@ const CommonFilter = () => {
 			</div>
 		</Menu>
 	);
+};
 
+const CommonFilter = ({ filterName, filterKey }) => {
 	return (
 		<div className="common-filter-wrapper">
-			<Dropdown overlay={menu} trigger={["click"]} className="filter-dropdown">
+			<Dropdown
+				overlay={getMenuOptions(filterName, filterKey)}
+				trigger={["click"]}
+				className="filter-dropdown"
+			>
 				<button className="common-filter-button" href="#">
-					Followers
+					{capitalize(filterName)}
 				</button>
 			</Dropdown>
 		</div>

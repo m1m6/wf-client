@@ -11,7 +11,7 @@
 		width: 7.4vw;
 		height: 35px;
 		outline: 0;
-
+		margin-left: 10px;
 		&:hover {
 			border-radius: 17.5px;
 			border: solid 1px $pale-grey;
@@ -33,25 +33,65 @@
 		border-radius: 4px;
 		border: solid 1px $pale-grey;
 		background-color: $white;
-		padding-top: 30px;
+		padding-top: 13px;
 		max-height: 250px;
 		flex-direction: column;
-        display: flex;
-        
-        > li {
-            padding-left: 21px;
-        }
+		display: flex;
+
+		.filter-input{
+			// height: 50px;
+			border: solid 1px #dbdbdb;
+			background-color: var(--white);
+			background-color: white;
+			border-radius: 0;
+			outline: none;
+			width: 92%;
+			margin: 0 auto;
+			margin-bottom: 20px;
+		}
+		> li {
+			padding-left: 21px;
+		}
+
+		.filter-checkbox-options {
+			display: flex;
+			flex-direction: column;
+			margin-left: 21px;
+
+			.ant-checkbox-wrapper {
+				margin-left: 0;
+
+				.ant-checkbox-checked {
+					.ant-checkbox-inner {
+						width: 16px;
+						height: 16px;
+						border-radius: 2px;
+						border: solid 1.5px $dark-slate-blue;
+						background-color: $dark-slate-blue;
+					}
+				}
+
+				.ant-checkbox-inner {
+					width: 16px;
+					height: 16px;
+					border-radius: 2px;
+					border: solid 1.5px #cccccc;
+					background-color: $white;
+				}
+			}
+		}
+
 		.ant-dropdown-menu-item-active:hover {
 			background-color: #eeeeee;
 		}
 
 		.filter-options-footer-wrapper {
-			position: absolute;
 			bottom: 10px;
-			width: 100%;
+            width: 100%;
+            background: white;
 			.filter-footer-divider {
-                margin: 12px 0;
-                background-color: $pale-grey;
+				margin: 12px 0;
+				background-color: $pale-grey;
 			}
 			.filter-options-footer {
 				display: flex;
@@ -59,7 +99,7 @@
 				align-items: center;
 				margin-left: 22px;
 				margin-right: 20px;
-
+                margin-bottom: 10px;
 				.save-btn {
 					width: 70px;
 					height: 30px;
