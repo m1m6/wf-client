@@ -38,7 +38,11 @@
 		flex-direction: column;
 		display: flex;
 
-		.filter-input{
+		.followers-slider {
+			width: 90%;
+			margin-left: 17px;
+		}
+		.filter-input {
 			// height: 50px;
 			border: solid 1px #dbdbdb;
 			background-color: var(--white);
@@ -87,8 +91,8 @@
 
 		.filter-options-footer-wrapper {
 			bottom: 10px;
-            width: 100%;
-            background: white;
+			width: 100%;
+			background: white;
 			.filter-footer-divider {
 				margin: 12px 0;
 				background-color: $pale-grey;
@@ -99,7 +103,7 @@
 				align-items: center;
 				margin-left: 22px;
 				margin-right: 20px;
-                margin-bottom: 10px;
+				margin-bottom: 10px;
 				.save-btn {
 					width: 70px;
 					height: 30px;

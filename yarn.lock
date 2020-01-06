@@ -9264,6 +9264,11 @@ react-busy-indicator@1.0.0:
   resolved "https://registry.yarnpkg.com/react-busy-indicator/-/react-busy-indicator-1.0.0.tgz#3369617f50fba61f4fc776355682c878e7c9eb66"
   integrity sha512-/3OdsHYAqZ9LsrTyjeVu/70yjCfJXmr2qdHuO4hdJ3I92saspXxAGvZzm+Go9luHGlAiKVVh7LykK6tjaXfRQA==
 
+react-country-flag@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-country-flag/-/react-country-flag-2.0.1.tgz#1028e71cd456b9685adc0447e148b79770c04b4e"
+  integrity sha512-cZQp+MTQUfSkI++ypDJU6PNgNU2K6Z/9htO4ct4HzvWAs19DoMbnvhzyK31lkBnW1vfx9OkMwskxuaYbEcFjLw==
+
 react-dev-utils@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-8.0.0.tgz#7c5b227a45a32ea8ff7fbc318f336cf9e2c6e34c"

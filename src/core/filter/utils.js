@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Menu, Divider, Checkbox, Icon, Spin, Input, Slider } from "antd";
 import Link from "../../form/components/Link";
+import { FILTER_KEYS } from "./constants";
 
 export const GENDER_LIST = [
 	{ value: "ML", label: "Male" },
@@ -9,24 +10,26 @@ export const GENDER_LIST = [
 
 const loadingIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
-export const getCheckboxMenu = (filterName, options = []) => {
+export const getCheckboxMenu = (filterName, filterKey, options = []) => {
 	let [loading, setLoading] = useState(false);
 	return (
 		<Menu className="filter-options">
-			<div className="filter-input">
-				<Spin spinning={loading} indicator={loadingIcon}>
-					<Input
-						placeholder={`Search ${filterName}`}
-						onChange={v => {}}
-						style={{ border: 0 }}
-					/>
-				</Spin>
-			</div>
+			{shouldShowSearchBox(filterKey) && (
+				<div className="filter-input">
+					<Spin spinning={loading} indicator={loadingIcon}>
+						<Input
+							placeholder={`Search ${filterName}`}
+							onChange={v => {}}
+							style={{ border: 0 }}
+						/>
+					</Spin>
+				</div>
+			)}
+
 			<div style={{ overflowY: "auto" }}>
 				<Checkbox.Group
 					defaultValue={[0]}
 					onChange={selectedOptions => console.log(selectedOptions)}
-					// setSelectedOptions(selectedOptions, filterKey)
 					className="filter-checkbox-options"
 				>
 					{options.map((option, index) => {
@@ -49,23 +52,21 @@ export const getCheckboxMenu = (filterName, options = []) => {
 	);
 };
 
-export const getSliderMenu = filterName => {
+export const getSliderMenu = (filterName, filterKey) => {
 	const marks = {
-		0: "0",
-		26: "26",
-		37: "37",
-		100: {
-			style: {
-				color: "#f50"
-			},
-			label: <strong>100</strong>
-		}
+		5000: "",
+		10000: "",
+        30000: "",
+        50000: "",
+        100000: "100K",
+        500000: "500K",
+        1000000: "1M",
 	};
 
 	return (
 		<Menu className="filter-options">
 			<div style={{ overflowY: "auto" }}>
-				<Slider marks={marks} defaultValue={37} />
+				<Slider max={1000000} step={5000} range={true} className="followers-slider" marks={marks} defaultValue={[5000, 20000]} />
 			</div>
 			<div className="filter-options-footer-wrapper">
 				<Divider className="filter-footer-divider" />
@@ -76,4 +77,8 @@ export const getSliderMenu = filterName => {
 			</div>
 		</Menu>
 	);
+};
+
+export const shouldShowSearchBox = filterKey => {
+    return filterKey !== FILTER_KEYS.gender && filterKey !== FILTER_KEYS.followers
 };

@@ -1,0 +1,107 @@
+// .profile-card {
+//     width: 330px;
+//     border-radius: 4px;
+//     background-color: $white;
+//     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+//     .profile-image {
+//         display: flex;
+//         justify-content: center;
+
+//         > img {
+//             border-radius: 100px;
+//             margin-top: 33px;
+//         }
+//     }
+
+//     .profile-data {
+//         .fullname {
+//             margin-top: 20px;
+//             font-family: Montserrat;
+//             font-size: 16px;
+//             font-weight: 500;
+//             text-align: center;
+//             color: $black;
+//         }
+
+//         .username {
+//             font-family: Montserrat;
+//             font-size: 14px;
+//             font-weight: 500;
+//             color: $black;
+//             margin-top: 9px;
+//             text-align: center;
+//         }
+
+//         .metadata {
+//             display: flex;
+//             margin-top: 12px;
+//             justify-content: space-evenly;
+//             font-family: Montserrat;
+//             font-size: 14px;
+//             font-weight: 500;
+//             color: $black;
+//         }
+
+//         .top-tags {
+//             margin-top: 18px;
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+
+//             .tag-item {
+//                 border-radius: 12.5px;
+//                 background-color: $pale-grey;
+//                 font-family: Montserrat;
+//                 font-size: 13px;
+//                 text-align: center;
+//                 color: $dark-slate-blue;
+//                 padding-top: 3px;
+//                 padding-bottom: 4px;
+//                 padding-left: 11px;
+//                 padding-right: 11px;
+//                 margin-right: 5px;
+//                 cursor: pointer;
+//             }
+
+//             .more-counter {
+//                 cursor: pointer;
+//                 font-family: Montserrat;
+//                 font-size: 13px;
+//                 font-weight: 500;
+//                 text-align: center;
+//                 color: $dark-slate-blue;
+//             }
+//         }
+//         .card-footer {
+//             display: flex;
+//             margin-top: 33px;
+//             border-top: 1px solid $pale-grey;
+//             justify-content: space-around;
+
+//             .footer-item{
+//                 margin-top: 11.5px;
+//                 .count{
+//                     font-family: Montserrat;
+//                     font-size: 14px;
+//                     font-weight: 500;
+//                     font-stretch: normal;
+//                     font-style: normal;
+//                     line-height: normal;
+//                     letter-spacing: 1px;
+//                     color: $black;
+//                 }
+//                 .label{
+//                     font-family: Montserrat;
+//                     font-size: 12px;
+//                     font-weight: 500;
+//                     font-stretch: normal;
+//                     font-style: normal;
+//                     line-height: normal;
+//                     letter-spacing: normal;
+//                     color: $warm-grey;
+//                     padding-bottom: 14px;
+//                 }
+//             }
+//         }
+//     }
+// }

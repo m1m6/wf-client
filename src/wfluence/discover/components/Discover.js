@@ -1,6 +1,9 @@
 import React from "react";
+import { Row, Col, Icon } from "antd";
+import ReactCountryFlag from "react-country-flag";
 import CommonFilter from "../../../core/filter/components/CommonFilter";
 import { FILTER_KEYS } from "../../../core/filter/constants";
+import ProfileCard from "./ProfileCard";
 
 const Discover = () => {
 	return (
@@ -26,7 +29,17 @@ const Discover = () => {
 					/>
 				</React.Fragment>
 			</div>
-			<div className="dicover-profiles-wrapper">profiles</div>
+			<div className="dicover-profiles-wrapper">
+				 {[1, 2, 3].map(i => (
+					<Row className="profiles-row">
+						{[1, 2, 3].map(i => (
+							<Col className="profile-card-wrapper">
+								<ProfileCard />
+							</Col>
+						))}
+					</Row>
+				))}
+			</div>
 		</div>
 	);
 };

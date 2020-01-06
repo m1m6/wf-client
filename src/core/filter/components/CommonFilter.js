@@ -5,17 +5,21 @@ import capitalize from "lodash/capitalize";
 import { FILTER_KEYS } from "../constants";
 import { GENDER_LIST, getCheckboxMenu, getSliderMenu } from "../utils";
 import { getCountriesList } from "../../../assets/js/countries";
+import { getCategoriesList } from "../../../assets/js/categories";
 
-const getMenuOptions = (filterName,filterKey) => {
+const getMenuOptions = (filterName, filterKey) => {
 	switch (filterKey) {
 		case FILTER_KEYS.gender:
-			return getCheckboxMenu(filterName, GENDER_LIST);
+			return getCheckboxMenu(filterName, filterKey, GENDER_LIST);
 
 		case FILTER_KEYS.country:
-            return getCheckboxMenu(filterName, getCountriesList());
+			return getCheckboxMenu(filterName, filterKey, getCountriesList());
+
+            case FILTER_KEYS.category:
+            return getCheckboxMenu(filterName, filterKey, getCategoriesList());
             
-            case FILTER_KEYS.followers:
-                return getSliderMenu(filterName)
+		case FILTER_KEYS.followers:
+			return getSliderMenu(filterName, filterKey);
 	}
 
 	return (
