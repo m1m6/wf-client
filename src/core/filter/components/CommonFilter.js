@@ -2,8 +2,8 @@ import React from "react";
 import { Menu, Dropdown, Divider } from "antd";
 import Link from "../../../form/components/Link";
 import capitalize from "lodash/capitalize";
-import { FILTER_KEYS } from "../constants";
-import { GENDER_LIST, getCheckboxMenu, getSliderMenu } from "../utils";
+import { FILTER_KEYS, GENDER_LIST } from "../constants";
+import { getCheckboxMenu, getSliderMenu } from "../utils";
 import { getCountriesList } from "../../../assets/js/countries";
 import { getCategoriesList } from "../../../assets/js/categories";
 
@@ -15,9 +15,9 @@ const getMenuOptions = (filterName, filterKey) => {
 		case FILTER_KEYS.country:
 			return getCheckboxMenu(filterName, filterKey, getCountriesList());
 
-            case FILTER_KEYS.category:
-            return getCheckboxMenu(filterName, filterKey, getCategoriesList());
-            
+		case FILTER_KEYS.category:
+			return getCheckboxMenu(filterName, filterKey, getCategoriesList());
+
 		case FILTER_KEYS.followers:
 			return getSliderMenu(filterName, filterKey);
 	}
@@ -35,7 +35,9 @@ const getMenuOptions = (filterName, filterKey) => {
 				<Divider className="filter-footer-divider" />
 				<div className="filter-options-footer">
 					<Link label="Clear" blackLink />
-					<button className="save-btn">SAVE</button>
+					<button className="save-btn" onClick={e => {}}>
+						SAVE2
+					</button>
 				</div>
 			</div>
 		</Menu>

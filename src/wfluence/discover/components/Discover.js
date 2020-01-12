@@ -1,9 +1,8 @@
 import React from "react";
 import { Row, Col, Icon } from "antd";
-import ReactCountryFlag from "react-country-flag";
 import CommonFilter from "../../../core/filter/components/CommonFilter";
 import { FILTER_KEYS } from "../../../core/filter/constants";
-import ProfileCard from "./ProfileCard";
+import ProfileCard from "../../profile/components/ProfileCard";
 
 const Discover = () => {
 	return (
@@ -16,21 +15,30 @@ const Discover = () => {
 					/>
 					<CommonFilter filterName="gender" filterKey={FILTER_KEYS.gender} />
 					<CommonFilter
-						filterName="categories"
+						filterName="category"
 						filterKey={FILTER_KEYS.category}
 					/>
 					<CommonFilter
-						filterName="languages"
+						filterName="language"
 						filterKey={FILTER_KEYS.language}
 					/>
 					<CommonFilter
-						filterName="countries"
+						filterName="country"
+						filterKey={FILTER_KEYS.country}
+					/>
+					<CommonFilter
+						filterName="city"
+						filterKey={FILTER_KEYS.country}
+					/>
+					<CommonFilter
+						filterName="size"
 						filterKey={FILTER_KEYS.country}
 					/>
 				</React.Fragment>
 			</div>
+			
 			<div className="dicover-profiles-wrapper">
-				 {[1, 2, 3].map(i => (
+				{[1, 2, 3].map(i => (
 					<Row className="profiles-row">
 						{[1, 2, 3].map(i => (
 							<Col className="profile-card-wrapper">
