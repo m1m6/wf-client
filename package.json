@@ -16,6 +16,8 @@
     "formik": "^2.1.0",
     "graphql": "14.0.2",
     "graphql-tag": "^2.10.1",
+    "highcharts": "^8.0.0",
+    "highcharts-react-official": "^2.2.2",
     "jwt-decode": "^2.2.0",
     "node-sass": "^4.13.0",
     "react": "16.12.0",

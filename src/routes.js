@@ -9,12 +9,14 @@ import AuthPageLayout from "./components/AuthPageLayout";
 import Login from "./signupLogin/login/components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Discover from "./wfluence/discover/components/Discover";
+import Profile from "./wfluence/profile/components/Profile";
 
 export const ROUTE_PATHS = {
 	home: "/",
 	notFound: "*",
 	app: {
-		discover: "/discover"
+		discover: "/discover",
+		instagramProfile: "/instagram-profile"
 	},
 	auth: {
 		me: "/me", // TODO add
@@ -44,6 +46,13 @@ const Routes = () => (
 			)}
 		/>
 
+		<ProtectedRoute
+			path={ROUTE_PATHS.app.instagramProfile}
+			exact
+			component={matchProps => (
+				<PageLayout Component={Profile} {...matchProps} title="Profile" />
+			)}
+		/>
 		<Route
 			path={ROUTE_PATHS.auth.signup}
 			exact
