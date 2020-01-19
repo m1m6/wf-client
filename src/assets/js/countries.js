@@ -237,7 +237,6 @@ const country_names = {
 	"United Arab Emirates": "AE",
 	"United Kingdom": "GB",
 	"United States": "US",
-	"United States Minor Outlying Islands": "UM",
 	Uruguay: "UY",
 	Uzbekistan: "UZ",
 	Vanuatu: "VU",

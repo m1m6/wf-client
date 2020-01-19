@@ -19,13 +19,13 @@ const Sidebar = () => {
 			<Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
 				<Menu.Item key="1">
 					<Icon type="bell" />
-					<Link to="notifications">
+					<Link to="/notifications">
 						<span className="nav-text">Notifications</span>
 					</Link>
 				</Menu.Item>
 				<Menu.Item key="2">
 					<Icon type="profile" />
-					<Link to="discover">
+					<Link to="/discover">
 						<span className="nav-text">Discover</span>
 					</Link>
 				</Menu.Item>

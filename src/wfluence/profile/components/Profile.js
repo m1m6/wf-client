@@ -1,61 +1,102 @@
 import React from "react";
-import { Icon } from "antd";
-import ReactCountryFlag from "react-country-flag";
+import { Icon, Skeleton } from "antd";
 import { Link } from "react-router-dom";
-import ChartButton from "../../../charts/components/ChartButton";
 import BasicArea from "../../../charts/components/BasicArea";
+import { useProfileQuery } from "../useProfile";
+import { nFormatter } from "../../../utils/numberUtils";
+import General from "./General";
+import AQS from "./AQS";
 
 const FullWidthChart = ({ data }) => {
 	return (
 		<div className="profile-full-row">
 			<div className="chart-header">
-				<span className="chart-header">Total Growth Fans</span>
-				<span className="filter-buttons">
-					<ChartButton>Week</ChartButton>
-					<ChartButton>Month</ChartButton>
-					<ChartButton>Year</ChartButton>
-				</span>
+				<span className="c-header">Audience</span>
 			</div>
-			<div className="chart-area">
-				<BasicArea />
+			<div className="charts-area-wrapper">
+				<div className="chart-area">
+					<BasicArea />
+				</div>
+				<div className="chart-area">
+					<BasicArea />
+				</div>
 			</div>
 		</div>
 	);
 };
 
-const Profile = () => {
+const HalfWidthChart = ({ title }) => {
+	return (
+		<div className="profile-half-row">
+			<div className="half-chart-header">
+				<span className="h-header">{title}</span>
+			</div>
+			<div className="half-chart-area">bla blab bla</div>
+		</div>
+	);
+};
+
+const Profile = ({ match }) => {
+	let profilesId = match.params.id;
+	const { loading, data, error } = useProfileQuery(profilesId);
+	console.log("profile query", data);
+
+	if (loading) {
+		return <Skeleton avatar active title paragraph />;
+	}
+
+	const { profile } = data;
 	return (
 		<div className="influencer-profile">
 			<div className="header">
 				<div className="img-wrapper">
-					<img
-						className="img"
-						src="https://app.hypeauditor.com/uploads/h/0/8/1/50b9d8ee342ed61ac0c9adb38dfc5a69.jpg?p=fczNAO9t1MDFeTFZwuYadTmaDNt%2FuRvBL8YIp%2Bu3lTLQKhord2anZmNsgc2zH64teJDxlvd%2BzNnS2AIQoHiT7onizaT1n%2BzcUlbgTS2u%2F6Erbc9X9T7YsQgK42fVODpEmLRxAx47BqHcvKq0aCrQFWpVpPtLHnKDyCUQcXvY0Aop878yKdQEHhMmnfvXOGxhZjb%2BHVeGLfxDalmB6A3QCraoi8tWtrfPmT7HPYBRCuubwcC%2B3Pup1ymtWO%2BeLgeVeBGF97e6H24X0WZICxxVPLii7Ei9Jkq4wymBxFS09ig%3D"
-					/>
+					<img className="img" src={profile.profilePic} />
 				</div>
 				<div className="user-info">
 					<Link
 						className="personal"
-						to="https://www.instagram.com/milliebobbybrown/"
+						to={`https://www.instagram.com/${profile.username}/`}
+						target="_blank"
 					>
-						<span className="username">@milliebobbybrown</span>
-						<Icon type="environment" /> <span className="country">Brazil</span>
+						<span className="username">@{profile.name}</span>
+						<Icon type="environment" />{" "}
+						<span className="country">{profile.location}</span>
 					</Link>
-					<div className="biography">this is a bio example </div>
+					<div className="biography">{profile.biography}</div>
 				</div>
 				<div className="header-stats">
 					<div className="stats-item">
 						<div className="label">Followers</div>
-						<div className="value">31.5M</div>
+						<div className="value">{nFormatter(profile.followersCount)}</div>
 					</div>
 					<div className="stats-item">
 						<div className="label">ER</div>
-						<div className="value">10.16%</div>
+						<div className="value">{`${profile.engRateValue}%`}</div>
 					</div>
 				</div>
 			</div>
 
-			{/* Followers */}
+			<div
+				style={{
+					display: "flex",
+					justifyContent: "space-between",
+					marginBottom: "27px"
+				}}
+			>
+				<General
+					title="General"
+					globalRank={profile.globalRank}
+					followersReach={profile.metrics[0].followersReach}
+					erValue={profile.engRateValue}
+					followersCount={profile.followersCount}
+				/>
+
+				<AQS
+					aqs={profile.aqs}
+					aqsName={profile.aqsName}
+					aqsDescription={profile.aqsDescription}
+				/>
+			</div>
 			<FullWidthChart />
 		</div>
 	);

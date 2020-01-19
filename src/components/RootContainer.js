@@ -18,13 +18,12 @@ import PageNotFound from "./PageNotFound";
 import LogoutPage from "./LogoutPage";
 import { AUTH_TOKEN } from "../constants";
 import { isTokenExpired } from "../helper/jwtHelper";
-import {ME_QUERY} from './test'
+import { ME_QUERY } from "./test";
 import ProtectedRoute from "./ProtectedRoute";
-
 
 const RootContainer = props => {
 	const [token, setToken] = useState(props.token);
-  const {loading, data, error} = useQuery(ME_QUERY)
+	const { loading, data, error } = useQuery(ME_QUERY);
 
 	useEffect(() => {
 		try {
@@ -41,8 +40,8 @@ const RootContainer = props => {
 		} catch (e) {
 			console.log("error", e);
 		}
-  }, []);
-  
+	}, []);
+
 	const refreshTokenFn = (data = {}) => {
 		const token = data[AUTH_TOKEN];
 		if (token) {
@@ -51,65 +50,6 @@ const RootContainer = props => {
 			localStorage.removeItem(AUTH_TOKEN);
 		}
 		setToken(data[AUTH_TOKEN]);
-	};
-
-	const renderNavBar = () => {
-		return (
-			<nav className="pa3 pa4-ns">
-				<Link className="link dim black b f6 f5-ns dib mr3" to="/" title="Feed">
-					Blog
-				</Link>
-				<NavLink
-					className="link dim f6 f5-ns dib mr3 black"
-					activeClassName="gray"
-					exact={true}
-					to="/"
-					title="Feed"
-				>
-					Feed
-				</NavLink>
-				{data && data.me && data.me.email && token && (
-					<NavLink
-						className="link dim f6 f5-ns dib mr3 black"
-						activeClassName="gray"
-						exact={true}
-						to="/drafts"
-						title="Drafts"
-					>
-						Drafts
-					</NavLink>
-				)}
-				{token ? (
-					<div
-						onClick={() => {
-							refreshTokenFn &&
-								refreshTokenFn({
-									[AUTH_TOKEN]: null
-								});
-							window.location.href = "/";
-						}}
-						className="f6 link dim br1 ba ph3 pv2 fr mb2 dib black"
-					>
-						Logout
-					</div>
-				) : (
-					<Link
-						to="/login"
-						className="f6 link dim br1 ba ph3 pv2 fr mb2 dib black"
-					>
-						Login
-					</Link>
-				)}
-				{data && data.me && data.me.email && token && (
-					<Link
-						to="/create"
-						className="f6 link dim br1 ba ph3 pv2 fr mb2 dib black"
-					>
-						+ Create Draft
-					</Link>
-				)}
-			</nav>
-		);
 	};
 
 	const renderRoute = () => {
@@ -147,5 +87,4 @@ const RootContainer = props => {
 	);
 };
 
-
-export default RootContainer
+export default RootContainer;

@@ -16,7 +16,7 @@ export const ROUTE_PATHS = {
 	notFound: "*",
 	app: {
 		discover: "/discover",
-		instagramProfile: "/instagram-profile"
+		profile: "/profile/:id"
 	},
 	auth: {
 		me: "/me", // TODO add
@@ -40,15 +40,13 @@ const Routes = () => (
 
 		<ProtectedRoute
 			path={ROUTE_PATHS.app.discover}
-			exact
 			component={matchProps => (
 				<PageLayout Component={Discover} {...matchProps} title="Discover" />
 			)}
 		/>
 
 		<ProtectedRoute
-			path={ROUTE_PATHS.app.instagramProfile}
-			exact
+			path={ROUTE_PATHS.app.profile}
 			component={matchProps => (
 				<PageLayout Component={Profile} {...matchProps} title="Profile" />
 			)}

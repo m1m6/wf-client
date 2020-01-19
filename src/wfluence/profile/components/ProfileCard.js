@@ -1,59 +1,78 @@
 import React from "react";
-import { Icon } from "antd";
+import { Icon, Skeleton } from "antd";
+import uniq from "lodash/uniq";
 import ReactCountryFlag from "react-country-flag";
+import { getCountryCode } from "../../../assets/js/countries";
+import { nFormatter } from "../../../utils/numberUtils";
+import { Link } from "react-router-dom";
+import { parseProfileCategories, getProfileTags } from "../utils";
 
-const ProfileCard = () => {
+const ProfileCard = ({ loading, profile }) => {
+	if (loading) {
+		return <Skeleton avatar loading={loading} active />;
+	}
+	const countryCode = getCountryCode(profile.location);
+	const categories = parseProfileCategories(profile.categories);
+	const mostUsedTags = getProfileTags(profile.media);
+	const tagsKeys = Object.keys(mostUsedTags);
+	console.log("mostUsedTags", mostUsedTags);
 	return (
 		<div className="profile-card">
 			<div className="profile-image">
-				<img
-					src="https://instagram.fjrs3-1.fna.fbcdn.net/v/t51.2885-19/s150x150/80303825_3616970831661251_217778120629944320_n.jpg?_nc_ht=instagram.fjrs3-1.fna.fbcdn.net&_nc_ohc=-kVdHubUwvoAX_8nJJo&oh=e730261f34bbf4d3953e8051c575e109&oe=5EB3043C"
-					width={110}
-					height={110}
-				/>
+				<img src={profile.profilePic} width={110} height={110} />
 			</div>
 			<div className="profile-data">
-				<div className="fullname">Laura Cobain</div>
+				<div className="fullname">{profile.name}</div>
+
 				<div className="username">
-					<Icon type="instagram" /> @leiba
+					<Link
+						// onClick={() =>
+						// 	window.open(`https://instagram.com/${profile.username}/`)
+						// }
+						to={`/profile/${profile.id}`}
+					>
+						<Icon type="instagram" /> {profile.username}
+					</Link>
 				</div>
+
 				<div className="metadata">
 					<span>
-						<ReactCountryFlag countryCode="US" /> USA
+						<ReactCountryFlag countryCode={countryCode} /> {countryCode}
 					</span>
 					<span>Female</span>
 					<span>Fashion</span>
 				</div>
 				<div className="top-tags">
 					<React.Fragment>
-						{[
-							{ id: 0, key: "Fashion" },
-							{ id: 0, key: "Sport" },
-							{ id: 0, key: "Photographer" }
-						].map(index => (
-							<span className="tag-item" onClick={e => {}}>
-								{index.key}
-							</span>
-						))}
-						<span
-							style={{ cursor: "pointer" }}
-							onClick={() => {}}
-							className="more-counter"
-						>{`+4 more`}</span>
+						{tagsKeys.length > 0 && [0, 1, 2].map(i => {
+							const key = tagsKeys[i];
+							return mostUsedTags[key] && (
+								<span className="tag-item" onClick={e => {}}>
+									{ mostUsedTags[key].substring(0, 6)}
+								</span>
+							);
+						})}
+						{tagsKeys.length > 3 && (
+							<span
+								style={{ cursor: "pointer" }}
+								onClick={() => {}}
+								className="more-counter"
+							>{`+${tagsKeys.length - 3} more`}</span>
+						)}
 					</React.Fragment>
 				</div>
 
 				<div className="card-footer">
 					<div className="footer-item">
-						<div className="count">5.3M</div>
+						<div className="count">{nFormatter(profile.followersCount)}</div>
 						<div className="label">Followers</div>
 					</div>
 					<div className="footer-item">
-						<div className="count">11.3M</div>
-						<div className="label">Followings</div>
+						<div className="count">{nFormatter(profile.mediaCount)}</div>
+						<div className="label">Posts</div>
 					</div>
 					<div className="footer-item">
-						<div className="count">1.93%</div>
+						<div className="count">{nFormatter(profile.engRateValue)}%</div>
 						<div className="label">Eng. Rate</div>
 					</div>
 				</div>

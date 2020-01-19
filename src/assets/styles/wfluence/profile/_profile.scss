@@ -1,6 +1,6 @@
 .influencer-profile {
+	margin-right: 3.2vw;
 	.header {
-		margin-right: 3.2vw;
 		border-radius: 4px;
 		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
 		background-color: #ffffff;
@@ -25,7 +25,7 @@
 				.username {
 					color: $dark-slate-blue;
 					font-family: Montserrat;
-					font-size: 14px;
+					font-size: 16px;
 					font-weight: 500;
 				}
 
@@ -38,7 +38,7 @@
 
 				.country {
 					font-family: Montserrat;
-					font-size: 14px;
+					font-size: 16px;
 					font-weight: 500;
 					color: $dark-slate-blue;
 				}
@@ -46,8 +46,9 @@
 
 			.biography {
 				font-family: "AvenirMedium";
-				font-size: 20px;
+				font-size: 14px;
 				font-weight: 500;
+				margin-top: 8px;
 			}
 		}
 
@@ -75,31 +76,166 @@
 	}
 
 	.profile-full-row {
-		margin-right: 3.2vw;
+		border-radius: 4px;
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+		background-color: $white;
+		.chart-header {
+			padding-top: 56px;
+			padding-left: 50px;
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+
+			.c-header {
+				font-family: Montserrat;
+				font-size: 24px;
+				font-weight: 500;
+				color: $black;
+			}
+
+			.filter-buttons {
+				margin-right: 3.6vw;
+				width: 14.2vw;
+				display: flex;
+				justify-content: space-evenly;
+			}
+		}
+
+		.charts-area-wrapper {
+			display: flex;
+			margin-left: 10px;
+			margin-right: 10px;
+			margin-top: 20px;
+			.chart-area {
+				width: 50%;
+			}
+		}
+	}
+
+	.profile-half-row {
+		width: 49.5%;
+		padding-bottom: 20px;
 		border-radius: 4px;
 		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
 		background-color: $white;
 
-		.chart-header {
+		.half-chart-header {
 			padding-top: 30px;
-            padding-left: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+			padding-left: 30px;
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
 
-			.chart-header {
+			.h-header {
 				font-family: Montserrat;
-				font-size: 18px;
+				font-size: 24px;
 				font-weight: 500;
 				color: $black;
-            }
-            
-            .filter-buttons{
-                margin-right: 3.6vw;
-                width: 14.2vw;
-                display: flex;
-                justify-content: space-evenly;
-            }
+			}
+		}
+
+		.aqs-description {
+			margin-top: 20px;
+			padding-left: 30px;
+			padding-right: 10px;
+			font-size: 14px;
+			font-weight: 500;
+			line-height: normal;
+		}
+		.aqs-area-wrapper {
+			display: flex;
+			margin-left: 30px;
+			margin-top: 20px;
+			.aqs-area {
+				margin-bottom: auto;
+				flex-shrink: 0;
+				background: #fff;
+				box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.1);
+				border-radius: 6px;
+				overflow: hidden;
+				.aqs-score-area {
+					height: 100px;
+					width: 140px;
+					color: #fff;
+					font-weight: 600;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					flex-direction: column;
+					line-height: 1.1;
+					background-color: #289155;
+					.aqs-score-value {
+						font-size: 40px;
+					}
+
+					.aqs-out-of {
+						font-size: 16px;
+						color: rgba(255, 255, 255, 0.56);
+					}
+				}
+				.aqs-sub {
+					height: 40px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font-size: 16px;
+					color: #000;
+					text-transform: capitalize;
+				}
+			}
+			.aqs-list {
+				margin-left: 20px;
+				.aqs-desc-item {
+					display: flex;
+					align-items: center;
+					font-size: 16px;
+					padding: 8px 60px 8px 0;
+					.aqs-desc-mark {
+						display: block;
+						margin-right: 16px;
+						margin-top: 4px;
+						width: 14px;
+						height: 14px;
+						border-radius: 50%;
+						flex-shrink: 0;
+						align-self: flex-start;
+						background-color: #289155;
+					}
+				}
+			}
+		}
+		.general-area {
+			display: flex;
+			justify-content: space-evenly;
+			margin-top: 20px;
+			.g-area-item {
+				.ga-label {
+					font-family: AvenirMedium;
+					font-size: 16px;
+					font-weight: 500;
+					color: $warm-grey-two;
+				}
+
+				.ga-value {
+					font-family: Montserrat;
+					font-size: 20px;
+					font-weight: 500;
+					letter-spacing: 1.5;
+					color: $black;
+
+					> span {
+						font-family: Montserrat;
+						font-size: 12px;
+						font-weight: 500;
+						font-stretch: normal;
+						font-style: normal;
+						line-height: normal;
+						letter-spacing: normal;
+						text-align: center;
+						color: $dark-slate-blue;
+					}
+				}
+			}
 		}
 	}
 }
