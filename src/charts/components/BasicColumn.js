@@ -1,8 +1,9 @@
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { colors } from "../HighChartTheme";
 
-const options = (title, xLabels, yData) => ({
+const options = (title, xLabels, yData, arrayOfObjectsSeries) => ({
 	chart: {
 		type: "column"
 	},
@@ -11,20 +12,19 @@ const options = (title, xLabels, yData) => ({
 	},
 
 	xAxis: {
-		categories: ["Jan", "Feb", "Mar", "Apr"],
+		categories: xLabels,
 		crosshair: true
 	},
 	yAxis: {
 		min: 0,
 		title: {
-			text: "%"
+			text: ""
 		}
 	},
 	tooltip: {
-		headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-		pointFormat:
-			'<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-			'<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+		headerFormat:
+			'<span style="font-size:10px">{point.key}: {point.y}%</span><table>',
+		pointFormat: "",
 		footerFormat: "</table>",
 		shared: true,
 		useHTML: true
@@ -35,19 +35,23 @@ const options = (title, xLabels, yData) => ({
 			borderWidth: 0
 		}
 	},
-	series: [
-		{
-			data: [49.9, 40, 30, 55]
-		}
-	]
+	colors: [colors[Math.floor(Math.random() * 4)]],
+	series: arrayOfObjectsSeries
+		? yData
+		: [
+				{
+					data: yData,
+					showInLegend: false
+				}
+		  ]
 });
 
-const BasicColumn = ({ title, xLabels, yData }) => {
+const BasicColumn = ({ title, xLabels, yData, arrayOfObjectsSeries }) => {
 	return (
 		<div>
 			<HighchartsReact
 				highcharts={Highcharts}
-				options={options(title, xLabels, yData)}
+				options={options(title, xLabels, yData, arrayOfObjectsSeries)}
 			/>
 		</div>
 	);

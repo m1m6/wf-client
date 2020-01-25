@@ -15,7 +15,7 @@ const AQS = ({ aqs, aqsName, aqsDescription }) => {
 				<div className="aqs-area">
 					<div className="aqs-score-area">
 						<span className="aqs-score-value">{aqs}</span>
-						<span className="aqs-out-of">Out Of 100</span>
+						<span className="aqs-out-of">Of 100</span>
 					</div>
 					<div className="aqs-sub">{aqsName}</div>
 				</div>

@@ -8,6 +8,7 @@ import "./assets/styles/_main.scss";
 
 import App from "./App";
 import { browserHistory } from "./browserHistory";
+import "./charts/HighChartTheme";
 // todod https://reacttraining.com/react-router/web/guides/code-splitting
 ReactDOM.render(
 	<ApolloProvider client={apolloClient}>
