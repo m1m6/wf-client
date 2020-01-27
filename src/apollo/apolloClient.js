@@ -4,6 +4,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloLink, split } from "apollo-link";
 import { getMainDefinition } from "apollo-utilities";
 import { WebSocketLink } from "apollo-link-ws";
+import { createUploadLink } from "apollo-upload-client";
 
 import { ACCESS_TOKEN } from "../constants";
 import defaultState from "./defaultState";
@@ -32,8 +33,9 @@ const wsLink = new WebSocketLink({
 		}
 	}
 });
+const uploadLink =  createUploadLink({ uri: "http://localhost:4000" })
 
-const httpLinkAuth = middlewareLink.concat(httpLink);
+const httpLinkAuth = middlewareLink.concat(uploadLink);
 
 const link = split(
 	// split based on operation type
@@ -41,6 +43,7 @@ const link = split(
 		const { kind, operation } = getMainDefinition(query);
 		return kind === "OperationDefinition" && operation === "subscription";
 	},
+	// uploadLink,
 	wsLink,
 	httpLinkAuth,
 	defaultState

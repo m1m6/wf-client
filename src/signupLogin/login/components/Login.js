@@ -8,6 +8,7 @@ import Link from "../../../form/components/Link";
 import { useLogin } from "../useLogin";
 import { showAllGraphQLErrors } from "../../../helper/graphqlErrors";
 import { auth } from "../../auth";
+import { useUserData } from "../useUserDataMutations";
 
 const initialValues = {
 	email: "",
@@ -19,7 +20,7 @@ const loginSchema = Yup.object().shape({
 	password: Yup.string().required("*Required")
 });
 
-const Login = ({ routerHistory }) => {
+const Login = ({routerHistory}) => {
 	const [login] = useLogin();
 	return (
 		<div className="login-wrapper">

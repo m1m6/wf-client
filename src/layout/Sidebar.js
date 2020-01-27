@@ -29,9 +29,11 @@ const Sidebar = () => {
 						<span className="nav-text">Discover</span>
 					</Link>
 				</Menu.Item>
-				<Menu.Item key="3">
-					<Icon type="upload" />
-					<span className="nav-text">Discover</span>
+				<Menu.Item key="7">
+					<Icon type="team" />
+					<Link to="/campaign">
+						<span className="nav-text">Campaigns</span>
+					</Link>
 				</Menu.Item>
 				<Menu.Item key="4">
 					<Icon type="bar-chart" />

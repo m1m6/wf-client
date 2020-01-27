@@ -13,3 +13,12 @@ export const LOGIN_USER_MUTATION = gql`
   }
 `
 
+export const setUserDataMutation = gql`
+	mutation setUserData($name: String!, $id: ID!, $email: String!) {
+		setUserData(name: $name, id: $id, email: $email) @client {
+			name
+			id 
+			email
+		}
+	}
+`;

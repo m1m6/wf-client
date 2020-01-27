@@ -10,13 +10,17 @@ import Login from "./signupLogin/login/components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Discover from "./wfluence/discover/components/Discover";
 import Profile from "./wfluence/profile/components/Profile";
+import Campaigns from "./wfluence/campaign/components/Campaigns";
+import NewCampaign from "./wfluence/campaign/components/NewCampaign";
 
 export const ROUTE_PATHS = {
 	home: "/",
 	notFound: "*",
 	app: {
 		discover: "/discover",
-		profile: "/profile/:id"
+		profile: "/profile/:id",
+		campaign: "/campaign",
+		newCampaign: "/campaign/new"
 	},
 	auth: {
 		me: "/me", // TODO add
@@ -49,6 +53,30 @@ const Routes = () => (
 			path={ROUTE_PATHS.app.profile}
 			component={matchProps => (
 				<PageLayout Component={Profile} {...matchProps} title="Profile" />
+			)}
+		/>
+
+		<ProtectedRoute
+			path={ROUTE_PATHS.app.campaign}
+			exact
+			component={matchProps => (
+				<PageLayout
+					Component={Campaigns}
+					{...matchProps}
+					title="Campaign tracking"
+				/>
+			)}
+		/>
+
+		<ProtectedRoute
+			path={ROUTE_PATHS.app.newCampaign}
+			exact
+			component={matchProps => (
+				<PageLayout
+					Component={NewCampaign}
+					{...matchProps}
+					title="Create new campaign"
+				/>
 			)}
 		/>
 		<Route

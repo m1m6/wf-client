@@ -314,7 +314,6 @@ const AudienceCountryAndCity = ({
 const Profile = ({ match }) => {
 	let profilesId = match.params.id;
 	const { loading, data, error } = useProfileQuery(profilesId);
-	console.log("profile query", data);
 
 	if (loading) {
 		return <Skeleton avatar active title paragraph />;

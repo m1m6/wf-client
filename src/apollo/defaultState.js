@@ -8,5 +8,11 @@ export default {
 		countries: [],
 		cities: [],
 		size: []
+	},
+	userData: {
+		__typename: "userData",
+		id: "",
+		name: "",
+		email: ""
 	}
 };
