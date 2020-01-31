@@ -9,13 +9,14 @@ function disabledDate(current) {
 	return current && current < moment().endOf("day");
 }
 
-const RangeDatePicker = () => {
+const RangeDatePicker = ({ name, setFieldValue }) => {
 	return (
 		<div>
 			<RangePicker
 				disabledDate={disabledDate}
 				separator="→"
 				format="DD/MM/YYYY"
+				onChange={e => setFieldValue(name, e)}
 			/>
 		</div>
 	);

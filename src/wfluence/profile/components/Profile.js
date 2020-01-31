@@ -41,7 +41,7 @@ const AudienceCountryAndCity = ({
 	const [showAllInterests, setShowAllInterests] = useState(false);
 	const uniqMediaType = uniqBy(media, "mediaType");
 	const postsHeatmap = getPostsHeatMap(media);
-	const suggestedPostTime = getSuggestedPostTime(postsHeatmap)
+	const suggestedPostTime = getSuggestedPostTime(postsHeatmap);
 	return (
 		<div className="profile-full-row">
 			<div className="chart-header">
@@ -132,8 +132,12 @@ const AudienceCountryAndCity = ({
 					<div>
 						The best time to post is{" "}
 						{suggestedPostTime.map((item, i) => {
-							console.log(i, suggestedPostTime.length)
-							return <span>{`${DAYS[item[1]]} at ${item[0]}${i < suggestedPostTime.length - 1 ? ', ': '.'}` }</span>
+							console.log(i, suggestedPostTime.length);
+							return (
+								<span>{`${DAYS[item[1]]} at ${item[0]}${
+									i < suggestedPostTime.length - 1 ? ", " : "."
+								}`}</span>
+							);
 						})}
 					</div>
 					<BasicHeatMap title="Best Time To Post" data={postsHeatmap} />
@@ -384,7 +388,11 @@ const Profile = ({ match }) => {
 				audienceThematics={profile.metrics[0].audienceThematics}
 				followersChart={profile.metrics[0].followersChart}
 				followingChart={profile.metrics[0].followingChart}
-				brandsMentions={profile.metrics[0].advertisingData.brands_mentions}
+				brandsMentions={
+					profile.metrics[0].advertisingData
+						? profile.metrics[0].advertisingData.brands_mentions
+						: undefined
+				}
 				media={profile.media}
 			/>
 		</div>

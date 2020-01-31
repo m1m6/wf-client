@@ -12,6 +12,7 @@ import Discover from "./wfluence/discover/components/Discover";
 import Profile from "./wfluence/profile/components/Profile";
 import Campaigns from "./wfluence/campaign/components/Campaigns";
 import NewCampaign from "./wfluence/campaign/components/NewCampaign";
+import CampaignView from "./wfluence/campaign/components/CampaignView";
 
 export const ROUTE_PATHS = {
 	home: "/",
@@ -19,8 +20,9 @@ export const ROUTE_PATHS = {
 	app: {
 		discover: "/discover",
 		profile: "/profile/:id",
-		campaign: "/campaign",
-		newCampaign: "/campaign/new"
+		campaign: "/campaigns",
+		newCampaign: "/campaigns/new",
+		campaignView: "/campaign-view/:id"
 	},
 	auth: {
 		me: "/me", // TODO add
@@ -63,11 +65,10 @@ const Routes = () => (
 				<PageLayout
 					Component={Campaigns}
 					{...matchProps}
-					title="Campaign tracking"
+					title="Campaigns List"
 				/>
 			)}
 		/>
-
 		<ProtectedRoute
 			path={ROUTE_PATHS.app.newCampaign}
 			exact
@@ -75,7 +76,18 @@ const Routes = () => (
 				<PageLayout
 					Component={NewCampaign}
 					{...matchProps}
-					title="Create new campaign"
+					title="Create New Campaign"
+				/>
+			)}
+		/>
+		<ProtectedRoute
+			path={ROUTE_PATHS.app.campaignView}
+			exact
+			component={matchProps => (
+				<PageLayout
+					Component={CampaignView}
+					{...matchProps}
+					title="Campaign Tracking"
 				/>
 			)}
 		/>
@@ -85,7 +97,7 @@ const Routes = () => (
 			render={matchProps => (
 				<AuthPageLayout
 					Component={SignupPage}
-					title="Sign up"
+					title="Sign Up"
 					{...matchProps}
 				/>
 			)}
@@ -94,7 +106,7 @@ const Routes = () => (
 			path={ROUTE_PATHS.auth.login}
 			exact
 			render={matchProps => (
-				<AuthPageLayout Component={Login} title="Log in" {...matchProps} />
+				<AuthPageLayout Component={Login} title="Log In" {...matchProps} />
 			)}
 		/>
 		{/* <ProtectedRoute

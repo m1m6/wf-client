@@ -8,13 +8,15 @@ import Dragger from "antd/lib/upload/Dragger";
 import RangeDatePicker from "../../../form/components/RangeDatePicker";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
-
+import moment from 'moment'
+import { useNewCampaign } from "../useMutations";
+import { showAllGraphQLErrors } from "../../../helper/graphqlErrors";
 const initialValues = {
 	name: "",
 	description: "",
 	budget: 0,
 	dateRange: null,
-	tagAndMentions: "",
+	tagsAndMentions: "",
 	media: null
 };
 
@@ -29,10 +31,10 @@ const UPLOAD_MUTATION = gql`
 	}
 `;
 
-const NewCampaign = props => {
+const NewCampaign = ({routerHistory}) => {
 	const [upload] = useMutation(UPLOAD_MUTATION);
 	const [uploadedFiles, setUploadedFiles] = useState([]);
-
+	const [newCamapgin] = useNewCampaign()
 	const _uploadFile = async event => {
 		const file = event.file;
 
@@ -55,19 +57,25 @@ const NewCampaign = props => {
 				initialValues={initialValues}
 				// validationSchema={loginSchema}
 				onSubmit={async (values, { setSubmitting }) => {
-					// try {
-					// 	const result = await login({ variables: { ...values } });
-					// 	if (result) {
-					// 		auth.logIn(result.data.login.token);
-					// 		window.location.assign("/");
-					// 	}
-					// } catch (error) {
-					// 	setSubmitting(false);
-					// 	showAllGraphQLErrors(error.graphQLErrors);
-					// }
+					const formValues = {
+						...values,
+						media: uploadedFiles,
+						startDate: moment(values.dateRange[0].toIso).toISOString(),
+						endDate: moment(values.dateRange[1]).toISOString()
+					}
+
+					try {
+						const result = await newCamapgin({ variables: { ...formValues } });
+						if (result && result.data && result.data.createCampaign) {
+							routerHistory.push(`/campaign-view/${result.data.createCampaign.id}`);
+						}
+					} catch (error) {
+						setSubmitting(false);
+						showAllGraphQLErrors(error.graphQLErrors);
+					}
 				}}
 			>
-				{({ values, isSubmitting }) => (
+				{({ values, isSubmitting, setFieldValue }) => (
 					<Form>
 						<Row className="new-campaign-row">
 							<InputField
@@ -104,13 +112,14 @@ const NewCampaign = props => {
 								type="number"
 								label="Campaign Date Range"
 								placeholder="Campaign Date Range"
+								setFieldValue={setFieldValue}
 							/>
 							<span>*Campaigns are limited to a maximum of 90 days.</span>
 						</Row>
 						<Row className="new-campaign-row">
 							<InputField
 								iconType="number"
-								name="tagAndMentions"
+								name="tagsAndMentions"
 								type="text"
 								label="Campaign Tags And Mentions"
 								placeholder="#Hashtag @Mention"
@@ -119,13 +128,12 @@ const NewCampaign = props => {
 						<Row className="new-campaign-row">
 							<span className="custom-label">Promoted Brand:</span>
 							<Dragger
-								name="file"
+								name="media"
 								multiple={true}
 								customRequest={event => {
 									_uploadFile(event);
 								}}
 								onDownload={e => {
-									console.log(e);
 									if (e.response && e.response.data) {
 										window.open(e.response.data.uploadFile, "_blank");
 									}

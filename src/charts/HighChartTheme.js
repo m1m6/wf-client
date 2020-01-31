@@ -65,4 +65,9 @@ Highcharts.theme = {
 	}
 };
 
-Highcharts.setOptions(Highcharts.theme);
+Highcharts.setOptions({
+	...Highcharts.theme,
+	lang: {
+		noData: "Data isn't calculated yet, Please come back later."
+	}
+});

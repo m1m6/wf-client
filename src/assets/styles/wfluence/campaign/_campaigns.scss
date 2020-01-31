@@ -1,0 +1,64 @@
+.campaigns-list {
+	.items-wrapper {
+		display: flex;
+		margin-top: 30px;
+		flex-wrap: wrap;
+		width: 100%;
+
+		.campaign-item {
+			margin-right: 2vw;
+			border-radius: 4px;
+			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+			background-color: $white;
+			width: 16.6vw;
+			padding: 15px;
+            height: 150px;
+            position: relative;
+            margin-top: 20px;
+            
+			> .name {
+				font-family: AvenirMedium;
+				font-size: 20px;
+				font-weight: 500;
+                color: $dark-slate-blue;
+                
+                > i{
+                    font-size: 16px;
+                    float: right;
+                    margin-top: 7px;
+                }
+			}
+
+			> .description {
+				font-family: Montserrat;
+				font-size: 14px;
+				font-weight: 500;
+				color: $black;
+				margin-top: 10px;
+				width: 100%;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				max-height: 50px;
+				overflow: hidden;
+			}
+
+			> .influencers-count {
+				margin-top: 10px;
+				font-family: Montserrat;
+				font-size: 12px;
+				font-weight: 500;
+				color: $dark-slate-blue;
+			}
+
+			> .footer {
+				position: absolute;
+				bottom: 10px;
+				right: 13px;
+			}
+        }
+        
+        .campaign-item:hover{
+            box-shadow: 0px 6px 10px 5px rgba(0, 0, 0, 0.09);
+        }
+	}
+}

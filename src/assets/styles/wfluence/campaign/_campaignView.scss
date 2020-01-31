@@ -1,0 +1,239 @@
+.campaign-view {
+	.invite-influencer {
+		display: flex;
+		justify-content: flex-end;
+		padding-right: 20px;
+		padding-bottom: 10px;
+		> .wf-btn-primary {
+			margin-top: 0px;
+			width: 20%;
+			font-size: 18px;
+		}
+
+		> .wf-btn-primary:hover {
+			color: #878787;
+		}
+	}
+	> .overview {
+		display: flex;
+		margin-bottom: 20px;
+		> .summary {
+			display: flex;
+			flex-wrap: wrap;
+
+			> .summary-item {
+				width: 200px;
+				padding: 20px;
+				border-radius: 2px;
+				background-color: #fdfdfd;
+				box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+				margin-right: 10px;
+
+				> .title {
+					font-family: AvenirMedium;
+					font-size: 32px;
+					font-weight: 600;
+					color: $dark-slate-blue;
+					font-size: 1.5625rem;
+					line-height: 1.875rem;
+				}
+
+				> .subtitle {
+					font-size: 1.2rem;
+					min-height: 50px;
+					margin-top: 5px;
+				}
+
+				> .container {
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					> .value {
+						font-size: 2.2rem;
+						font-weight: 600;
+						line-height: 3rem;
+						color: #61bd50;
+					}
+
+					> .summary-footer {
+						font-family: AvenirMedium;
+						margin-top: 25px;
+						font-size: 0.87rem;
+						font-weight: 400;
+						line-height: 1.0625rem;
+						min-height: 20px;
+						color: #878787;
+						display: flex;
+						align-items: center;
+						justify-content: space-around;
+						width: 100%;
+
+						> div {
+							display: flex;
+							justify-content: center;
+							flex-direction: column;
+						}
+					}
+				}
+			}
+		}
+
+		> .influencers-summary {
+			position: relative;
+			display: flex;
+			flex-direction: row;
+			align-items: flex-start;
+			flex-grow: 1;
+			padding: 15px;
+			background: #fdfdfd;
+			box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+
+			> .influencers-details {
+				display: flex;
+				flex-shrink: 0;
+				height: 100%;
+				flex-direction: column;
+				justify-content: space-between;
+
+				> .details-headline {
+					> .top-headline {
+						font-weight: 700;
+						font-family: AvenirMedium;
+						font-weight: 600;
+						color: #1c3a6a;
+						font-size: 1.5625rem;
+						line-height: 1.875rem;
+					}
+
+					> .bottom-headline {
+						font-size: 1.2rem;
+						min-height: 50px;
+						margin-top: 5px;
+						font-weight: 100;
+					}
+				}
+
+				> .extra-details {
+					text-align: left;
+					font-size: 2.5rem;
+					font-weight: 100;
+					color: #1dafe7;
+				}
+			}
+
+			> .influencers {
+				display: flex;
+				flex-wrap: wrap;
+				margin-bottom: -22px;
+				display: flex;
+				flex-wrap: wrap;
+				margin-bottom: -22px;
+				width: 100%;
+				margin-left: 10px;
+				> .participating-influencer-preview {
+					position: relative;
+					display: flex;
+					flex-direction: row;
+					width: 170px;
+					max-width: 100%;
+					margin-bottom: 5px;
+					> .profile-image-container {
+						position: relative;
+
+						> img {
+							display: inline-block;
+							background-size: cover;
+							border-radius: 4px;
+							margin: 6px 5px 11px 3px;
+							height: 2.5em;
+							width: 2.5em;
+							align-self: center;
+						}
+					}
+
+					> .influencer-details {
+						display: flex;
+						flex-direction: row;
+						text-align: left;
+						color: #03739e;
+						justify-content: space-between;
+						width: 70%;
+
+						> .influencer-info {
+							display: flex;
+							flex-direction: column;
+							justify-content: space-around;
+							box-sizing: border-box;
+							padding: 2.4px 0;
+							font-size: 1rem;
+							width: 107px;
+							font-size: 14px;
+							> .influencer-name {
+								white-space: nowrap;
+								overflow: hidden;
+								text-overflow: ellipsis;
+								width: 100%;
+								color: #181320;
+							}
+
+							> .influencer-data {
+								display: flex;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	> .campaign-tabs-container {
+		font-family: AvenirMedium;
+		margin-top: 30px;
+		color: #181320;
+		padding-right: 10px;
+		.ant-tabs-tab {
+			font-family: AvenirMedium;
+			font-size: 26px;
+			font-weight: 600;
+			font-size: 1.5625rem;
+			line-height: 1.875rem;
+			font-size: 22px;
+		}
+		.ant-tabs-tab:hover {
+			color: #4e4e4e;
+		}
+
+		.ant-tabs-tab-active {
+			color: #1c3a6a !important;
+		}
+
+		.ant-tabs-content {
+			background-color: #fdfdfd;
+			box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+			margin-left: 1px;
+			border-bottom-right-radius: 2px;
+			border-bottom-left-radius: 2px;
+			padding: 20px;
+
+			.analytics-tab {
+				> div {
+					display: flex;
+					width: 100%;
+					margin-top: 20px;
+					> div {
+						box-shadow: 0 3px 2px -1px rgba(0, 0, 0, 0.1);
+
+						> .title {
+							font-family: AvenirMedium;
+							font-weight: 600;
+							color: #1c3a6a;
+							font-size: 1.3rem;
+							line-height: 1.875rem;
+							margin: 10px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

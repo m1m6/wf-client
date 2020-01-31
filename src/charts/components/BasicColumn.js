@@ -2,7 +2,9 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { colors } from "../HighChartTheme";
+import noData from "highcharts/modules/no-data-to-display";
 
+noData(Highcharts);
 const options = (title, xLabels, yData, arrayOfObjectsSeries) => ({
 	chart: {
 		type: "column"

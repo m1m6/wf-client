@@ -1,15 +1,21 @@
-import React from "react";
-import { Row, Col } from "antd";
+import React, { useState, useEffect, useMemo } from "react";
+import { Row, Col, Skeleton } from "antd";
 import CommonFilter from "../../../core/filter/components/CommonFilter";
 import { FILTER_KEYS } from "../../../core/filter/constants";
 import ProfileCard from "../../profile/components/ProfileCard";
-import { useProfilesQuery } from "../useProfiles";
+import Button from "../../../form/components/Button";
+import useProfilesQuery from "../useProfiles";
 
 const Discover = () => {
-	const { loading, data, error } = useProfilesQuery(9, 0);
-	const { profiles } = loading ? { profiles: [] } : data;
-	console.log("data", data);
-	console.log("error", error);
+	const [pagingFirst, setPagingFirst] = useState(9);
+	const [pagingSkip, setPagingSkip] = useState(0);
+	const [allProfiles, setAllProfiles] = useState([]);
+	const { profiles, loading, loadMore } = useProfilesQuery(
+		pagingFirst,
+		pagingSkip
+	);
+
+	if (loading) return <Skeleton active paragraph title loading />;
 	return (
 		<div className="discover-wrapper">
 			<div className="discover-filters-wrapper">
@@ -34,22 +40,30 @@ const Discover = () => {
 			</div>
 
 			<div className="dicover-profiles-wrapper">
-				{[1, 2, 3].map((j, pi) => {
-					const profilesRow = profiles.slice(pi * 3,  3);
-					console.log(profilesRow)
-					return (
-						<Row className="profiles-row">
-							{[1, 2, 3].map((i, ci) => (
+				<Row className="profiles-row">
+					{profiles &&
+						profiles.length > 0 &&
+						profiles.map((profile, i) => {
+							return (
 								<Col className="profile-card-wrapper">
-									<ProfileCard
-										loading={loading}
-										profile={profiles[pi * ci + i]}
-									/>
+									<ProfileCard loading={loading} profile={profile} />
 								</Col>
-							))}
-						</Row>
-					);
-				})}
+							);
+						})}
+				</Row>
+			</div>
+			<div className="footer">
+				<Button
+					className="wf-btn-primary"
+					onClick={e => {
+						loadMore(18, 9);
+
+						setPagingSkip(pagingFirst);
+						setPagingFirst(pagingFirst + 9);
+					}}
+				>
+					Load More
+				</Button>
 			</div>
 		</div>
 	);
