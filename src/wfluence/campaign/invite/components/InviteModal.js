@@ -1,44 +1,62 @@
 import React, { useState } from "react";
 import { Modal, Button, Icon, Tooltip, Input, message } from "antd";
+import { useLinkProfilesToCampaign } from "../../useMutations";
 
 const InviteModal = ({
 	inviteModalVisible,
 	setInviteModalVisible,
-	setInvitedInfluencers
+	setInvitedInfluencers,
+	campaignId
 }) => {
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const [searchTerm, setSearchTerm] = useState("");
-	const [postsCount, setPostsCount] = useState(0);
+	const [requiredPostsCount, setPostsCount] = useState(0);
 	const [budget, setBudget] = useState(0);
 	const [results, setResults] = useState([]);
 	const [isSearching, setIsSearching] = useState(false);
+	const [addProfilesToCampaign] = useLinkProfilesToCampaign();
 
 	const callApi = searchTerm => {
-        if (budget === 0 || postsCount === 0){
-            message.warning('Please complete all fields.')
-            return;
-        }
+		if (budget === 0 || requiredPostsCount === 0) {
+			message.warning("Please complete all fields.");
+			return;
+		}
 		setIsSearching(true);
 		searchCharacters(searchTerm).then(profile => {
 			setIsSearching(false);
 			if (profile) {
-                const newProfile = {...profile, postsCount, budget}
+				const newProfile = {
+					...profile,
+					requiredPostsCount,
+					budget,
+					publishedPostsCount: 0
+				};
 				setResults([...results, newProfile]);
-                setSearchTerm("");
-                setInvitedInfluencers([...results, newProfile])
+				setSearchTerm("");
+				setInvitedInfluencers([...results, newProfile]);
 			}
 		});
 	};
-	const handleOk = () => {
-        if (budget === 0 || postsCount === 0){
-            message.warning('Please complete all fields.')
-            return;
-        }
+	const handleOk = async () => {
+		if (budget === 0 || requiredPostsCount === 0) {
+			message.warning("Please complete all fields.");
+			return;
+		}
 		setConfirmLoading(true);
-		setTimeout(() => {
-			setInviteModalVisible(false);
-			setConfirmLoading(false);
-		}, 2000);
+		const mappedProfiles = results.map(profile => ({
+			username: profile.username,
+			budget: parseFloat(budget),
+			requiredPostsCount: parseInt(requiredPostsCount),
+			publishedPostsCount: 0
+		}));
+		const response = await addProfilesToCampaign({
+			variables: { profiles: mappedProfiles, cid: campaignId }
+		});
+
+		if (response && response.data && response.data.linkProfilesToCampaign) {
+			message.success("Profiles successfully added");
+		}
+		setInviteModalVisible(false);
 	};
 
 	const handleCancel = () => {
@@ -48,8 +66,8 @@ const InviteModal = ({
 	const deleteProfile = i => {
 		let profiles = JSON.parse(JSON.stringify(results));
 		profiles.splice(i, 1);
-        setResults([...profiles]);
-        setInvitedInfluencers([...profiles])
+		setResults([...profiles]);
+		setInvitedInfluencers([...profiles]);
 	};
 	return (
 		<Modal
@@ -60,7 +78,7 @@ const InviteModal = ({
 			confirmLoading={confirmLoading}
 			onCancel={handleCancel}
 			okButtonProps={{
-				disabled: isSearching
+				disabled: isSearching || results.length === 0
 			}}
 			cancelButtonProps={{
 				disabled: isSearching
@@ -68,7 +86,7 @@ const InviteModal = ({
 			closable={false}
 			maskClosable={false}
 		>
-			Enter Influencer Username:{" "}
+			Enter Influencer Username:
 			<div style={{ display: "flex", justifyContent: "column" }}>
 				<Input
 					placeholder="Enter influencer username"
@@ -82,13 +100,6 @@ const InviteModal = ({
 					onChange={e => setSearchTerm(e.target.value)}
 					value={searchTerm}
 				/>
-				<Button
-					style={{ marginLeft: "10px" }}
-					onClick={e => callApi(searchTerm)}
-					disabled={isSearching}
-				>
-					Add
-				</Button>
 			</div>
 			<div
 				style={{ display: "flex", justifyContent: "column", marginTop: "10px" }}
@@ -103,7 +114,7 @@ const InviteModal = ({
 						}
 						disabled={isSearching}
 						onChange={e => setPostsCount(e.target.value)}
-						value={postsCount}
+						value={requiredPostsCount}
 						type="number"
 					/>
 				</div>
@@ -121,6 +132,13 @@ const InviteModal = ({
 						type="number"
 					/>
 				</div>
+				<Button
+					style={{ marginLeft: "10px", marginTop: "21px" }}
+					onClick={e => callApi(searchTerm)}
+					disabled={isSearching}
+				>
+					Add
+				</Button>
 			</div>
 			<div className="influencers-list" style={{ marginTop: "10px" }}>
 				{results.length > 0 &&

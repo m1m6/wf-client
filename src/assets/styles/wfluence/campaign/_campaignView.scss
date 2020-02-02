@@ -1,7 +1,7 @@
 .campaign-view {
 	.invite-influencer {
 		display: flex;
-		justify-content: flex-end;
+		justify-content: flex-start;
 		padding-right: 20px;
 		padding-bottom: 10px;
 		> .wf-btn-primary {
@@ -17,10 +17,12 @@
 	> .overview {
 		display: flex;
 		margin-bottom: 20px;
+		flex-wrap: wrap;
+		width: 100%;
 		> .summary {
 			display: flex;
 			flex-wrap: wrap;
-
+			min-width: 46%;
 			> .summary-item {
 				width: 200px;
 				padding: 20px;
@@ -87,7 +89,9 @@
 			padding: 15px;
 			background: #fdfdfd;
 			box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-
+			width: 50%;
+			min-width: 50%;
+			margin-right: 1%;
 			> .influencers-details {
 				display: flex;
 				flex-shrink: 0;
@@ -134,7 +138,7 @@
 					position: relative;
 					display: flex;
 					flex-direction: row;
-					width: 170px;
+					width: 150px;
 					max-width: 100%;
 					margin-bottom: 5px;
 					> .profile-image-container {
@@ -182,6 +186,12 @@
 						}
 					}
 				}
+			}
+		}
+
+		@media only screen and (max-width: 1638px) {
+			> .influencers-summary {
+				margin-top: 30px;
 			}
 		}
 	}

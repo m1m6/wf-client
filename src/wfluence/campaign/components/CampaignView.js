@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../../../form/components/Button";
-import { Icon, Tabs } from "antd";
+import { Icon, Tabs, Skeleton } from "antd";
 import Analytics from "../tabs/components/Analytics";
 import InviteModal from "../invite/components/InviteModal";
+import { useCampaignDetailsQuery } from "../useQueries";
+import { getCampaignInfluencers } from "../utils";
 
-//{match.params.id}
+//{}
 const { TabPane } = Tabs;
 
 const CampaignTabs = () => {
@@ -35,8 +37,19 @@ const CampaignTabs = () => {
 };
 
 const CampaignView = ({ routerHistory, match }) => {
+    const campaignId = match.params.id
 	const [inviteModalVisible, setInviteModalVisible] = useState(false);
 	const [invitedInfluencers, setInvitedInfluencers] = useState([]);
+	const { loading, data, error } = useCampaignDetailsQuery(campaignId);
+
+	if (loading) {
+		return <Skeleton loading active paragraph title />;
+	}
+	const { campaign } = data;
+	const { influencers, totalBudget, totalPosts } = getCampaignInfluencers(
+		campaign
+	);
+	const allProfiles = [...influencers, ...invitedInfluencers];
 
 	return (
 		<div className="campaign-view">
@@ -54,7 +67,7 @@ const CampaignView = ({ routerHistory, match }) => {
 						<div className="title">Posts</div>
 						<div className="subtitle">in the campaign</div>
 						<div className="container">
-							<div className="value">2</div>
+							<div className="value">{totalPosts}</div>
 						</div>
 					</div>
 					<div className="summary-item">
@@ -82,7 +95,9 @@ const CampaignView = ({ routerHistory, match }) => {
 						<div className="title">Campaign</div>
 						<div className="subtitle">Budget</div>
 						<div className="container">
-							<div className="value">$400</div>
+							<div className="value">{`${
+								totalBudget ? `$${totalBudget}` : "N/A"
+							}`}</div>
 							<div className="summary-footer">
 								<div>
 									<Icon type="like" />
@@ -106,11 +121,13 @@ const CampaignView = ({ routerHistory, match }) => {
 							<div class="top-headline">Participating</div>
 							<div class="bottom-headline">Influencers</div>
 						</div>
-						<div class="extra-details">2</div>
+						<div class="extra-details">
+							{allProfiles && allProfiles.length ? allProfiles.length : 0}
+						</div>
 					</div>
 					<div class="influencers">
-						{invitedInfluencers.length > 0 &&
-							invitedInfluencers.map(profile => (
+						{allProfiles.length > 0 &&
+							allProfiles.map(profile => (
 								<div class="participating-influencer-preview">
 									<div class="profile-image-container">
 										<img
@@ -127,7 +144,7 @@ const CampaignView = ({ routerHistory, match }) => {
 											<div class="influencer-name">{profile.username}</div>
 											<div class="influencer-data">
 												<div class="badge counter-badge">
-													0/{profile.postsCount}
+													{profile.publishedPostsCount}/{profile.requiredPostsCount}
 												</div>
 												{/* <div class="badge status-badge status-badge_complete">
 											Accepted
@@ -147,7 +164,8 @@ const CampaignView = ({ routerHistory, match }) => {
 					inviteModalVisible={inviteModalVisible}
 					setInviteModalVisible={setInviteModalVisible}
 					invitedInfluencers={invitedInfluencers}
-					setInvitedInfluencers={setInvitedInfluencers}
+                    setInvitedInfluencers={setInvitedInfluencers}
+                    campaignId={campaignId}
 				/>
 			)}
 		</div>

@@ -1,4 +1,3 @@
-import { ApolloClient } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloLink, split } from "apollo-link";
@@ -9,6 +8,8 @@ import { createUploadLink } from "apollo-upload-client";
 import { ACCESS_TOKEN } from "../constants";
 import defaultState from "./defaultState";
 import resolvers from "./resolvers";
+import { ApolloClient } from 'apollo-client';
+
 
 const httpLink = createHttpLink({ uri: "http://localhost:4000" });
 const cache = new InMemoryCache({ freezeResults: true });

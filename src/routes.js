@@ -30,7 +30,8 @@ export const ROUTE_PATHS = {
 		login: "/login",
 		logout: "/logout",
 		passwordForgot: "/password-forgot", // TODO add
-		passwordReset: "/password-reset/:token" // TODO add
+		passwordReset: "/password-reset/:token", // TODO add
+		brands: "/brands"
 	}
 };
 
@@ -92,7 +93,7 @@ const Routes = () => (
 			)}
 		/>
 		<Route
-			path={ROUTE_PATHS.auth.signup}
+			path={ROUTE_PATHS.auth.brands}
 			exact
 			render={matchProps => (
 				<AuthPageLayout

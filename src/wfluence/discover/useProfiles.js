@@ -5,7 +5,7 @@ const useProfilesQuery = (first, skip) => {
 	const { data, loading, fetchMore } = useQuery(PROFILES_QUERY, {
 		variables: { first, skip },
 		notifyOnNetworkStatusChange: true,
-		fetchPolicy: 'network-only'
+		fetchPolicy: "no-cache"
 	});
 
 	if (loading) return { loading, profiles: [] };
@@ -15,11 +15,10 @@ const useProfilesQuery = (first, skip) => {
 			query: PROFILES_QUERY,
 			notifyOnNetworkStatusChange: true,
 			variables: { first, skip },
-			fetchPolicy: 'no-cache',
+			fetchPolicy: "no-cache",
 			updateQuery: (previousResult, x) => {
 				const { fetchMoreResult } = x;
 				const newProfiles = fetchMoreResult.profiles;
-				debugger;
 				return newProfiles.length
 					? {
 							profiles: [...previousResult.profiles, ...newProfiles]
@@ -28,10 +27,8 @@ const useProfilesQuery = (first, skip) => {
 			}
 		});
 	};
-	debugger;
-	console.log("fetched data", data);
 	return {
-		profiles: data.profiles ,
+		profiles: data.profiles,
 		loading,
 		loadMore: loading ? () => {} : loadMore
 	};
