@@ -1,0 +1,44 @@
+.connect-wrapper {
+	> .try-it-wrapper {
+		box-shadow: rgba(34, 67, 98, 0.2) 30px -10px 30px -10px;
+		width: 550px;
+		max-width: 550px;
+		margin: 0px auto;
+		border-radius: 15px;
+		background-color: white;
+		padding: 30px;
+
+		> .header {
+			font-family: AvenirMedium;
+			font-size: 32px;
+			font-weight: 500;
+			color: #1c3a6a;
+			margin-bottom: 20px;
+		}
+		> .item {
+			font-family: AvenirMedium;
+			font-size: 16px;
+			color: $turtle-green;
+			margin-top: 10px;
+		}
+
+		> .item::before {
+			content: "# ";
+		}
+
+		.login-with-fb {
+			> .lgh {
+				font-family: Montserrat;
+				font-size: 16px;
+				color: #1c3a6a;
+				margin-top: 30px;
+			}
+
+			>.fb-login-button{
+				width: 100%;
+				text-align: center;
+				margin-top: 20px;
+			}
+		}
+	}
+}

@@ -14,11 +14,12 @@ export const LOGIN_USER_MUTATION = gql`
 `;
 
 export const setUserDataMutation = gql`
-	mutation setUserData($name: String!, $id: ID!, $email: String!) {
-		setUserData(name: $name, id: $id, email: $email) @client {
+	mutation setUserData($name: String!, $id: ID!, $email: String!, $role: UserRole!) {
+		setUserData(name: $name, id: $id, email: $email, role: $role) @client {
 			name
 			id
 			email
+			role
 		}
 	}
 `;

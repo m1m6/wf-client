@@ -6,6 +6,18 @@ export const ME_QUERY = gql`
 			id
 			email
 			name
+			role
+		}
+	}
+`;
+
+export const ME_QUERY_CLIENT = gql`
+	query MeQuery {
+		me @client {
+			id
+			email
+			name
+			role
 		}
 	}
 `;

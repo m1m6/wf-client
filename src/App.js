@@ -11,25 +11,31 @@ const token = auth.getAccessToken();
 
 const App = () => {
 	const { loading, data, error } = useMeQuery();
+	const [userRole, setUserRole] = useState(undefined);
+
 	const [setUserData] = useUserData();
 
 	async function setUserDataAsync() {
 		if (!loading) {
-			const {id, name, email} = data.me
-			await setUserData({ variables: { id, name, email } });
+			const { id, name, email, role } = data.me;
+			setUserRole(role);
+			await setUserData({ variables: { id, name, email, role } });
 		}
 	}
-	useEffect( () => {
-		setUserDataAsync();
-	}, []);
 
-	return loading ? (
-		<Spin spinning={loading} size="large" delay={500} />
-	) : token ? (
+	if (loading) {
+		return <Spin spinning={loading} size="large" delay={500} />;
+	}
+
+	if (userRole === undefined && data && data.me) {
+		setUserDataAsync();
+	}
+
+	return token ? (
 		<Layout>
-			<Sidebar />
+			<Sidebar userRole={userRole} />
 			<Content className="app-page-wrapper">
-				<Routes />
+				<Routes userRole={userRole} />
 			</Content>
 		</Layout>
 	) : (

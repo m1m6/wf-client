@@ -2,11 +2,19 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { auth } from "../signupLogin/auth";
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
+const hasAccess = (roles, userRole) => {
+	return roles.includes(userRole);
+};
+
+const ProtectedRoute = ({ component: Component, userRole, roles, ...rest }) => {
 	const token = auth.getAccessToken();
-	console.log("token", token)
+	const isAuthorizedToAccess = hasAccess(roles, userRole);
 	return token ? (
-		<Route {...rest} render={matchProps => <Component {...matchProps} />} />
+		isAuthorizedToAccess ? (
+			<Route {...rest} render={matchProps => <Component {...matchProps} />} />
+		) : (
+			<Redirect to="/" />
+		)
 	) : (
 		<Redirect to="/login" />
 	);

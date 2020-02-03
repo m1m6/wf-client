@@ -5,37 +5,44 @@ import * as Yup from "yup";
 import InputField from "../../../form/components/InputField";
 import Button from "../../../form/components/Button";
 import Link from "../../../form/components/Link";
-import { useLogin } from "../useLogin";
-import { showAllGraphQLErrors } from "../../../helper/graphqlErrors";
+import { useBrandSignup } from "../useMutations";
 import { auth } from "../../auth";
-import { useUserData } from "../useUserDataMutations";
+import { showAllGraphQLErrors } from "../../../helper/graphqlErrors";
+import { ROUTE_PATHS } from "../../../routes";
 
 const initialValues = {
 	email: "",
-	password: ""
+	password: "",
+	name: "",
+	role: "BRAND"
 };
 
-const loginSchema = Yup.object().shape({
+const signupSchema = Yup.object().shape({
 	email: Yup.string().required("*Required"),
-	password: Yup.string().required("*Required")
+	password: Yup.string().required("*Required"),
+	name: Yup.string().required("*Required")
 });
 
-const Login = ({routerHistory}) => {
-	const [login] = useLogin();
+const Signup = ({ routerHistory, role }) => {
+	const [signup] = useBrandSignup();
+	if (role) {
+		initialValues.role = role;
+	}
 	return (
 		<div className="login-wrapper">
 			<p>
-				Don’t have an account? <Link to="/brands" label="Create an account" />
+				Already have an account? <Link to="/login" label="Login" />
 			</p>
 			<Formik
 				initialValues={initialValues}
-				validationSchema={loginSchema}
+				validationSchema={signupSchema}
 				onSubmit={async (values, { setSubmitting }) => {
 					try {
-						const result = await login({ variables: { ...values } });
+						const result = await signup({ variables: { ...values } });
 						if (result) {
-							auth.logIn(result.data.login.token);
-							window.location.assign("/");
+							auth.logIn(result.data.signup.token);
+							auth.creatorFirstTime(true);
+							window.location.assign(ROUTE_PATHS.app.connectIg);
 						}
 					} catch (error) {
 						setSubmitting(false);
@@ -48,6 +55,16 @@ const Login = ({routerHistory}) => {
 						<Row className="auth-row">
 							<InputField
 								iconType="user"
+								name="name"
+								type="text"
+								label="Your Name"
+								placeholder="John Doe"
+							/>
+						</Row>
+
+						<Row className="auth-row">
+							<InputField
+								iconType="email"
 								name="email"
 								type="text"
 								label="Email"
@@ -63,11 +80,6 @@ const Login = ({routerHistory}) => {
 								placeholder="***********"
 							/>
 						</Row>
-						<Row className="forgot-pwd-link">
-							<p>
-								<Link to="/signup" label="Forgot your password?" />
-							</p>
-						</Row>
 						<Row>
 							<Button
 								htmlType="submit"
@@ -76,10 +88,10 @@ const Login = ({routerHistory}) => {
 								className="wf-btn-primary"
 							>
 								{isSubmitting ? (
-									"LOGGING IN..."
+									"SIGNING UP..."
 								) : (
 									<>
-										LOG IN
+										SIGN UP
 										<Icon type="arrow-right" />
 									</>
 								)}
@@ -92,4 +104,4 @@ const Login = ({routerHistory}) => {
 	);
 };
 
-export default Login;
+export default Signup;

@@ -13,6 +13,7 @@ export default {
 		__typename: "userData",
 		id: "",
 		name: "",
-		email: ""
+		email: "",
+		role: ""
 	}
 };
