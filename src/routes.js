@@ -16,6 +16,8 @@ import Signup from "./signupLogin/signup/components/Signup";
 import { ROLES } from "./signupLogin/constants";
 import { auth } from "./signupLogin/auth";
 import Connect from "./socialIntegration/instagram/components/Connect";
+import CreatorCampaigns from "./wfluence/campaign/components/CreatorCampaigns";
+import CampaignOffer from "./wfluence/campaign/components/CampaignOffer";
 
 export const ROUTE_PATHS = {
 	home: "/",
@@ -26,7 +28,9 @@ export const ROUTE_PATHS = {
 		campaign: "/campaigns",
 		newCampaign: "/campaigns/new",
 		campaignView: "/campaign-view/:id",
-		connectIg: "/connect"
+		connectIg: "/connect",
+		creatorCampaigns: "/creator-campaigns",
+		campaignOffer: "/campaign-offer/:id"
 	},
 	auth: {
 		me: "/me", // TODO add
@@ -111,6 +115,35 @@ const Routes = ({ userRole }) => {
 				roles={[ROLES.ADMIN, ROLES.BRANDS, ROLES.CREATORS]}
 				userRole={userRole}
 			/>
+
+			<ProtectedRoute
+				path={ROUTE_PATHS.app.creatorCampaigns}
+				exact
+				component={matchProps => (
+					<PageLayout
+						Component={CreatorCampaigns}
+						{...matchProps}
+						title="My Participation In Campaigns"
+					/>
+				)}
+				roles={[ROLES.ADMIN, ROLES.CREATORS]}
+				userRole={userRole}
+			/>
+
+			<ProtectedRoute
+				path={ROUTE_PATHS.app.campaignOffer}
+				exact
+				component={matchProps => (
+					<PageLayout
+						Component={CampaignOffer}
+						{...matchProps}
+						title="Campaign Offer"
+					/>
+				)}
+				roles={[ROLES.ADMIN, ROLES.CREATORS]}
+				userRole={userRole}
+			/>
+
 			<Route
 				path={ROUTE_PATHS.auth.brands}
 				exact

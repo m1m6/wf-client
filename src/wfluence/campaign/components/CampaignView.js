@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { isPast } from "date-fns";
 import Button from "../../../form/components/Button";
 import { Icon, Tabs, Skeleton } from "antd";
 import Analytics from "../tabs/components/Analytics";
 import InviteModal from "../invite/components/InviteModal";
 import { useCampaignDetailsQuery } from "../useQueries";
-import { getCampaignInfluencers } from "../utils";
+import {
+	getCampaignInfluencers,
+	findMediaMetrics,
+	getCostPerEachEngagement
+} from "../utils";
+import { nFormatter } from "../../../utils/numberUtils";
 
-//{}
 const { TabPane } = Tabs;
 
 const CampaignTabs = () => {
@@ -37,7 +42,7 @@ const CampaignTabs = () => {
 };
 
 const CampaignView = ({ routerHistory, match }) => {
-    const campaignId = match.params.id
+	const campaignId = match.params.id;
 	const [inviteModalVisible, setInviteModalVisible] = useState(false);
 	const [invitedInfluencers, setInvitedInfluencers] = useState([]);
 	const { loading, data, error } = useCampaignDetailsQuery(campaignId);
@@ -46,47 +51,83 @@ const CampaignView = ({ routerHistory, match }) => {
 		return <Skeleton loading active paragraph title />;
 	}
 	const { campaign } = data;
+
+	console.log("campaign", campaign);
 	const { influencers, totalBudget, totalPosts } = getCampaignInfluencers(
 		campaign
 	);
+
+	const {
+		medias,
+		totalEngagementRate,
+		totalLikes,
+		totalComments,
+		totalViews
+	} = findMediaMetrics(campaign.mediaPosts);
+	const { mediaPosts } = campaign;
 	const allProfiles = [...influencers, ...invitedInfluencers];
 
+	const getTotleCPE = getCostPerEachEngagement(
+		totalLikes,
+		totalComments,
+		totalViews,
+		totalBudget
+	);
+
+	const { startDate, endDate, name, status } = campaign;
+	const isEnded = isPast(new Date(endDate));
 	return (
 		<div className="campaign-view">
-			<div className="invite-influencer">
+			<div className="header">
 				<Button
 					className="wf-btn-primary"
 					onClick={e => setInviteModalVisible(true)}
 				>
 					Invite Influencers
 				</Button>
+				<div className="campaign-info">
+					<span className="label">Campaign Name: </span>
+					<div className="name"> {name}</div>
+					<div className="date">
+						<span className="label">Start Date:</span>
+						<span className="st">{new Date(startDate).toDateString()}</span>
+						<span className="label">End Date:</span>
+						<span className="st">{new Date(endDate).toDateString()}</span>
+						<span className="label">Status:</span>
+						<span className={`status-${isEnded? "ended": status.toLowerCase()}`}>
+							●{isEnded ? "Ended" : status}
+						</span>
+					</div>
+				</div>
 			</div>
 			<div className="overview">
 				<div className="summary">
 					<div className="summary-item">
-						<div className="title">Posts</div>
+						<div className="title">Posts/Stories</div>
 						<div className="subtitle">in the campaign</div>
 						<div className="container">
-							<div className="value">{totalPosts}</div>
+							<div className="value">{mediaPosts ? mediaPosts.length : 0}</div>
 						</div>
 					</div>
 					<div className="summary-item">
 						<div className="title">Engagement</div>
 						<div className="subtitle">in the campaign</div>
 						<div className="container">
-							<div className="value">8%</div>
+							<div className="value">
+								{Math.round(totalEngagementRate.toFixed(2))}%
+							</div>
 							<div className="summary-footer">
 								<div>
 									<Icon type="like" />
-									<div>10K</div>
+									<div>{nFormatter(totalLikes)}</div>
 								</div>
 								<div>
 									<Icon type="message" />
-									<div>10K</div>
+									<div>{nFormatter(totalComments)}</div>
 								</div>
 								<div>
 									<Icon type="eye" />
-									<div>10K</div>
+									<div>{nFormatter(totalViews)}</div>
 								</div>
 							</div>
 						</div>
@@ -101,15 +142,15 @@ const CampaignView = ({ routerHistory, match }) => {
 							<div className="summary-footer">
 								<div>
 									<Icon type="like" />
-									<div>$0.00</div>
+									<div>${getTotleCPE.costPerLikes}</div>
 								</div>
 								<div>
 									<Icon type="message" />
-									<div>$0.00</div>
+									<div>${getTotleCPE.costPerComments}</div>
 								</div>
 								<div>
 									<Icon type="eye" />
-									<div>$0.00</div>
+									<div>${getTotleCPE.costPerViews}</div>
 								</div>
 							</div>
 						</div>
@@ -144,11 +185,14 @@ const CampaignView = ({ routerHistory, match }) => {
 											<div class="influencer-name">{profile.username}</div>
 											<div class="influencer-data">
 												<div class="badge counter-badge">
-													{profile.publishedPostsCount}/{profile.requiredPostsCount}
+													{profile.publishedPostsCount}/
+													{profile.requiredPostsCount}
 												</div>
-												{/* <div class="badge status-badge status-badge_complete">
-											Accepted
-										</div> */}
+												<div
+													className={`status ${profile.status.toLowerCase()}`}
+												>
+													{profile.status}
+												</div>
 											</div>
 										</div>
 									</div>
@@ -164,8 +208,8 @@ const CampaignView = ({ routerHistory, match }) => {
 					inviteModalVisible={inviteModalVisible}
 					setInviteModalVisible={setInviteModalVisible}
 					invitedInfluencers={invitedInfluencers}
-                    setInvitedInfluencers={setInvitedInfluencers}
-                    campaignId={campaignId}
+					setInvitedInfluencers={setInvitedInfluencers}
+					campaignId={campaignId}
 				/>
 			)}
 		</div>

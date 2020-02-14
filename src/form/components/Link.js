@@ -2,9 +2,9 @@ import React from "react";
 import { Link as RLink } from "react-router-dom";
 import classnames from "classnames";
 
-const Link = ({ label, to, blackLink, target }) => {
+const Link = ({ label, to, blackLink, target, style }) => {
 	return (
-		<RLink to={to} className={classnames("btn-link", { black: blackLink })} target={target}>
+		<RLink to={to} className={classnames("btn-link", { black: blackLink })} target={target} style={style}>
 			{label}
 		</RLink>
 	);

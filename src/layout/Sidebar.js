@@ -39,7 +39,7 @@ const Sidebar = () => {
 					</Link>
 				</Menu.Item>
 				{(isBrandUser || isAdminUser) && (
-					<Menu.Item key="2">
+					<Menu.Item key="21">
 						<Icon type="profile" />
 						<Link to="/discover">
 							<span className="nav-text">Discover</span>
@@ -47,27 +47,24 @@ const Sidebar = () => {
 					</Menu.Item>
 				)}
 
-				<Menu.Item key="7">
-					<Icon type="team" />
-					<Link to="/campaigns">
-						<span className="nav-text">Campaigns</span>
-					</Link>
-				</Menu.Item>
 
-				<Menu.Item key="4">
-					<Icon type="bar-chart" />
-					<span className="nav-text">Analytics</span>
-				</Menu.Item>
+				{(isCreatorUser || isAdminUser) && (
+					<Menu.Item key="2">
+						<Icon type="profile" />
+						<Link to="/creator-campaigns">
+							<span className="nav-text">My Campaigns</span>
+						</Link>
+					</Menu.Item>
+				)}
 
-				<Menu.Item key="5">
-					<Icon type="cloud-o" />
-					<span className="nav-text">Insights</span>
-				</Menu.Item>
-
-				<Menu.Item key="6">
-					<Icon type="appstore-o" />
-					<span className="nav-text">Media</span>
-				</Menu.Item>
+				{(isBrandUser || isAdminUser) && (
+					<Menu.Item key="7">
+						<Icon type="team" />
+						<Link to="/campaigns">
+							<span className="nav-text">Campaigns</span>
+						</Link>
+					</Menu.Item>
+				)}
 			</Menu>
 		</Sider>
 	);

@@ -1,0 +1,68 @@
+.campaign-offer {
+	margin-right: 9.2vw;
+	border-radius: 4px;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+	background-color: $white;
+	display: flex;
+	flex-direction: row;
+	> .details {
+		width: 75%;
+		padding-left: 3vw;
+		padding-top: 40px;
+		padding-bottom: 30px;
+		padding-right: 40px;
+
+		> .name {
+			font-family: AvenirMedium;
+			font-size: 20px;
+			font-weight: 500;
+			color: $black;
+		}
+
+		> .description {
+			font-family: AvenirMedium;
+			font-size: 16px;
+			font-weight: 500;
+			line-height: 1.63;
+			color: #4e4e4e;
+			margin-top: 30px;
+		}
+
+		.tags-mentions {
+			font-family: AvenirMedium;
+			font-size: 16px;
+			font-weight: 500;
+			line-height: 1.63;
+			color: #4e4e4e;
+			margin-top: 5px;
+		}
+	}
+
+	> .right-panel {
+        width: 23%;
+        padding-left: 20px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        border-left: 1px solid #dbdbdb;
+
+        >.wf-btn-secondary{
+            margin-top: 0px;
+            height: 40px;
+            background-color: $turtle-green;
+            border-radius: 25px;
+            border-color: transparent;
+            width: 15vw;
+        }
+
+
+        >.wf-btn-decline{
+            width: 15vw;
+            height: 40px;
+            margin-top: 20px;
+            border-radius: 20px;
+            border: solid 1px $dark-slate-blue;
+            background-color: white;
+            color: $dark-slate-blue;
+        }
+	}
+}

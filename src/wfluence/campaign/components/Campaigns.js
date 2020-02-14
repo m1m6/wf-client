@@ -1,14 +1,14 @@
 import React from "react";
 import Button from "../../../form/components/Button";
 import { useCampaignsQuery } from "../useQueries";
-import { Alert, Skeleton, Icon } from "antd";
+import { Alert, Skeleton, Icon, message } from "antd";
 import { Link } from "react-router-dom";
 
 const Campaigns = ({ routerHistory }) => {
 	const { loading, data, error } = useCampaignsQuery();
 
 	if (error) {
-		alert("errorrrrr!");
+		message.warning('Unable to fetch your campaigns.')
 		return;
 	}
 

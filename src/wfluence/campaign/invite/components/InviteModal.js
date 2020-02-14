@@ -29,7 +29,8 @@ const InviteModal = ({
 					...profile,
 					requiredPostsCount,
 					budget,
-					publishedPostsCount: 0
+					publishedPostsCount: 0,
+					status: "PENDING"
 				};
 				setResults([...results, newProfile]);
 				setSearchTerm("");
@@ -167,12 +168,12 @@ const InviteModal = ({
 
 async function searchCharacters(profile) {
 	return fetch(`https://www.instagram.com/${profile}/`, {
-		headers: {
-			referer: "https://www.instagram.com/p/BT1ynUvhvaR/?taken-by=yatsenkolesh",
-			origin: "https://www.instagram.com",
-			"user-agent":
-				"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36"
-		},
+		// headers: {
+		// 	referer: "https://www.instagram.com/p/BT1ynUvhvaR/?taken-by=yatsenkolesh",
+		// 	origin: "https://www.instagram.com",
+		// 	"user-agent":
+		// 		"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36"
+		// },
 		method: "get"
 	})
 		.then(r =>

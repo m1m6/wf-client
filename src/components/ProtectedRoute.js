@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { auth } from "../signupLogin/auth";
 
@@ -8,13 +8,15 @@ const hasAccess = (roles, userRole) => {
 
 const ProtectedRoute = ({ component: Component, userRole, roles, ...rest }) => {
 	const token = auth.getAccessToken();
-	const isAuthorizedToAccess = hasAccess(roles, userRole);
+	const [isAuth, setIsAuth] = useState(false);
+	let isAuthorizedToAccess;
+
+	useEffect(() => {
+		setIsAuth(hasAccess(roles, userRole));
+	}, [roles, userRole]);
+	console.log("isAuthorizedToAccess", isAuth, roles, userRole);
 	return token ? (
-		isAuthorizedToAccess ? (
-			<Route {...rest} render={matchProps => <Component {...matchProps} />} />
-		) : (
-			<Redirect to="/" />
-		)
+		<Route {...rest} render={matchProps => <Component {...matchProps} />} />
 	) : (
 		<Redirect to="/login" />
 	);

@@ -50,6 +50,32 @@
 				color: $dark-slate-blue;
 			}
 
+			> .status {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				width: fit-content;
+				color: #181320;
+				background-color: #1c3a6a;
+				color: white;
+				padding-left: 6px;
+				padding-right: 6px;
+				border-radius: 20px;
+				margin-top: 10px;
+			}
+
+			> .pending {
+				background-color:rgb(111, 111, 111);
+			}
+
+			> .accepted{
+				background-color: rgb(49, 126, 171);
+			}
+
+			> .completed{
+				background-color: rgb(49, 126, 171);
+			}
+
 			> .footer {
 				position: absolute;
 				bottom: 10px;

@@ -1,5 +1,6 @@
 import React from "react";
 import BasicColumn from "../../../../charts/components/BasicColumn";
+import TwoYAxis from "../../../../charts/components/TwoYAxis";
 const Analytics = () => {
 	return (
 		<div className="analytics-tab">
@@ -10,7 +11,7 @@ const Analytics = () => {
 				</div>
 				<div style={{ width: "40%" }}>
 					<div className="title">Engagement Timeline</div>
-					<BasicColumn />
+					<TwoYAxis />
 				</div>
 			</div>
 

@@ -1,5 +1,5 @@
 .campaign-view {
-	.invite-influencer {
+	> .header {
 		display: flex;
 		justify-content: flex-start;
 		padding-right: 20px;
@@ -12,6 +12,52 @@
 
 		> .wf-btn-primary:hover {
 			color: #878787;
+		}
+
+		> .campaign-info {
+			margin-left: 20px;
+			display: flex;
+			width: 100%;
+			font-family: Montserrat;
+			color: $dark-slate-blue;
+			font-size: 1rem;
+			margin-top: 15px;
+			> .date {
+				margin-left: 2vw;
+				width: 60%;
+				> span {
+					font-family: Montserrat;
+					color: $dark-slate-blue;
+					font-size: 1rem;
+					margin-left: 5px;
+					margin-right: 5px;
+				}
+				.label {
+					font-weight: 600;
+				}
+
+				.status-pending {
+					color: orange;
+				}
+
+				.status-paused,
+				.status-cancelled,
+				.status-ended {
+					color: red;
+				}
+
+				.status-in_progress {
+					color: seagreen;
+				}
+
+				.status-completed {
+					color: green;
+				}
+			}
+			.label {
+				font-weight: 600;
+				margin-right: 5px;
+			}
 		}
 	}
 	> .overview {
@@ -33,7 +79,6 @@
 
 				> .title {
 					font-family: AvenirMedium;
-					font-size: 32px;
 					font-weight: 600;
 					color: $dark-slate-blue;
 					font-size: 1.5625rem;
@@ -67,13 +112,17 @@
 						color: #878787;
 						display: flex;
 						align-items: center;
-						justify-content: space-around;
+						justify-content: space-between;
 						width: 100%;
 
 						> div {
 							display: flex;
 							justify-content: center;
 							flex-direction: column;
+
+							> div {
+								text-align: center;
+							}
 						}
 					}
 				}
@@ -182,6 +231,31 @@
 
 							> .influencer-data {
 								display: flex;
+
+								> .status {
+									white-space: nowrap;
+									overflow: hidden;
+									text-overflow: ellipsis;
+									width: 80%;
+									color: #181320;
+									margin-left: 4px;
+									background-color: #1c3a6a;
+									color: white;
+									padding-left: 4px;
+									border-radius: 20px;
+								}
+
+								> .pending {
+									background-color: rgb(111, 111, 111);
+								}
+
+								> .accepted {
+									background-color: rgb(49, 126, 171);
+								}
+
+								> .completed {
+									background-color: rgb(49, 126, 171);
+								}
 							}
 						}
 					}
@@ -201,6 +275,7 @@
 		margin-top: 30px;
 		color: #181320;
 		padding-right: 10px;
+		margin-left: -68px;
 		.ant-tabs-tab {
 			font-family: AvenirMedium;
 			font-size: 26px;

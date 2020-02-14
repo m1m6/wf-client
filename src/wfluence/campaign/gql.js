@@ -48,6 +48,7 @@ export const campaignDetailsQuery = gql`
 		campaign(id: $id) {
 			id
 			name
+			status
 			description
 			budget
 			startDate
@@ -59,6 +60,7 @@ export const campaignDetailsQuery = gql`
 				requiredPostsCount
 				publishedPostsCount
 				budget
+				status
 				Profile {
 					id
 					name
@@ -68,6 +70,70 @@ export const campaignDetailsQuery = gql`
 			metric {
 				id
 			}
+			mediaPosts {
+				id
+				commentsCount
+				likesCount
+				mediaType
+				reach
+				engagement
+				impressions
+				carouselAlbumReach
+				carouselAlbumSaved
+				carouselAlbumEngagement
+				carouselAlbumVideoViews
+				carouselAlbumImpressions
+				exits
+				video_views
+				timestamp
+				profile {
+					id
+					name
+					followersCount
+				}
+			}
 		}
+	}
+`;
+
+export const creatorCampaignsQuery = gql`
+	query getCreatorCampaigns {
+		creatorCampaigns {
+			id
+			status
+			campaign {
+				id
+				tagsAndMentions
+				name
+				description
+				status
+			}
+		}
+	}
+`;
+
+export const creatorCampaignQuery = gql`
+	query getCreatorCampaign($id: ID!) {
+		creatorCampaign(id: $id) {
+			id
+			status
+			campaign {
+				id
+				tagsAndMentions
+				name
+				description
+				status
+				media
+			}
+		}
+	}
+`;
+
+export const updateCampaignCreatorStatusMutation = gql`
+	mutation updateCampaignCreatorStatus(
+		$id: ID!
+		$status: CampaignCreatorStatus!
+	) {
+		updateCampaignCreatorStatus(id: $id, status: $status)
 	}
 `;
