@@ -1,17 +1,28 @@
 import React from "react";
 import BasicColumn from "../../../../charts/components/BasicColumn";
 import TwoYAxis from "../../../../charts/components/TwoYAxis";
-const Analytics = () => {
+import { getCampaignEngagementTimeLineData, getUTCDate, getEngagementRateData } from "../../utils";
+import CampaignEngagementRate from "../../../../charts/components/CampaignEngagementRate";
+
+const Analytics = ({ campaign }) => {
+	const { mediaPosts, startDate, endDate } = campaign;
+	const engagementTimeLine = getCampaignEngagementTimeLineData(mediaPosts);
+	const engagementRate = getEngagementRateData(mediaPosts);
+	console.log("engagementRate", engagementRate)
 	return (
 		<div className="analytics-tab">
 			<div>
 				<div style={{ width: "60%" }}>
 					<div className="title">Engagement Rate</div>
-					<BasicColumn />
+					<CampaignEngagementRate {...engagementRate}/>
 				</div>
 				<div style={{ width: "40%" }}>
 					<div className="title">Engagement Timeline</div>
-					<TwoYAxis />
+					<TwoYAxis
+						engagementTimeLine={engagementTimeLine}
+						startDate={getUTCDate(startDate)}
+						endDate={getUTCDate(endDate)}
+					/>
 				</div>
 			</div>
 

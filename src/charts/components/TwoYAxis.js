@@ -2,75 +2,71 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-const options = (title, data) => ({
+const options = (title, data, startDate, endDate) => ({
 	chart: {
-        zoomType: "x",
-        marginTop: 20,
-        marginLeft: 45,
-        marginRight: 45
+		zoomType: "x",
+		marginTop: 20,
+		marginLeft: 45,
+		marginRight: 45
 	},
 	title: {
 		text: ""
 	},
 	xAxis: {
 		type: "datetime",
-		tickInterval: 6 * 3600 * 1000,
-		min: Date.UTC(2013, 4, 22),
-        max: Date.UTC(2013, 4, 23)
-  
+		min: startDate,
+		max: endDate,
+		endOnTick: true
 	},
 	yAxis: [
 		{
-      margin: 0,
+			margin: 0,
 			title: {
-				text: "Primary Axis",
-                align: 'high',
-                offset: 0,
-                rotation: 0,
-                y: -10,
-                x: 30
+				text: "Likes",
+				align: "high",
+				offset: 0,
+				rotation: 0,
+				y: -10,
+				x: 5
 			}
 		},
 		{
-            margin: 0,
+			margin: 0,
 			title: {
-                text: "Secondary Axis",
-                align: 'high',
-                offset: 0,
-                rotation: 0,
-                y: -10,
-                x: -50
+				text: "Comments",
+				align: "high",
+				offset: 0,
+				rotation: 0,
+				y: -10,
+				x: -20
 			},
 			opposite: true
 		}
 	],
 	series: [
 		{
-			data: [
-				[1369206795000, 1],
-				[1369225421000, 3],
-				[1369230934000, 2]
-			],
-			pointStart: Date.UTC(2012, 5, 22),
-			pointInterval: 24 * 3600 * 1000 // one day
+			data: data.likesArray,
+			pointStart: startDate,
+			pointInterval: 24 * 3600 * 1000,
+			name: "Likes"
 		},
 		{
-			data: [
-				[1369206795000, 1],
-				[1369225421000, 4],
-				[1369230934000, 6]
-			],
-			pointStart: Date.UTC(2012, 5, 22),
+			data: data.commentsArray,
+			pointStart: startDate,
 			yAxis: 1,
-			pointInterval: 24 * 3600 * 1000 // one day
+			pointInterval: 24 * 3600 * 1000,
+			name: "Comments"
 		}
 	]
 });
 
-const TwoYAxis = ({ title, data }) => {
+const TwoYAxis = ({ title, engagementTimeLine, startDate, endDate }) => {
 	return (
 		<div>
-			<HighchartsReact highcharts={Highcharts} options={options(title, data)} />
+			<HighchartsReact
+				highcharts={Highcharts}
+				options={options(title, engagementTimeLine, startDate, endDate)}
+			/>
 		</div>
 	);
 };

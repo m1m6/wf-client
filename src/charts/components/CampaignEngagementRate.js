@@ -15,21 +15,29 @@ const options = (title, xLabels, yData, arrayOfObjectsSeries) => ({
 
 	xAxis: {
 		categories: xLabels,
-		crosshair: true
+		crosshair: true,
+		title: {
+			text: "Post Date"
+		}
 	},
 	yAxis: {
 		min: 0,
 		title: {
-			text: ""
+			text: "Engagement Rate (%)"
 		}
 	},
 	tooltip: {
-		headerFormat:
-			'<span style="font-size:10px">{point.key}: {point.y}%</span><table>',
-		pointFormat: "",
-		footerFormat: "</table>",
-		shared: true,
-		useHTML: true
+		formatter: function(tooltip) {
+			console.log(this, tooltip);
+			return (
+				"Post by: <b>" +
+				this.point.name +
+				"</b> <br>Has <b>" +
+				this.y +
+				"% ER</b><br>At Date: <b>" +
+				this.x +"</b>"
+			);
+		}
 	},
 	plotOptions: {
 		column: {
@@ -38,18 +46,21 @@ const options = (title, xLabels, yData, arrayOfObjectsSeries) => ({
 		}
 	},
 	colors: [colors[Math.floor(Math.random() * 4)]],
-	series: arrayOfObjectsSeries
-		? yData
-		: [
-				{
-					data: yData,
-					showInLegend: false,
-						pointWidth: 30
-				}
-		  ]
+	series: [
+		{
+			data: yData,
+			showInLegend: false,
+			pointWidth: 30
+		}
+	]
 });
 
-const BasicColumn = ({ title, xLabels, yData, arrayOfObjectsSeries }) => {
+const CampaignEngagementRate = ({
+	title,
+	xLabels,
+	yData,
+	arrayOfObjectsSeries
+}) => {
 	return (
 		<div>
 			<HighchartsReact
@@ -60,4 +71,4 @@ const BasicColumn = ({ title, xLabels, yData, arrayOfObjectsSeries }) => {
 	);
 };
 
-export default BasicColumn;
+export default CampaignEngagementRate;

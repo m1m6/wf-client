@@ -86,6 +86,11 @@ export const campaignDetailsQuery = gql`
 				exits
 				video_views
 				timestamp
+				mediaMetrics {
+					likesCount
+					commentsCount
+					updatedAt
+				}
 				profile {
 					id
 					name

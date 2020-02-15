@@ -14,7 +14,10 @@ import { nFormatter } from "../../../utils/numberUtils";
 
 const { TabPane } = Tabs;
 
-const CampaignTabs = () => {
+const CampaignTabs = ({campaign}) => {
+
+	
+
 	return (
 		<div className="campaign-tabs-container">
 			<Tabs
@@ -24,7 +27,7 @@ const CampaignTabs = () => {
 				animated={false}
 			>
 				<TabPane className="tab-item" tab="Analytics" key="1">
-					<Analytics />
+					<Analytics campaign={campaign}/>
 				</TabPane>
 				<TabPane tab="Posts" key="2">
 					<p>Content of Tab Pane 2</p>
@@ -57,15 +60,16 @@ const CampaignView = ({ routerHistory, match }) => {
 		campaign
 	);
 
+	const allProfiles = [...influencers, ...invitedInfluencers];
+
+	const { mediaPosts, startDate, endDate, name, status } = campaign;
 	const {
 		medias,
 		totalEngagementRate,
 		totalLikes,
 		totalComments,
 		totalViews
-	} = findMediaMetrics(campaign.mediaPosts);
-	const { mediaPosts } = campaign;
-	const allProfiles = [...influencers, ...invitedInfluencers];
+	} = findMediaMetrics(mediaPosts);
 
 	const getTotleCPE = getCostPerEachEngagement(
 		totalLikes,
@@ -74,8 +78,8 @@ const CampaignView = ({ routerHistory, match }) => {
 		totalBudget
 	);
 
-	const { startDate, endDate, name, status } = campaign;
 	const isEnded = isPast(new Date(endDate));
+
 	return (
 		<div className="campaign-view">
 			<div className="header">
@@ -94,7 +98,9 @@ const CampaignView = ({ routerHistory, match }) => {
 						<span className="label">End Date:</span>
 						<span className="st">{new Date(endDate).toDateString()}</span>
 						<span className="label">Status:</span>
-						<span className={`status-${isEnded? "ended": status.toLowerCase()}`}>
+						<span
+							className={`status-${isEnded ? "ended" : status.toLowerCase()}`}
+						>
 							●{isEnded ? "Ended" : status}
 						</span>
 					</div>
@@ -201,7 +207,7 @@ const CampaignView = ({ routerHistory, match }) => {
 					</div>
 				</div>
 			</div>
-			<CampaignTabs />
+			<CampaignTabs campaign={campaign}/>
 
 			{inviteModalVisible && (
 				<InviteModal

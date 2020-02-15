@@ -86,17 +86,107 @@ export const getCostPerEachEngagement = (
 	totalBudget = 0
 ) => {
 	return {
-		costPerLikes: getCostPerEngagement(totalLikes, totalBudget) ,
-		costPerComments: getCostPerEngagement(totalComments, totalBudget) ,
-		costPerViews: getCostPerEngagement(totalViews, totalBudget) ,
+		costPerLikes: getCostPerEngagement(totalLikes, totalBudget),
+		costPerComments: getCostPerEngagement(totalComments, totalBudget),
+		costPerViews: getCostPerEngagement(totalViews, totalBudget)
 	};
 };
 
 const getCostPerEngagement = (number, cost) => {
-	const isValid =  isNumber(number) && number > 0;
-	if (isValid){
-		return (cost/number).toFixed(2)
+	const isValid = isNumber(number) && number > 0;
+	if (isValid) {
+		return (cost / number).toFixed(2);
 	}
 
-	return "0.00"
+	return "0.00";
+};
+
+export const getCampaignEngagementTimeLineData = mediaData => {
+	let likesArray = [];
+	let commentsArray = [];
+
+	let likesHash = {};
+	let commentsHash = {};
+	if (mediaData && mediaData.length) {
+		for (const media of mediaData) {
+			const { mediaMetrics } = media;
+			for (const metric of mediaMetrics) {
+				const { commentsCount, likesCount, updatedAt } = metric;
+				let utcDate = new Date(updatedAt);
+				let utcMilliseconds = Date.UTC(
+					utcDate.getUTCFullYear(),
+					utcDate.getUTCMonth() + 1,
+					utcDate.getUTCDay(),
+					utcDate.getUTCHours(),
+					utcDate.getUTCMinutes()
+				);
+				likesHash[utcMilliseconds] = likesHash[utcMilliseconds]
+					? likesHash[utcMilliseconds] + likesCount
+					: likesCount;
+				commentsHash[utcMilliseconds] = commentsHash[utcMilliseconds]
+					? commentsHash[utcMilliseconds] + commentsCount
+					: commentsCount;
+			}
+		}
+	}
+
+	Object.keys(likesHash).map(key => {
+		likesArray.push([key, likesHash[key]]);
+	});
+	Object.keys(commentsHash).map(key => {
+		commentsArray.push([key, commentsHash[key]]);
+	});
+
+	console.log(likesArray);
+	console.log(commentsArray);
+
+	return {
+		likesArray,
+		commentsArray
+	};
+};
+
+export const getUTCDate = date => {
+	if (date) {
+		let utcDate = new Date(date);
+		let utcYMD = Date.UTC(
+			utcDate.getUTCFullYear(),
+			utcDate.getUTCMonth() + 1,
+			utcDate.getUTCDay()
+		);
+		return utcYMD;
+	}
+
+	return null;
+};
+
+export const getEngagementRateData = mediaData => {
+	let xLabels = [];
+	let yData = [];
+
+	if (mediaData && mediaData.length) {
+		for (const media of mediaData) {
+			if (media.mediaType !== "STORY") {
+				const {
+					timestamp,
+					likesCount,
+					commentsCount,
+					profile: { followersCount, name }
+				} = media;
+				let er = (
+					((likesCount + commentsCount) / followersCount) *
+					100
+				).toFixed(2);
+
+				let postDate = new Date(timestamp);
+				xLabels.push(`${postDate.getDate()}/${postDate.getMonth() + 1}`);
+				yData.push({y: parseFloat(er), name});
+			}
+		}
+	}
+
+	return {
+		xLabels,
+		yData
+	};
 };
