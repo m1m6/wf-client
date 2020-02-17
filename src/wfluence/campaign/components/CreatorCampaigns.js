@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { useCreatorCampaignsQuery } from "../useQueries";
-import { Skeleton, Icon, message, Modal } from "antd";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { useCreatorCampaignsQuery } from '../useQueries';
+import { Skeleton, Icon, message, Modal } from 'antd';
+import { Link } from 'react-router-dom';
 
 const CreatorCampaigns = ({ routerHistory }) => {
 	const { loading, data, error } = useCreatorCampaignsQuery();
 
 	if (error) {
-		message.warning("Unable to fetch your campaigns.");
+		message.warning('Unable to fetch your campaigns.');
 	}
 
 	if (loading) {
 		return <Skeleton loading={loading} active paragraph />;
 	}
 
-	console.log("data", data);
+	console.log('data', data);
 
 	const { creatorCampaigns } = data;
 	return (
@@ -28,10 +28,7 @@ const CreatorCampaigns = ({ routerHistory }) => {
 								<div className="description">{campaign.description}</div>
 								<div className="status">{status}</div>
 								<div className="footer">
-									<Icon
-										type="right-square"
-										style={{ fontSize: "18px", color: "#1c3a6a" }}
-									/>
+									<Icon type="right-square" style={{ fontSize: '18px', color: '#1c3a6a' }} />
 								</div>
 							</div>
 						</Link>

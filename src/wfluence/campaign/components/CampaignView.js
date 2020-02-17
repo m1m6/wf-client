@@ -1,43 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { isPast } from "date-fns";
-import Button from "../../../form/components/Button";
-import { Icon, Tabs, Skeleton } from "antd";
-import Analytics from "../tabs/components/Analytics";
-import InviteModal from "../invite/components/InviteModal";
-import { useCampaignDetailsQuery } from "../useQueries";
-import {
-	getCampaignInfluencers,
-	findMediaMetrics,
-	getCostPerEachEngagement
-} from "../utils";
-import { nFormatter } from "../../../utils/numberUtils";
+import React, { useState, useEffect } from 'react';
+import { isPast } from 'date-fns';
+import Button from '../../../form/components/Button';
+import { Icon, Tabs, Skeleton } from 'antd';
+import Analytics from '../tabs/components/Analytics';
+import InviteModal from '../invite/components/InviteModal';
+import { useCampaignDetailsQuery } from '../useQueries';
+import { getCampaignInfluencers, findMediaMetrics, getCostPerEachEngagement } from '../utils';
+import { nFormatter } from '../../../utils/numberUtils';
+import Posts from '../tabs/components/Posts';
+import Influencers from '../tabs/components/Influencers';
 
 const { TabPane } = Tabs;
 
-const CampaignTabs = ({campaign}) => {
-
-	
-
+const CampaignTabs = ({ campaign }) => {
 	return (
 		<div className="campaign-tabs-container">
-			<Tabs
-				type="card"
-				size="large"
-				tabBarStyle={{ margin: "0px" }}
-				animated={false}
-			>
+			<Tabs type="card" size="large" tabBarStyle={{ margin: '0px' }} animated={true}>
 				<TabPane className="tab-item" tab="Analytics" key="1">
-					<Analytics campaign={campaign}/>
+					<Analytics campaign={campaign} />
 				</TabPane>
 				<TabPane tab="Posts" key="2">
-					<p>Content of Tab Pane 2</p>
-					<p>Content of Tab Pane 2</p>
-					<p>Content of Tab Pane 2</p>
+					<Posts campaign={campaign} />
 				</TabPane>
 				<TabPane tab="Influencers" key="3">
-					<p>Content of Tab Pane 3</p>
-					<p>Content of Tab Pane 3</p>
-					<p>Content of Tab Pane 3</p>
+					<Influencers />
 				</TabPane>
 			</Tabs>
 		</div>
@@ -55,38 +41,24 @@ const CampaignView = ({ routerHistory, match }) => {
 	}
 	const { campaign } = data;
 
-	console.log("campaign", campaign);
-	const { influencers, totalBudget, totalPosts } = getCampaignInfluencers(
-		campaign
-	);
+	console.log('campaign', campaign);
+	const { influencers, totalBudget, totalPosts } = getCampaignInfluencers(campaign);
 
 	const allProfiles = [...influencers, ...invitedInfluencers];
 
 	const { mediaPosts, startDate, endDate, name, status } = campaign;
-	const {
-		medias,
-		totalEngagementRate,
-		totalLikes,
-		totalComments,
-		totalViews
-	} = findMediaMetrics(mediaPosts);
-
-	const getTotleCPE = getCostPerEachEngagement(
-		totalLikes,
-		totalComments,
-		totalViews,
-		totalBudget
+	const { medias, totalEngagementRate, totalLikes, totalComments, totalViews } = findMediaMetrics(
+		mediaPosts
 	);
+
+	const getTotleCPE = getCostPerEachEngagement(totalLikes, totalComments, totalViews, totalBudget);
 
 	const isEnded = isPast(new Date(endDate));
 
 	return (
 		<div className="campaign-view">
 			<div className="header">
-				<Button
-					className="wf-btn-primary"
-					onClick={e => setInviteModalVisible(true)}
-				>
+				<Button className="wf-btn-primary" onClick={e => setInviteModalVisible(true)}>
 					Invite Influencers
 				</Button>
 				<div className="campaign-info">
@@ -98,10 +70,8 @@ const CampaignView = ({ routerHistory, match }) => {
 						<span className="label">End Date:</span>
 						<span className="st">{new Date(endDate).toDateString()}</span>
 						<span className="label">Status:</span>
-						<span
-							className={`status-${isEnded ? "ended" : status.toLowerCase()}`}
-						>
-							●{isEnded ? "Ended" : status}
+						<span className={`status-${isEnded ? 'ended' : status.toLowerCase()}`}>
+							●{isEnded ? 'Ended' : status}
 						</span>
 					</div>
 				</div>
@@ -119,9 +89,7 @@ const CampaignView = ({ routerHistory, match }) => {
 						<div className="title">Engagement</div>
 						<div className="subtitle">in the campaign</div>
 						<div className="container">
-							<div className="value">
-								{Math.round(totalEngagementRate.toFixed(2))}%
-							</div>
+							<div className="value">{Math.round(totalEngagementRate.toFixed(2))}%</div>
 							<div className="summary-footer">
 								<div>
 									<Icon type="like" />
@@ -142,9 +110,7 @@ const CampaignView = ({ routerHistory, match }) => {
 						<div className="title">Campaign</div>
 						<div className="subtitle">Budget</div>
 						<div className="container">
-							<div className="value">{`${
-								totalBudget ? `$${totalBudget}` : "N/A"
-							}`}</div>
+							<div className="value">{`${totalBudget ? `$${totalBudget}` : 'N/A'}`}</div>
 							<div className="summary-footer">
 								<div>
 									<Icon type="like" />
@@ -183,7 +149,7 @@ const CampaignView = ({ routerHistory, match }) => {
 											alt=""
 											height="auto"
 											width="auto"
-											style={{ opacity: 1, transition: "opacity 0.6s ease 0s" }}
+											style={{ opacity: 1, transition: 'opacity 0.6s ease 0s' }}
 										/>
 									</div>
 									<div class="influencer-details">
@@ -191,12 +157,9 @@ const CampaignView = ({ routerHistory, match }) => {
 											<div class="influencer-name">{profile.username}</div>
 											<div class="influencer-data">
 												<div class="badge counter-badge">
-													{profile.publishedPostsCount}/
-													{profile.requiredPostsCount}
+													{profile.publishedPostsCount}/{profile.requiredPostsCount}
 												</div>
-												<div
-													className={`status ${profile.status.toLowerCase()}`}
-												>
+												<div className={`status ${profile.status.toLowerCase()}`}>
 													{profile.status}
 												</div>
 											</div>
@@ -207,7 +170,7 @@ const CampaignView = ({ routerHistory, match }) => {
 					</div>
 				</div>
 			</div>
-			<CampaignTabs campaign={campaign}/>
+			<CampaignTabs campaign={campaign} />
 
 			{inviteModalVisible && (
 				<InviteModal

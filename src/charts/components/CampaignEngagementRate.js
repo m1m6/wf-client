@@ -28,7 +28,6 @@ const options = (title, xLabels, yData, arrayOfObjectsSeries) => ({
 	},
 	tooltip: {
 		formatter: function(tooltip) {
-			console.log(this, tooltip);
 			return (
 				"Post by: <b>" +
 				this.point.name +

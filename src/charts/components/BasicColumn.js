@@ -5,7 +5,7 @@ import { colors } from "../HighChartTheme";
 import noData from "highcharts/modules/no-data-to-display";
 
 noData(Highcharts);
-const options = (title, xLabels, yData, arrayOfObjectsSeries) => ({
+const options = (title, xLabels, yData, arrayOfObjectsSeries, maxValue) => ({
 	chart: {
 		type: "column"
 	},
@@ -19,6 +19,7 @@ const options = (title, xLabels, yData, arrayOfObjectsSeries) => ({
 	},
 	yAxis: {
 		min: 0,
+		max: maxValue,
 		title: {
 			text: ""
 		}
@@ -49,12 +50,12 @@ const options = (title, xLabels, yData, arrayOfObjectsSeries) => ({
 		  ]
 });
 
-const BasicColumn = ({ title, xLabels, yData, arrayOfObjectsSeries }) => {
+const BasicColumn = ({ title, xLabels, yData, arrayOfObjectsSeries, maxValue = undefined }) => {
 	return (
 		<div>
 			<HighchartsReact
 				highcharts={Highcharts}
-				options={options(title, xLabels, yData, arrayOfObjectsSeries)}
+				options={options(title, xLabels, yData, arrayOfObjectsSeries, maxValue)}
 			/>
 		</div>
 	);

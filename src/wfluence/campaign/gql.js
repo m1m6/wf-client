@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const newCampaignMutation = gql`
 	mutation newCampaign(
@@ -25,10 +25,7 @@ export const newCampaignMutation = gql`
 `;
 
 export const linkProfilesToCampaignMutation = gql`
-	mutation linkProfilesToCampaign(
-		$profiles: [CampaignCreatorsInput!]!
-		$cid: ID!
-	) {
+	mutation linkProfilesToCampaign($profiles: [CampaignCreatorsInput!]!, $cid: ID!) {
 		linkProfilesToCampaign(profiles: $profiles, cid: $cid)
 	}
 `;
@@ -135,10 +132,21 @@ export const creatorCampaignQuery = gql`
 `;
 
 export const updateCampaignCreatorStatusMutation = gql`
-	mutation updateCampaignCreatorStatus(
-		$id: ID!
-		$status: CampaignCreatorStatus!
-	) {
+	mutation updateCampaignCreatorStatus($id: ID!, $status: CampaignCreatorStatus!) {
 		updateCampaignCreatorStatus(id: $id, status: $status)
+	}
+`;
+
+export const campaignMetricsQuery = gql`
+	query getCampaignMetrics($campaignId: ID!) {
+		campaignMetrics(campaignId: $campaignId) {
+			id
+			updatedAt
+			createdAt
+			age
+			gender
+			topCities
+			topCountries
+		}
 	}
 `;

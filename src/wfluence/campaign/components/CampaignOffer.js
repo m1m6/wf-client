@@ -1,35 +1,31 @@
-import React, { useState } from "react";
-import { useCreatorCampaignQuery } from "../useQueries";
-import { Skeleton, Icon, message } from "antd";
-import Button from "../../../form/components/Button";
-import { useUpdateCampaignCreatorStatusMutation } from "../useMutations";
+import React, { useState } from 'react';
+import { useCreatorCampaignQuery } from '../useQueries';
+import { Skeleton, Icon, message } from 'antd';
+import Button from '../../../form/components/Button';
+import { useUpdateCampaignCreatorStatusMutation } from '../useMutations';
 
 const CampaignOffer = ({ routerHistory, match }) => {
 	const campaignCreatorId = match.params.id;
 	const [isAcceptSubmitting, setIsAcceptSubmitting] = useState(false);
 	const [isDeclineSubmitting, setIsDeclineSubmitting] = useState(false);
-	const [
-		updateCampaignCreatorStatus
-	] = useUpdateCampaignCreatorStatusMutation();
-	const { loading, data, error, refetch } = useCreatorCampaignQuery(
-		campaignCreatorId
-	);
+	const [updateCampaignCreatorStatus] = useUpdateCampaignCreatorStatusMutation();
+	const { loading, data, error, refetch } = useCreatorCampaignQuery(campaignCreatorId);
 
 	if (error) {
-		message.warning("Unable to fetch your campaigns.");
+		message.warning('Unable to fetch your campaigns.');
 	}
 
 	if (loading) {
 		return <Skeleton loading={loading} active paragraph />;
 	}
 
-	console.log("data", data);
+	console.log('data', data);
 
 	const {
 		creatorCampaign: { campaign, status }
 	} = data;
 
-	let isAcceptedOrDeclined = status === "ACCEPTED" || status === "DECLINED";
+	let isAcceptedOrDeclined = status === 'ACCEPTED' || status === 'DECLINED';
 
 	return (
 		<div className="campaign-offer">
@@ -48,38 +44,34 @@ const CampaignOffer = ({ routerHistory, match }) => {
 				<Button
 					htmlType="submit"
 					type="primary"
-					disabled={
-						isAcceptSubmitting || isDeclineSubmitting || isAcceptedOrDeclined
-					}
+					disabled={isAcceptSubmitting || isDeclineSubmitting || isAcceptedOrDeclined}
 					className="wf-btn-secondary"
 					onClick={async () => {
 						setIsAcceptSubmitting(true);
 						await updateCampaignCreatorStatus({
-							variables: { id: campaignCreatorId, status: "ACCEPTED" }
+							variables: { id: campaignCreatorId, status: 'ACCEPTED' }
 						});
 						refetch({ variables: { id: campaignCreatorId } });
 						setIsAcceptSubmitting(false);
 					}}
 				>
-					{isAcceptSubmitting ? "SUBMITTING..." : "Accept Campaign"}
+					{isAcceptSubmitting ? 'SUBMITTING...' : 'Accept Campaign'}
 				</Button>
 				<Button
 					htmlType="submit"
 					type="primary"
-					disabled={
-						isDeclineSubmitting || isAcceptSubmitting || isAcceptedOrDeclined
-					}
+					disabled={isDeclineSubmitting || isAcceptSubmitting || isAcceptedOrDeclined}
 					className="wf-btn-decline"
 					onClick={async () => {
 						setIsDeclineSubmitting(true);
 						await updateCampaignCreatorStatus({
-							variables: { id: campaignCreatorId, status: "DECLINED" }
+							variables: { id: campaignCreatorId, status: 'DECLINED' }
 						});
 						refetch({ variables: { id: campaignCreatorId } });
 						setIsDeclineSubmitting(false);
 					}}
 				>
-					{isDeclineSubmitting ? "SUBMITTING..." : "Decline Campaign"}
+					{isDeclineSubmitting ? 'SUBMITTING...' : 'Decline Campaign'}
 				</Button>
 			</div>
 		</div>

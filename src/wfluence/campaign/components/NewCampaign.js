@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import Button from "../../../form/components/Button";
-import { Row, Icon,  message } from "antd";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import InputField from "../../../form/components/InputField";
-import Dragger from "antd/lib/upload/Dragger";
-import RangeDatePicker from "../../../form/components/RangeDatePicker";
-import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
-import moment from 'moment'
-import { useNewCampaign } from "../useMutations";
-import { showAllGraphQLErrors } from "../../../helper/graphqlErrors";
+import React, { useState } from 'react';
+import Button from '../../../form/components/Button';
+import { Row, Icon, message } from 'antd';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import InputField from '../../../form/components/InputField';
+import Dragger from 'antd/lib/upload/Dragger';
+import RangeDatePicker from '../../../form/components/RangeDatePicker';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+import moment from 'moment';
+import { useNewCampaign } from '../useMutations';
+import { showAllGraphQLErrors } from '../../../helper/graphqlErrors';
 const initialValues = {
-	name: "",
-	description: "",
+	name: '',
+	description: '',
 	budget: 0,
 	dateRange: null,
-	tagsAndMentions: "",
+	tagsAndMentions: '',
 	media: null
 };
 
 const loginSchema = Yup.object().shape({
-	email: Yup.string().required("*Required"),
-	password: Yup.string().required("*Required")
+	email: Yup.string().required('*Required'),
+	password: Yup.string().required('*Required')
 });
 
 const UPLOAD_MUTATION = gql`
@@ -31,10 +31,10 @@ const UPLOAD_MUTATION = gql`
 	}
 `;
 
-const NewCampaign = ({routerHistory}) => {
+const NewCampaign = ({ routerHistory }) => {
 	const [upload] = useMutation(UPLOAD_MUTATION);
 	const [uploadedFiles, setUploadedFiles] = useState([]);
-	const [newCamapgin] = useNewCampaign()
+	const [newCamapgin] = useNewCampaign();
 	const _uploadFile = async event => {
 		const file = event.file;
 
@@ -62,7 +62,7 @@ const NewCampaign = ({routerHistory}) => {
 						media: uploadedFiles,
 						startDate: moment(values.dateRange[0].toIso).toISOString(),
 						endDate: moment(values.dateRange[1]).toISOString()
-					}
+					};
 
 					try {
 						const result = await newCamapgin({ variables: { ...formValues } });
@@ -135,23 +135,21 @@ const NewCampaign = ({routerHistory}) => {
 								}}
 								onDownload={e => {
 									if (e.response && e.response.data) {
-										window.open(e.response.data.uploadFile, "_blank");
+										window.open(e.response.data.uploadFile, '_blank');
 									}
 								}}
 								onChange={info => {
 									const { status, response } = info.file;
-									if (status !== "uploading") {
+									if (status !== 'uploading') {
 										console.log(info.file, info.fileList);
 									}
-									if (status === "done") {
-										message.success(
-											`${info.file.name} file uploaded successfully.`
-										);
+									if (status === 'done') {
+										message.success(`${info.file.name} file uploaded successfully.`);
 
 										if (response.uploadFile) {
-                                            setUploadedFiles([...uploadedFiles, response.uploadFile]);
+											setUploadedFiles([...uploadedFiles, response.uploadFile]);
 										}
-									} else if (status === "error") {
+									} else if (status === 'error') {
 										message.error(`${info.file.name} file upload failed.`);
 									}
 								}}
@@ -160,9 +158,7 @@ const NewCampaign = ({routerHistory}) => {
 									<Icon type="inbox" />
 								</p>
 								<p className="ant-upload-text">Promoted Brand</p>
-								<p className="ant-upload-hint">
-									Drag and drop image here, or click to upload.
-								</p>
+								<p className="ant-upload-hint">Drag and drop image here, or click to upload.</p>
 							</Dragger>
 						</Row>
 						<Row>
@@ -173,7 +169,7 @@ const NewCampaign = ({routerHistory}) => {
 								className="wf-btn-primary"
 							>
 								{isSubmitting ? (
-									"PROCESSING..."
+									'PROCESSING...'
 								) : (
 									<>
 										Create

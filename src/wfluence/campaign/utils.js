@@ -1,4 +1,8 @@
-import isNumber from "lodash/isNumber";
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import ReactCountryFlag from 'react-country-flag';
+
+import isNumber from 'lodash/isNumber';
 
 export const getCampaignInfluencers = campaign => {
 	let results = [];
@@ -47,13 +51,11 @@ export const findMediaMetrics = medias => {
 			debugger;
 			const { profile } = media;
 			if (
-				media.mediaType === "IMAGE" ||
-				media.mediaType === "VIDEO" ||
-				media.mediaType === "CAROUSEL_ALBUM"
+				media.mediaType === 'IMAGE' ||
+				media.mediaType === 'VIDEO' ||
+				media.mediaType === 'CAROUSEL_ALBUM'
 			) {
-				let er =
-					((media.commentsCount + media.likesCount) / profile.followersCount) *
-					100;
+				let er = ((media.commentsCount + media.likesCount) / profile.followersCount) * 100;
 
 				media.er = er;
 				totalEngagementRate += er;
@@ -61,7 +63,7 @@ export const findMediaMetrics = medias => {
 				totalLikes += media.likesCount;
 				totalComments += media.commentsCount;
 				totalViews += media.video_views ? media.video_views : 0;
-			} else if (media.mediaType === "STORY") {
+			} else if (media.mediaType === 'STORY') {
 				let er = (media.reach / profile.followersCount) * 100;
 				media.er = er;
 				totalEngagementRate += er;
@@ -98,7 +100,7 @@ const getCostPerEngagement = (number, cost) => {
 		return (cost / number).toFixed(2);
 	}
 
-	return "0.00";
+	return '0.00';
 };
 
 export const getCampaignEngagementTimeLineData = mediaData => {
@@ -149,11 +151,7 @@ export const getCampaignEngagementTimeLineData = mediaData => {
 export const getUTCDate = date => {
 	if (date) {
 		let utcDate = new Date(date);
-		let utcYMD = Date.UTC(
-			utcDate.getUTCFullYear(),
-			utcDate.getUTCMonth() + 1,
-			utcDate.getUTCDay()
-		);
+		let utcYMD = Date.UTC(utcDate.getUTCFullYear(), utcDate.getUTCMonth() + 1, utcDate.getUTCDay());
 		return utcYMD;
 	}
 
@@ -166,21 +164,18 @@ export const getEngagementRateData = mediaData => {
 
 	if (mediaData && mediaData.length) {
 		for (const media of mediaData) {
-			if (media.mediaType !== "STORY") {
+			if (media.mediaType !== 'STORY') {
 				const {
 					timestamp,
 					likesCount,
 					commentsCount,
 					profile: { followersCount, name }
 				} = media;
-				let er = (
-					((likesCount + commentsCount) / followersCount) *
-					100
-				).toFixed(2);
+				let er = (((likesCount + commentsCount) / followersCount) * 100).toFixed(2);
 
 				let postDate = new Date(timestamp);
 				xLabels.push(`${postDate.getDate()}/${postDate.getMonth() + 1}`);
-				yData.push({y: parseFloat(er), name});
+				yData.push({ y: parseFloat(er), name });
 			}
 		}
 	}
@@ -188,5 +183,89 @@ export const getEngagementRateData = mediaData => {
 	return {
 		xLabels,
 		yData
+	};
+};
+
+export const getTopCountriesData = metrics => {
+	let xLabels = [];
+	let yData = [];
+
+	if (metrics && metrics.length) {
+		const { topCountries } = metrics[0];
+
+		let sortedKeys = Object.keys(topCountries).sort((a, b) => topCountries[b] - topCountries[a]);
+		for (let key of sortedKeys) {
+			let value = (topCountries[key] * 100).toFixed(0);
+			let labelValue = (
+				<span>
+					<ReactCountryFlag countryCode={key} />
+					{key}
+				</span>
+			);
+			xLabels.push(ReactDOMServer.renderToString(labelValue));
+			yData.push(parseInt(value));
+		}
+	}
+
+	return {
+		xLabels,
+		yData
+	};
+};
+
+export const getCitiesData = metrics => {
+	let xLabels = [];
+	let yData = [];
+
+	if (metrics && metrics.length) {
+		const { topCities } = metrics[0];
+		let sortedKeys = Object.keys(topCities).sort((a, b) => topCities[b] - topCities[a]);
+		for (let key of sortedKeys) {
+			let value = (topCities[key] * 100).toFixed(0);
+			xLabels.push(key);
+			yData.push(parseInt(value));
+		}
+	}
+
+	return {
+		xLabels,
+		yData
+	};
+};
+
+export const getAgeData = metrics => {
+	let xLabels = ['13-17', '18-24', '25-34', '35-44', '45-54', '55-64'];
+	let yData = [];
+
+	let genderLabels = ['Male', 'Female'];
+	let genderYData = [];
+
+	let maleSum = 0;
+	let femaleSum = 0;
+	try {
+		if (metrics && metrics.length) {
+			let { gender } = metrics[0];
+			for (let key of xLabels) {
+				let mValue = parseFloat(gender[`M.${key}`]);
+				let fValue = parseFloat(gender[`F.${key}`]);
+
+				maleSum += mValue;
+				femaleSum += fValue;
+
+				let sum = ((mValue + fValue) * 100).toFixed(0);
+				yData.push(parseInt(sum));
+			}
+
+			genderYData.push(parseInt((maleSum * 100).toFixed(0)));
+			genderYData.push(parseInt((femaleSum * 100).toFixed(0)));
+		}
+	} catch (e) {
+		console.exception(e);
+	}
+	return {
+		xLabels,
+		yData,
+		genderLabels,
+		genderYData
 	};
 };
