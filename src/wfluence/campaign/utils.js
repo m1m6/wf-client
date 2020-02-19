@@ -48,7 +48,6 @@ export const findMediaMetrics = medias => {
 		const newMediasObject = JSON.parse(JSON.stringify(medias));
 
 		for (const media of newMediasObject) {
-			debugger;
 			const { profile } = media;
 			if (
 				media.mediaType === 'IMAGE' ||

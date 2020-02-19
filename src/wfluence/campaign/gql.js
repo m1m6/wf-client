@@ -150,3 +150,46 @@ export const campaignMetricsQuery = gql`
 		}
 	}
 `;
+
+export const campaignInfluencersAndPostsDetailsQuery = gql`
+	query getCampaignInfluencers($campaignId: ID!) {
+		campaignInfluencers(campaignId: $campaignId) {
+			creator {
+				id
+				requiredPostsCount
+				publishedPostsCount
+				budget
+			}
+			profile {
+				id
+				followersCount
+				profilePic
+				name
+				username
+				name
+				engRateValue
+				engRateAvg
+			}
+			media {
+				id
+				likesCount
+				commentsCount
+				video_views
+				reach
+				carouselAlbumReach
+				impressions
+				carouselAlbumImpressions
+				timestamp
+				mediaType
+				permalink
+				profile {
+					id
+				}
+			}
+			profileInsights {
+				audienceGenderAge
+				audienceCountry
+			}
+		}
+	}
+`;

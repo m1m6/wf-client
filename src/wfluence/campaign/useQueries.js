@@ -4,7 +4,8 @@ import {
 	campaignDetailsQuery,
 	creatorCampaignsQuery,
 	creatorCampaignQuery,
-	campaignMetricsQuery
+	campaignMetricsQuery,
+	campaignInfluencersAndPostsDetailsQuery
 } from './gql';
 
 export const useCampaignsQuery = () => useQuery(campaignsQuery);
@@ -13,3 +14,5 @@ export const useCreatorCampaignsQuery = () => useQuery(creatorCampaignsQuery);
 export const useCreatorCampaignQuery = id => useQuery(creatorCampaignQuery, { variables: { id } });
 export const useCampaignMetricsQuery = campaignId =>
 	useQuery(campaignMetricsQuery, { variables: { campaignId } });
+export const useCampaignInfluencersAndPostsDetailsQuery = campaignId =>
+	useQuery(campaignInfluencersAndPostsDetailsQuery, { variables: { campaignId } });

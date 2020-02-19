@@ -1,27 +1,21 @@
 import React from 'react';
 import { Skeleton } from 'antd';
 import { Table } from 'antd';
-import {  getInfluencersTableColumns } from '../utils';
+import { getInfluencersTableColumns, getInfluencersRows } from '../utils';
 
-const dataSource = [
-	{
-		key: '1',
-		name: 'Mike',
-		age: 32,
-		address: '10 Downing Street'
-	},
-	{
-		key: '2',
-		name: 'John',
-		age: 42,
-		address: '10 Downing Street'
+const Influencers = ({ campaign, response }) => {
+	const { loading, data, error } = response;
+
+	if (loading) {
+		return <Skeleton active loading paragraph title />;
 	}
-];
 
-const Influencers = ({ campaign }) => {
 	return (
 		<div className="influencers-tab">
-			<Table dataSource={dataSource} columns={getInfluencersTableColumns()} />
+			<Table
+				dataSource={getInfluencersRows(data.campaignInfluencers)}
+				columns={getInfluencersTableColumns()}
+			/>
 		</div>
 	);
 };

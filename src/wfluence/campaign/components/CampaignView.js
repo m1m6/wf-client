@@ -4,7 +4,7 @@ import Button from '../../../form/components/Button';
 import { Icon, Tabs, Skeleton } from 'antd';
 import Analytics from '../tabs/components/Analytics';
 import InviteModal from '../invite/components/InviteModal';
-import { useCampaignDetailsQuery } from '../useQueries';
+import { useCampaignDetailsQuery, useCampaignInfluencersAndPostsDetailsQuery } from '../useQueries';
 import { getCampaignInfluencers, findMediaMetrics, getCostPerEachEngagement } from '../utils';
 import { nFormatter } from '../../../utils/numberUtils';
 import Posts from '../tabs/components/Posts';
@@ -13,17 +13,19 @@ import Influencers from '../tabs/components/Influencers';
 const { TabPane } = Tabs;
 
 const CampaignTabs = ({ campaign }) => {
+	const response = useCampaignInfluencersAndPostsDetailsQuery(campaign.id)
+	console.log("response",response)
 	return (
 		<div className="campaign-tabs-container">
-			<Tabs type="card" size="large" tabBarStyle={{ margin: '0px' }} animated={true}>
+			<Tabs type="card" size="large" tabBarStyle={{ margin: '0px' }} animated={false}>
 				<TabPane className="tab-item" tab="Analytics" key="1">
 					<Analytics campaign={campaign} />
 				</TabPane>
-				<TabPane tab="Posts" key="2">
-					<Posts campaign={campaign} />
+				<TabPane tab="Posts/Stories" key="2">
+					<Posts campaign={campaign} response={response}/>
 				</TabPane>
 				<TabPane tab="Influencers" key="3">
-					<Influencers />
+					<Influencers campaign={campaign} response={response}/>
 				</TabPane>
 			</Tabs>
 		</div>

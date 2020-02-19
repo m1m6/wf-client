@@ -1,7 +1,7 @@
 import React from 'react';
 import { Skeleton } from 'antd';
 import { Table } from 'antd';
-import { getPostsTableColumns } from '../utils';
+import { getPostsTableColumns, getPostsRows } from '../utils';
 
 const dataSource = [
 	{
@@ -18,10 +18,18 @@ const dataSource = [
 	}
 ];
 
-const Posts = ({ campaign }) => {
+const Posts = ({ campaign, response }) => {
+	const { loading, data, error } = response;
+
+	if (loading) {
+		return <Skeleton active loading paragraph title />;
+	}
 	return (
 		<div className="posts-tab">
-			<Table dataSource={dataSource} columns={getPostsTableColumns()} />
+			<Table
+				dataSource={getPostsRows(data.campaignInfluencers)}
+				columns={getPostsTableColumns()}
+			/>
 		</div>
 	);
 };
