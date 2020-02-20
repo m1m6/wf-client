@@ -4,12 +4,11 @@ import { ApolloLink, split } from "apollo-link";
 import { getMainDefinition } from "apollo-utilities";
 import { WebSocketLink } from "apollo-link-ws";
 import { createUploadLink } from "apollo-upload-client";
+import { ApolloClient } from "apollo-client";
 
 import { ACCESS_TOKEN } from "../constants";
 import defaultState from "./defaultState";
 import resolvers from "./resolvers";
-import { ApolloClient } from 'apollo-client';
-
 
 const httpLink = createHttpLink({ uri: "http://localhost:4000" });
 const cache = new InMemoryCache({ freezeResults: true });
@@ -50,7 +49,7 @@ const link = split(
 	defaultState
 );
 
-// // apollo client setup
+// apollo client setup
 export const apolloClient = new ApolloClient({
 	link: ApolloLink.from([link]),
 	cache,

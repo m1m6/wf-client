@@ -26,25 +26,26 @@
 			.profile-card-wrapper {
 				flex: 1;
 				width: fit-content;
-				margin-top: 20px;
+				margin-top: 50px;
 				.profile-card {
-					width: 330px;
+					width: 22vw;
 					border-radius: 4px;
 					background-color: $white;
 					box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
 					.profile-image {
-						display: flex;
+						display: flex;	
 						justify-content: center;
 
 						> img {
 							border-radius: 100px;
-							margin-top: 33px;
+							margin-top: -28px;
+							margin-left: 15px;
 						}
 					}
 
 					.profile-data {
 						.fullname {
-							margin-top: 20px;
+							margin-top: 15px;
 							font-family: Montserrat;
 							font-size: 16px;
 							font-weight: 500;
@@ -72,7 +73,7 @@
 						}
 
 						.top-tags {
-							margin-top: 18px;
+							margin-top: 15px;
 							display: flex;
 							align-items: center;
 							justify-content: center;
@@ -103,7 +104,7 @@
 						}
 						.card-footer {
 							display: flex;
-							margin-top: 33px;
+							margin-top: 20px;
 							border-top: 1px solid $pale-grey;
 							justify-content: space-around;
 

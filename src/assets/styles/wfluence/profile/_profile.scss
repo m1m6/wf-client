@@ -45,7 +45,7 @@
 			}
 
 			.biography {
-				font-family: "AvenirMedium";
+				font-family: 'AvenirMedium';
 				font-size: 14px;
 				font-weight: 500;
 				margin-top: 8px;
@@ -170,7 +170,7 @@
 								text-align: center;
 							}
 
-							.brand-mention-category{
+							.brand-mention-category {
 								width: 80%;
 								text-overflow: ellipsis;
 								overflow: hidden;
@@ -194,7 +194,7 @@
 					}
 
 					.aud-score:before {
-						content: "";
+						content: '';
 						position: absolute;
 						left: 0;
 						width: 16px;
@@ -202,8 +202,18 @@
 						border-radius: 50%;
 						background: gray;
 						top: 50%;
-						background-color: #289155;
 						transform: translateY(-50%);
+					}
+					.good::before {
+						background-color: #289155;
+					}
+
+					.bad::before {
+						background-color: #b93a08;
+					}
+
+					.mid::before {
+						background-color: #eeaf11;
 					}
 					.aud-sub-title {
 						font-family: Montserrat;
@@ -297,7 +307,6 @@
 					justify-content: center;
 					flex-direction: column;
 					line-height: 1.1;
-					background-color: #289155;
 					.aqs-score-value {
 						font-size: 40px;
 					}
@@ -307,6 +316,18 @@
 						color: rgba(255, 255, 255, 0.56);
 					}
 				}
+
+				> .good {
+					background-color: #289155;
+				}
+
+				> .bad {
+					background-color: #b93a08;
+				}
+
+				> .mid {
+					background-color: #eeaf11;
+				}
 				.aqs-sub {
 					height: 40px;
 					display: flex;
@@ -315,6 +336,10 @@
 					font-size: 16px;
 					color: #000;
 					text-transform: capitalize;
+					width: 140px;
+					text-align: center;
+					margin-top: 5px;
+					margin-bottom: 5px;
 				}
 			}
 			.aqs-list {
@@ -336,6 +361,32 @@
 						background-color: #289155;
 					}
 				}
+			}
+		}
+		.contact-details {
+			display: flex;
+			margin-top: 30px;
+			margin-left: 4vw;
+			flex-direction: column;
+
+			> .g-area-item {
+				display: flex;
+
+				.ga-label {
+					font-family: AvenirMedium;
+					font-size: 20px;
+					color: $black;
+					
+				}
+
+				.ga-value {
+					font-family: Montserrat;
+					font-size: 16px;
+					color: $warm-grey-two;
+					margin-left: 10px;
+					margin-top: 3px;
+				}
+
 			}
 		}
 		.general-area {

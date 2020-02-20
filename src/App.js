@@ -34,7 +34,7 @@ const App = () => {
 	return token ? (
 		<Layout>
 			<Sidebar userRole={userRole} />
-			<Content className="app-page-wrapper">
+			<Content className="app-page-wrapper" id="app-page-wrapper-id">
 				<Routes userRole={userRole} />
 			</Content>
 		</Layout>

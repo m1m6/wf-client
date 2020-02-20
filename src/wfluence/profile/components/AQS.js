@@ -1,4 +1,6 @@
 import React from "react";
+import { getAqsStatus } from "../utils";
+import classNames from "classnames";
 
 const AQS = ({ aqs, aqsName, aqsDescription }) => {
 	const aqsDescList = aqsDescription ? aqsDescription.split(";") : [];
@@ -13,7 +15,7 @@ const AQS = ({ aqs, aqsName, aqsDescription }) => {
 			</div>
 			<div className="aqs-area-wrapper">
 				<div className="aqs-area">
-					<div className="aqs-score-area">
+					<div className={classNames('aqs-score-area', getAqsStatus(aqs))}>
 						<span className="aqs-score-value">{aqs}</span>
 						<span className="aqs-out-of">Of 100</span>
 					</div>

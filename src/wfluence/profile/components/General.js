@@ -8,12 +8,12 @@ const General = ({
 	erValue,
 	followersCount
 }) => {
-	const qualityAudience =
-		followersCount * (followersReach.real / 100 + followersReach.infs / 100);
-	const authenticEngagement =
+	const qualityAudience = followersReach ? 
+		followersCount * (followersReach.real / 100 + followersReach.infs / 100): "-"
+	const authenticEngagement =followersReach ? 
 		erValue *
 		followersCount *
-		(followersReach.real / 100 + followersReach.infs / 100);
+		(followersReach.real / 100 + followersReach.infs / 100): '-'
 	return (
 		<div className="profile-half-row">
 			<div className="half-chart-header">
@@ -31,8 +31,18 @@ const General = ({
 				<div className="g-area-item">
 					<div className="ga-label">Authentic Engagement</div>
 					<div className="ga-value">
-						{nFormatter(authenticEngagement)} <span >Per Post</span>
+						{nFormatter(authenticEngagement)} <span>Per Post</span>
 					</div>
+				</div>
+			</div>
+			<div className="contact-details">
+				<div className="g-area-item">
+					<div className="ga-label">Email:</div>
+					<div className="ga-value">mahmoud@wfluence.com</div>
+				</div>
+				<div className="g-area-item">
+					<div className="ga-label">Phone:</div>
+					<div className="ga-value">+972 595 437 560</div>
 				</div>
 			</div>
 		</div>
