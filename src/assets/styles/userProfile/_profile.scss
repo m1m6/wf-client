@@ -1,0 +1,116 @@
+.body {
+  font-family: "Montserrat", "Open Sans", sans-serif;
+}
+
+.user-profile-container {
+  padding-bottom: 15px;
+}
+
+.user-profile-avatar {
+  width: 90%;
+  height: 250px;
+  margin: 16px;
+  justify-content: center;
+}
+
+.rating-section {
+    margin-top: 2%;
+}
+
+.ant-btn{
+    margin-top: 2%;
+}
+
+.contact-information-icon {
+  margin-right: 5px;
+  margin-top: 3px;
+}
+
+.buttons-wrapper {
+    margin-top: 3%;
+    width: 50%;
+}
+
+@media (max-width: 800px){
+    .buttons-wrapper {
+        margin-top: 3%;
+        width: 100%;
+    }
+}
+
+.contact-information-container {
+  margin: 16px;
+}
+
+.contact-info-rows-wrapper {
+  margin-left: 5%;
+}
+
+.user-profile-left-section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.profile-skills {
+  margin: 16px;
+}
+
+.about-section {
+  margin-bottom: 15px;
+  margin-left: 5%;
+}
+
+.footer-item {
+  display: flex;
+  flex-direction: column;
+  margin-top: 11.5px;
+}
+
+.profile-username {
+  color: $light-navy-blue;
+  font-weight: bold;
+}
+
+.interest-tag {
+    margin: 5px;
+}
+
+.location-icon {
+  color: $dark-slate-blue-two;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.username-location-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.user-location {
+  color: $dark-slate-blue-two;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.count {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  color: $black;
+}
+
+.label {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: $warm-grey;
+  padding-bottom: 14px;
+}
