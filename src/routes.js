@@ -45,8 +45,6 @@ export const ROUTE_PATHS = {
 };
 
 const Routes = ({ userRole }) => {
-	const isCreatorFirstTime = auth.getFirstTime();
-	console.log("isCreatorFirstTime", isCreatorFirstTime);
 	return (
 		<Switch>
 			<ProtectedRoute

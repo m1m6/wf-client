@@ -1,11 +1,19 @@
-import updateSelectedGender from './updateSelectedGender'
-import updateSelectedCountries from './updateSelectedCountries'
-import setUserData from './setUserData'
+import updateSelectedGender from './updateSelectedGender';
+import updateSelectedCountries from './updateSelectedCountries';
+import setUserData from './setUserData';
+import updateFolllowersFilter from './updateFolllowersFilter';
+import updateSelectedLanguages from './updateSelectedLanguages';
+import updateSelectedCategories from './updateSelectedCategories';
+import updateSelectedCreatorsSize from './updateSelectedCreatorsSize';
 
 export default {
 	Mutation: {
 		updateSelectedGender,
 		updateSelectedCountries,
-		setUserData
+		updateFolllowersFilter,
+		setUserData,
+		updateSelectedLanguages,
+		updateSelectedCategories,
+		updateSelectedCreatorsSize
 	}
 };

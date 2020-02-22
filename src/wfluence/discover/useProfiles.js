@@ -1,17 +1,17 @@
 import { useQuery } from '@apollo/react-hooks';
 import { PROFILES_QUERY } from './gql';
 
-const useProfilesQuery = (first, skip) => {
-	const { data, loading, fetchMore } = useQuery(PROFILES_QUERY, {
-		variables: { first, skip },
+const useProfilesQuery = (first, skip, filters) => {
+	const { data, loading, fetchMore, updateQuery } = useQuery(PROFILES_QUERY, {
+		variables: { first, skip, filters },
 		// notifyOnNetworkStatusChange: true,
 	});
 
 	if (loading) return { loading, data };
 
-	const loadMore = (first, skip) => {
+	const loadMore = (first, skip, filters) => {
 		return fetchMore({
-			variables: { first, skip },
+			variables: { first, skip, filters },
 			fetchPolicy: 'cache-and-network',
 			notifyOnNetworkStatusChange: true,
 			updateQuery: (previousResult,{ fetchMoreResult }) => {
@@ -27,7 +27,8 @@ const useProfilesQuery = (first, skip) => {
 	return {
 		data,
 		loading,
-		loadMore: loading ? () => {} : loadMore
+		loadMore: loading ? () => {} : loadMore,
+		updateQuery
 	};
 };
 

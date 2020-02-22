@@ -1,13 +1,16 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { Row, Col, Skeleton, Spin } from 'antd';
-import CommonFilter from '../../../core/filter/components/CommonFilter';
-import { FILTER_KEYS } from '../../../core/filter/constants';
+import React, { useState } from 'react';
+import { Row, Col, Skeleton, Spin, Result } from 'antd';
 import ProfileCard from '../../profile/components/ProfileCard';
 import Button from '../../../form/components/Button';
 import useProfilesQuery from '../useProfiles';
+import { useFiltersQuery } from '../../../core/filter/useQueries';
+import { buildWhereFilter } from '../../../core/filter/utils';
 
 const List = () => {
-	const { data, loading, loadMore, error } = useProfilesQuery(9, 0);
+	const { loading: fLoading, data: fData, error: fError } = useFiltersQuery();
+	const whereFilter = buildWhereFilter(fData);
+	console.log(whereFilter);
+	const { data, loading, loadMore, error } = useProfilesQuery(9, 0, whereFilter);
 	const [btnLoading, setBtnLoading] = useState(false);
 	if (loading && !data) return <Skeleton active paragraph title loading />;
 
@@ -16,22 +19,26 @@ const List = () => {
 	}
 
 	const { profiles } = data;
-	console.log('loading', loading);
-	console.log('profiles', profiles);
 
 	return (
 		<>
 			<div className="dicover-profiles-wrapper">
 				<Row className="profiles-row">
-					{profiles &&
-						profiles.length > 0 &&
+					{profiles && profiles.length > 0 ? (
 						profiles.map((profile, i) => {
 							return (
 								<Col className="profile-card-wrapper">
 									<ProfileCard loading={loading} profile={profile} />
 								</Col>
 							);
-						})}
+						})
+					) : (
+						<Result
+							status="404"
+							title="Ooops!"
+							subTitle="Sorry, there's no results matching your criteria."
+						/>
+					)}
 				</Row>
 			</div>
 			<div className="footer">
@@ -43,7 +50,7 @@ const List = () => {
 							className="wf-btn-primary"
 							onClick={e => {
 								setBtnLoading(true);
-								loadMore(9, profiles.length);
+								loadMore(9, profiles.length, whereFilter);
 
 								setTimeout(() => {
 									setBtnLoading(false);

@@ -170,7 +170,7 @@ const country_names = {
 	Oman: "OM",
 	Pakistan: "PK",
 	Palau: "PW",
-	"Palestine, State of": "PS",
+	"Palestine": "PS",
 	Panama: "PA",
 	"Papua New Guinea": "PG",
 	Paraguay: "PY",
@@ -269,6 +269,6 @@ export const getCountryCode = country => {
 export const getCountriesList = () => {
 	return Object.keys(country_names).map(c => ({
 		label: c,
-		value: country_names[c]
+		value: c
 	}));
 };

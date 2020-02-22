@@ -2,12 +2,12 @@ export default {
 	filters: {
 		__typename: "filters",
 		gender: [],
-		followers: [],
+		followersCount: [],
 		categories: [],
 		languages: [],
 		countries: [],
 		cities: [],
-		size: []
+		creatorsSize: []
 	},
 	userData: {
 		__typename: "userData",

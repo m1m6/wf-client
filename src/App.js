@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import Layout from "./layout/Layout";
 import Sidebar from "./layout/Sidebar";
 import Content from "./layout/Content";
@@ -7,6 +7,7 @@ import { auth } from "./signupLogin/auth";
 import { useMeQuery } from "./rootUseQuery";
 import { Spin } from "antd";
 import { useUserData } from "./signupLogin/login/useUserDataMutations";
+
 const token = auth.getAccessToken();
 
 const App = () => {
