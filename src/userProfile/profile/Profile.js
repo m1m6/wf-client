@@ -39,23 +39,23 @@ const Profile = ({}) => {
               </Col>
 
               <Row type="flex" justify="space-between">
-                <Col class="footer-item">
+                <Col class="profile-statistics-item">
                   <Col>
-                    <Text class="count">241.3K</Text>
+                    <Text class="profile-statistics-value">241.3K</Text>
                   </Col>
-                  <Text class="label">Followers</Text>
+                  <Text class="profile-statistics-label">Followers</Text>
                 </Col>
-                <Col class="footer-item">
+                <Col class="profile-statistics-item">
                   <Col>
-                    <Text class="count">241.3K</Text>
+                    <Text class="profile-statistics-value">241.3K</Text>
                   </Col>
-                  <Text class="label">Followers</Text>
+                  <Text class="profile-statistics-label">Following</Text>
                 </Col>
-                <Col class="footer-item">
+                <Col class="profile-statistics-item">
                   <Col>
-                    <Text class="count">241.3K</Text>
+                    <Text class="profile-statistics-value">234</Text>
                   </Col>
-                  <Text class="label">Followers</Text>
+                  <Text class="profile-statistics-label">Campaigns</Text>
                 </Col>
               </Row>
 
@@ -65,10 +65,17 @@ const Profile = ({}) => {
                 justify="space-between"
                 className="buttons-wrapper"
               >
-                <Button type="primary" ghost icon="message">
+                <Button
+                  type="primary"
+                  ghost
+                  icon="message"
+                  className="userprofile-button"
+                >
                   Send a message
                 </Button>
-                <Button type="primary">Follow</Button>
+                <Button type="primary" className="userprofile-button">
+                  Follow
+                </Button>
               </Row>
             </Row>
           </Col>
