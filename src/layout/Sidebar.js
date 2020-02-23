@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Menu, Icon, Skeleton, Avatar } from "antd";
+import { Layout, Menu, Icon, Skeleton, Avatar, Dropdown, Button } from "antd";
 import headerLogo from "../assets/imgs/sidebar/header-logo@3x.png";
 import { Link } from "react-router-dom";
 import { useMeQueryClient } from "../rootUseQuery";
@@ -35,34 +35,45 @@ const Sidebar = () => {
         <Sider width={270} className="sidebar-wrapper">
             <HeaderLogo />
             <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
-                <SubMenu
-                    className="siderbar-profile-section"
-                    key="0"
-                    title={
-                        <span>
-                            <Avatar
-                                shape="square"
-                                src={
-                                    "https://image.shutterstock.com/image-photo/close-portrait-beautiful-young-black-260nw-623123291.jpg"
-                                }
-                                className="siderbar-avatar"
-                            />
-                            <span className="siderbar-username">
-                                {titleCase(name + " Alshaer")}
-                            </span>
-                        </span>
-                    }
+                <Dropdown
+                    trigger="click"
+                    overlayClassName="profile-submenu-overlay"
+                    overlay={() => (
+                        <Menu className="user-menu">
+                            <Menu.Item
+                                key="01"
+                                className="profile-submenu-item"
+                            >
+                                <Link to="/profile">Profile</Link>
+                            </Menu.Item>
+                            <Menu.Item
+                                key="02"
+                                className="profile-submenu-item"
+                            >
+                                Sign out
+                            </Menu.Item>
+                            <Menu.Item
+                                key="03"
+                                className="profile-submenu-item"
+                            >
+                                Reset Password
+                            </Menu.Item>
+                        </Menu>
+                    )}
                 >
-                    <Menu.Item key="01" className="profile-submenu-item">
-                        <Link to="/profile">Profile</Link>
+                    <Menu.Item className="user-menu-item">
+                        <Avatar
+                            shape="square"
+                            icon="user"
+                            className="siderbar-avatar"
+                        />
+                        <span className="siderbar-username">
+                            {titleCase(name + " Alshaer")}
+                        </span>
+                        <Icon type="down" className="arrow-down-angle" />
                     </Menu.Item>
-                    <Menu.Item key="02" className="profile-submenu-item">
-                        Sign out
-                    </Menu.Item>
-                    <Menu.Item key="03" className="profile-submenu-item">
-                        Reset Password
-                    </Menu.Item>{" "}
-                </SubMenu>
+                </Dropdown>
+
                 <Menu.Item key="1">
                     <Icon type="bell" />
                     <Link to="/notifications">
