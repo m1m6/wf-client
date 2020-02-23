@@ -12,7 +12,6 @@
 	}
 
 	.siderbar-profile-section {
-		width: 216px;
 		border-radius: 4px;
 		display: flex;
 		flex-direction: column;
@@ -22,6 +21,12 @@
 		.ant-menu-item {
 			background-color: $dark-slate-blue;
 		}
+		.ant-menu {
+			-webkit-box-shadow: unset;
+			 box-shadow: unset;
+		}
+
+	
 	}
 
 	.siderbar-username {
