@@ -1,23 +1,20 @@
-import { useQuery } from "@apollo/react-hooks";
-import { PROFILES_QUERY } from "./gql";
+import { useQuery } from '@apollo/react-hooks';
+import { PROFILES_QUERY } from './gql';
 
-const useProfilesQuery = (first, skip) => {
-	const { data, loading, fetchMore } = useQuery(PROFILES_QUERY, {
-		variables: { first, skip },
-		notifyOnNetworkStatusChange: true,
-		fetchPolicy: "no-cache"
+const useProfilesQuery = (first, skip, filters) => {
+	const { data, loading, fetchMore, updateQuery } = useQuery(PROFILES_QUERY, {
+		variables: { first, skip, filters },
+		// notifyOnNetworkStatusChange: true,
 	});
 
-	if (loading) return { loading, profiles: [] };
+	if (loading) return { loading, data };
 
-	const loadMore = (first, skip) => {
+	const loadMore = (first, skip, filters) => {
 		return fetchMore({
-			query: PROFILES_QUERY,
+			variables: { first, skip, filters },
+			fetchPolicy: 'cache-and-network',
 			notifyOnNetworkStatusChange: true,
-			variables: { first, skip },
-			fetchPolicy: "no-cache",
-			updateQuery: (previousResult, x) => {
-				const { fetchMoreResult } = x;
+			updateQuery: (previousResult,{ fetchMoreResult }) => {
 				const newProfiles = fetchMoreResult.profiles;
 				return newProfiles.length
 					? {
@@ -28,9 +25,10 @@ const useProfilesQuery = (first, skip) => {
 		});
 	};
 	return {
-		profiles: data.profiles,
+		data,
 		loading,
-		loadMore: loading ? () => {} : loadMore
+		loadMore: loading ? () => {} : loadMore,
+		updateQuery
 	};
 };
 

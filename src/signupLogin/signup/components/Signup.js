@@ -32,92 +32,78 @@ const Signup = ({ routerHistory, role }) => {
     }
     return (
         <div className="login-wrapper">
-            <Col
-                span={12}
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center"
+            <p>
+                Already have an account? <Link to="/login" label="Login" />
+            </p>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={signupSchema}
+                onSubmit={async (values, { setSubmitting }) => {
+                    try {
+                        const result = await signup({
+                            variables: { ...values }
+                        });
+                        if (result) {
+                            auth.logIn(result.data.signup.token);
+                            auth.creatorFirstTime(true);
+                            window.location.assign(ROUTE_PATHS.app.connectIg);
+                        }
+                    } catch (error) {
+                        setSubmitting(false);
+                        showAllGraphQLErrors(error.graphQLErrors);
+                    }
                 }}
             >
-                <p>
-                    Already have an account? <Link to="/login" label="Login" />
-                </p>
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={signupSchema}
-                    onSubmit={async (values, { setSubmitting }) => {
-                        try {
-                            const result = await signup({
-                                variables: { ...values }
-                            });
-                            if (result) {
-                                auth.logIn(result.data.signup.token);
-                                auth.creatorFirstTime(true);
-                                window.location.assign(
-                                    ROUTE_PATHS.app.connectIg
-                                );
-                            }
-                        } catch (error) {
-                            setSubmitting(false);
-                            showAllGraphQLErrors(error.graphQLErrors);
-                        }
-                    }}
-                >
-                    {({ values, isSubmitting }) => (
-                        <Form>
-                            <Row className="auth-row">
-                                <InputField
-                                    iconType="user"
-                                    name="name"
-                                    type="text"
-                                    label="Your Name"
-                                    placeholder="John Doe"
-                                />
-                            </Row>
+                {({ values, isSubmitting }) => (
+                    <Form>
+                        <Row className="auth-row">
+                            <InputField
+                                iconType="user"
+                                name="name"
+                                type="text"
+                                label="Your Name"
+                                placeholder="John Doe"
+                            />
+                        </Row>
 
-                            <Row className="auth-row">
-                                <InputField
-                                    iconType="email"
-                                    name="email"
-                                    type="text"
-                                    label="Email"
-                                    placeholder="name@company.com"
-                                />
-                            </Row>
-                            <Row className="auth-row">
-                                <InputField
-                                    iconType="lock"
-                                    name="password"
-                                    type="password"
-                                    label="Password"
-                                    placeholder="***********"
-                                />
-                            </Row>
-                            <Row>
-                                <Button
-                                    htmlType="submit"
-                                    type="primary"
-                                    disabled={isSubmitting}
-                                    className="wf-btn-primary"
-                                >
-                                    {isSubmitting ? (
-                                        "SIGNING UP..."
-                                    ) : (
-                                        <>
-                                            SIGN UP
-                                            <Icon type="arrow-right" />
-                                        </>
-                                    )}
-                                </Button>
-                            </Row>
-                        </Form>
-                    )}
-                </Formik>
-            </Col>
-            <Col span={12} class="signin-left-side">
-                <img className="signin-left-side-background" src={background} />
-            </Col>
+                        <Row className="auth-row">
+                            <InputField
+                                iconType="email"
+                                name="email"
+                                type="text"
+                                label="Email"
+                                placeholder="name@company.com"
+                            />
+                        </Row>
+                        <Row className="auth-row">
+                            <InputField
+                                iconType="lock"
+                                name="password"
+                                type="password"
+                                label="Password"
+                                placeholder="***********"
+                            />
+                        </Row>
+                        <Row>
+                            <Button
+                                htmlType="submit"
+                                type="primary"
+                                disabled={isSubmitting}
+                                className="wf-btn-primary"
+                            >
+                                {isSubmitting ? (
+                                    "SIGNING UP..."
+                                ) : (
+                                    <>
+                                        SIGN UP
+                                        <Icon type="arrow-right" />
+                                    </>
+                                )}
+                            </Button>
+                        </Row>
+                    </Form>
+                )}
+            </Formik>
         </div>
     );
 };

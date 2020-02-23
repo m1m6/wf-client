@@ -1,11 +1,11 @@
-import gql from "graphql-tag";
-import {apolloClient} from '../apolloClient'
+import gql from 'graphql-tag';
+import { apolloClient } from '../apolloClient';
 
 export default (_, { list }, { cache }) => {
 	const query = gql`
-		query getCountriesist {
+		query getCreatorsSizeList {
 			filters @client {
-				countries
+				creatorsSize
 			}
 		}
 	`;
@@ -15,18 +15,16 @@ export default (_, { list }, { cache }) => {
 	const data = {
 		filters: {
 			...previousState.filters,
-			countries: list
+			creatorsSize: list
 		}
 	};
-
-	
 
 	setTimeout(() => {
 		apolloClient.writeData({
 			query,
 			data
 		});
-	  }, 0);
+	}, 0);
 
 	return null;
 };

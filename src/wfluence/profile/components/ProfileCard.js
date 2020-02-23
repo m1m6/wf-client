@@ -15,7 +15,6 @@ const ProfileCard = ({ loading, profile }) => {
 	const categories = parseProfileCategories(profile.categories);
 	const mostUsedTags = getProfileTags(profile.media);
 	const tagsKeys = Object.keys(mostUsedTags);
-	console.log("mostUsedTags", mostUsedTags);
 	return (
 		<div className="profile-card">
 			<div className="profile-image">
@@ -72,7 +71,7 @@ const ProfileCard = ({ loading, profile }) => {
 						<div className="label">Posts</div>
 					</div>
 					<div className="footer-item">
-						<div className="count">{nFormatter(profile.engRateValue)}%</div>
+						<div className="count">{nFormatter(profile.engRateValue.toFixed(2))}%</div>
 						<div className="label">Eng. Rate</div>
 					</div>
 				</div>

@@ -1,7 +1,7 @@
 .login-wrapper {
 	@include font-size(22px, 32px);
-    margin-top: 41px;
-    
+	margin-top: 41px;
+
 	.auth-row {
 		margin-top: 31px;
 	}
@@ -9,13 +9,5 @@
 	.forgot-pwd-link {
 		margin-top: 16px;
 		text-align: end;
-	}
-	.signin-left-side-background {
-		height: 100vh;
-		width: 50vw;
-		position: fixed;
-		top:0;
-		right: 0;
-		bottom: 0;
 	}
 }

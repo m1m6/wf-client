@@ -1,4 +1,5 @@
 import gql from "graphql-tag";
+import {apolloClient} from '../apolloClient'
 
 export default (_, { name, id, email }, { cache }) => {
 	const query = gql`
@@ -10,7 +11,7 @@ export default (_, { name, id, email }, { cache }) => {
 			}
 		}
 	`;
-	const previousState = cache.readQuery({ query });
+	const previousState = apolloClient.readQuery({ query });
 	const data = {
 		userData: {
 			...previousState.userData,
@@ -21,7 +22,7 @@ export default (_, { name, id, email }, { cache }) => {
 	};
     console.log("data", data )
 
-	cache.writeQuery({
+	apolloClient.writeData({
 		query,
 		data
 	});

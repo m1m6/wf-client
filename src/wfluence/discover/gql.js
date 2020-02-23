@@ -1,8 +1,8 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const PROFILES_QUERY = gql`
-	query getProfiles($first: Int!, $skip: Int!) {
-		profiles(first: $first, skip: $skip) {
+	query getProfiles($first: Int!, $skip: Int!, $filters: Json) {
+		profiles(first: $first, skip: $skip, filters: $filters) {
 			id
 			engRateValue
 			engRateAvg

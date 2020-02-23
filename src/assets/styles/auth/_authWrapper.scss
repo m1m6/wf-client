@@ -1,21 +1,21 @@
 .auth-page-layout {
-	height: 100%;
-	width: 100%;
+	top: 0px;
+	background: #ffffff 0% 0% no-repeat padding-box;
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: $white;
-
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	height: 100vh;
+	overflow-y: hidden;
+	.responsive {
+		width: 100%;
+	}
 	.auth-page-container {
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
-        // width: 27.4vw;
-        // margin-top: -100px;
-	}
-
-	.auth-title-wrapper {
-		display: flex;
-		justify-content: center;
+		width: 40%;
+		margin-left: 5%;
+		height: 100vh;
 	}
 }

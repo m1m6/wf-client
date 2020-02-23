@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from "react";
-import { Row, Col } from "antd";
 import { auth } from "../signupLogin/auth";
+import authBg from "../assets/imgs/background/authBg.jpg";
 
 const AuthPageLayout = ({ history, Component, title, ...rest }) => {
     useLayoutEffect(() => {
@@ -10,14 +10,16 @@ const AuthPageLayout = ({ history, Component, title, ...rest }) => {
         }
     }, []);
     return (
-        <Col span={24} className="auth-page-layout">
-            <Col span={24} className="auth-page-container">
-                <Col span={12} className="auth-title-wrapper">
-                    <h1 className="auth-title">{title}</h1>
-                </Col>
+        <div className="auth-page-layout">
+            <div style={{ width: "40%", height: "100%" }}>
+                <img src={authBg} class="responsive" />
+            </div>
+
+            <div class="auth-page-container">
+                <h1>{title}</h1>
                 <Component routerHistory={history} {...rest} />
-            </Col>
-        </Col>
+            </div>
+        </div>
     );
 };
 

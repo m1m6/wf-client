@@ -3,9 +3,9 @@ import {apolloClient} from '../apolloClient'
 
 export default (_, { list }, { cache }) => {
 	const query = gql`
-		query getCountriesist {
+		query getCategoriesList {
 			filters @client {
-				countries
+				categories
 			}
 		}
 	`;
@@ -15,7 +15,7 @@ export default (_, { list }, { cache }) => {
 	const data = {
 		filters: {
 			...previousState.filters,
-			countries: list
+			categories: list
 		}
 	};
 
