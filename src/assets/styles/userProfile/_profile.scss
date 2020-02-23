@@ -1,110 +1,110 @@
 .user-profile-container {
-  padding-bottom: 15px;
-}
+    padding-bottom: 15px;
 
-.user-profile-avatar {
-  width: 90%;
-  height: 250px;
-  margin: 16px;
-  justify-content: center;
-}
+    .user-profile-avatar {
+        width: 90%;
+        height: 250px;
+        margin: 16px;
+        justify-content: center;
+    }
 
-.rating-section {
-    margin-top: 2%;
-}
+    .rating-section {
+        margin-top: 2%;
+    }
 
-.userprofile-button{
-    margin-top: 2%;
-}
+    .userprofile-button {
+        margin-top: 2%;
+    }
 
-.contact-information-icon {
-  margin-right: 5px;
-  margin-top: 3px;
-}
+    .contact-information-icon {
+        margin-right: 5px;
+        margin-top: 3px;
+    }
 
-.buttons-wrapper {
-    margin-top: 3%;
-    width: 50%;
-}
-
-@media (max-width: 800px){
     .buttons-wrapper {
         margin-top: 3%;
+        width: 50%;
+    }
+
+    @media (max-width: 800px) {
+        .buttons-wrapper {
+            margin-top: 3%;
+            width: 100%;
+        }
+    }
+
+    .contact-information-container {
+        margin: 16px;
+    }
+
+    .contact-info-rows-wrapper {
+        margin-left: 5%;
+    }
+
+    .user-profile-left-section {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .profile-skills {
+        margin: 16px;
+    }
+
+    .about-section {
+        margin-bottom: 15px;
+        margin-left: 5%;
+    }
+
+    .profile-statistics-item {
+        display: flex;
+        flex-direction: column;
+        margin-top: 11.5px;
+    }
+
+    .profile-username {
+        color: $light-navy-blue;
+        font-weight: bold;
+    }
+
+    .interest-tag {
+        margin: 5px;
+    }
+
+    .location-icon {
+        color: $dark-slate-blue-two;
+        margin-left: 5%;
+        margin-top: 5%;
+    }
+
+    .username-location-wrapper {
+        display: flex;
         width: 100%;
     }
-}
 
-.contact-information-container {
-  margin: 16px;
-}
+    .user-location {
+        color: $dark-slate-blue-two;
+        margin-left: 5%;
+        margin-top: 5%;
+    }
 
-.contact-info-rows-wrapper {
-  margin-left: 5%;
-}
+    .profile-statistics-count {
+        font-size: 14px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        color: $black;
+    }
 
-.user-profile-left-section {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.profile-skills {
-  margin: 16px;
-}
-
-.about-section {
-  margin-bottom: 15px;
-  margin-left: 5%;
-}
-
-.profile-statistics-item {
-  display: flex;
-  flex-direction: column;
-  margin-top: 11.5px;
-}
-
-.profile-username {
-  color: $light-navy-blue;
-  font-weight: bold;
-}
-
-.interest-tag {
-    margin: 5px;
-}
-
-.location-icon {
-  color: $dark-slate-blue-two;
-  margin-left: 5%;
-  margin-top: 5%;
-}
-
-.username-location-wrapper {
-    display: flex;
-    width: 100%;
-}
-
-.user-location {
-  color: $dark-slate-blue-two;
-  margin-left: 5%;
-  margin-top: 5%;
-}
-
-.profile-statistics-count {
-  font-size: 14px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: 0.5px;
-  color: $black;
-}
-
-.profile-statistics-label {
-  font-size: 12px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: $warm-grey;
-  padding-bottom: 14px;
+    .profile-statistics-label {
+        font-size: 12px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: $warm-grey;
+        padding-bottom: 14px;
+    }
 }

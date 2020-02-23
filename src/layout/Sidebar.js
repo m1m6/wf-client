@@ -4,6 +4,8 @@ import headerLogo from "../assets/imgs/sidebar/header-logo@3x.png";
 import { Link } from "react-router-dom";
 import { useMeQueryClient } from "../rootUseQuery";
 import { isAdmin, isBrand, isCreator } from "../signupLogin/utils";
+import { titleCase } from "title-case";
+
 import { SubMenu } from "rc-menu";
 
 const { Sider } = Layout;
@@ -22,7 +24,7 @@ const Sidebar = () => {
     }
 
     const {
-        me: { role }
+        me: { role, email, name }
     } = data;
 
     const isAdminUser = isAdmin(role);
@@ -46,7 +48,7 @@ const Sidebar = () => {
                                 className="siderbar-avatar"
                             />
                             <span className="siderbar-username">
-                                Abeer Alshaer
+                                {titleCase(name + " Alshaer")}
                             </span>
                         </span>
                     }
@@ -59,9 +61,8 @@ const Sidebar = () => {
                     </Menu.Item>
                     <Menu.Item key="03" className="profile-submenu-item">
                         Reset Password
-                    </Menu.Item>
+                    </Menu.Item>{" "}
                 </SubMenu>
-
                 <Menu.Item key="1">
                     <Icon type="bell" />
                     <Link to="/notifications">
