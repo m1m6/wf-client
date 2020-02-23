@@ -9,7 +9,7 @@ import Login from "./signupLogin/login/components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Discover from "./wfluence/discover/components/Discover";
 import Profile from "./wfluence/profile/components/Profile";
-import UserProfile from "./userProfile/profile/Profile";
+import UserProfile from "./userProfile/profile/components/Profile";
 import Campaigns from "./wfluence/campaign/components/Campaigns";
 import NewCampaign from "./wfluence/campaign/components/NewCampaign";
 import CampaignView from "./wfluence/campaign/components/CampaignView";
