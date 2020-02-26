@@ -12,8 +12,8 @@ import {
 const { Title, Paragraph, Text } = Typography;
 
 const formItemLayout = {
-    labelCol: { span: 5 },
-    wrapperCol: { span: 8 }
+    labelCol: { lg: 5, xs: 8, sm: 8 },
+    wrapperCol: { lg: 8, xs: 12, sm: 12 }
 };
 const formTailLayout = {
     labelCol: { span: 4 },
