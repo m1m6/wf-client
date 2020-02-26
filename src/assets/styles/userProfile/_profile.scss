@@ -34,11 +34,18 @@
     }
 
     .contact-information-container {
-        margin: 16px;
+        margin-top: 5%;
+       
     }
 
     .contact-info-rows-wrapper {
-        margin-left: 5%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        .info-row {
+            width: 40%;
+        }
     }
 
     .user-profile-left-section {
