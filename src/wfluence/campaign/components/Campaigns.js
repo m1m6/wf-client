@@ -43,19 +43,14 @@ const Campaigns = ({ routerHistory }) => {
 								<div className="description">{campaign.description}</div>
 								<div className="influencers-count">4 Influencers</div>
 								<div className="footer">
-									<Icon
-										type="right-square"
-										// theme="twoTone"
-										// twoToneColor="#eb2f96"
-										style={{ fontSize: '18px', color: '#1c3a6a' }}
-									/>
+									<Icon type="right-square" style={{ fontSize: '18px', color: '#1c3a6a' }} />
 								</div>
 							</div>
 						</Link>
 					);
 				})}
 			</div>
-			<div>
+			<div style={{ marginTop: '20px' }}>
 				<Button onClick={() => routerHistory.push('/campaigns/new')}>New Campaign</Button>
 			</div>
 		</div>

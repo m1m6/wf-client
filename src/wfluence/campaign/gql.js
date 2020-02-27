@@ -119,6 +119,8 @@ export const creatorCampaignQuery = gql`
 		creatorCampaign(id: $id) {
 			id
 			status
+			budget
+			requiredPostsCount
 			campaign {
 				id
 				tagsAndMentions

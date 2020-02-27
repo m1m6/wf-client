@@ -1,46 +1,48 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-import Home from "./components/Home";
-import PageNotFound from "./components/PageNotFound";
-import LoginPage from "./components/LoginPage";
-import PageLayout from "./components/PageLayout";
-import AuthPageLayout from "./components/AuthPageLayout";
-import Login from "./signupLogin/login/components/Login";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Discover from "./wfluence/discover/components/Discover";
-import Profile from "./wfluence/profile/components/Profile";
-import Campaigns from "./wfluence/campaign/components/Campaigns";
-import NewCampaign from "./wfluence/campaign/components/NewCampaign";
-import CampaignView from "./wfluence/campaign/components/CampaignView";
-import Signup from "./signupLogin/signup/components/Signup";
-import { ROLES } from "./signupLogin/constants";
-import { auth } from "./signupLogin/auth";
-import Connect from "./socialIntegration/instagram/components/Connect";
-import CreatorCampaigns from "./wfluence/campaign/components/CreatorCampaigns";
-import CampaignOffer from "./wfluence/campaign/components/CampaignOffer";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Home from './components/Home';
+import PageNotFound from './components/PageNotFound';
+import LoginPage from './components/LoginPage';
+import PageLayout from './components/PageLayout';
+import AuthPageLayout from './components/AuthPageLayout';
+import Login from './signupLogin/login/components/Login';
+import ProtectedRoute from './components/ProtectedRoute';
+import Discover from './wfluence/discover/components/Discover';
+import Profile from './wfluence/profile/components/Profile';
+import Campaigns from './wfluence/campaign/components/Campaigns';
+import NewCampaign from './wfluence/campaign/components/NewCampaign';
+import CampaignView from './wfluence/campaign/components/CampaignView';
+import Signup from './signupLogin/signup/components/Signup';
+import { ROLES } from './signupLogin/constants';
+import { auth } from './signupLogin/auth';
+import Connect from './socialIntegration/instagram/components/Connect';
+import CreatorCampaigns from './wfluence/campaign/components/CreatorCampaigns';
+import CampaignOffer from './wfluence/campaign/components/CampaignOffer';
+import Notifications from './user/notifications/Notifications';
 
 export const ROUTE_PATHS = {
-	home: "/",
-	notFound: "*",
+	home: '/',
+	notFound: '*',
 	app: {
-		discover: "/discover",
-		profile: "/profile/:id",
-		campaign: "/campaigns",
-		newCampaign: "/campaigns/new",
-		campaignView: "/campaign-view/:id",
-		connectIg: "/connect",
-		creatorCampaigns: "/creator-campaigns",
-		campaignOffer: "/campaign-offer/:id"
+		discover: '/discover',
+		profile: '/profile/:id',
+		campaign: '/campaigns',
+		newCampaign: '/campaigns/new',
+		campaignView: '/campaign-view/:id',
+		connectIg: '/connect',
+		creatorCampaigns: '/creator-campaigns',
+		campaignOffer: '/campaign-offer/:id',
+		notifications: '/notifications'
 	},
 	auth: {
-		me: "/me", // TODO add
-		signup: "/signup",
-		login: "/login",
-		logout: "/logout",
-		passwordForgot: "/password-forgot", // TODO add
-		passwordReset: "/password-reset/:token", // TODO add
-		brands: "/brands",
-		creators: "/creators"
+		me: '/me', // TODO add
+		signup: '/signup',
+		login: '/login',
+		logout: '/logout',
+		passwordForgot: '/password-forgot', // TODO add
+		passwordReset: '/password-reset/:token', // TODO add
+		brands: '/brands',
+		creators: '/creators'
 	}
 };
 
@@ -50,9 +52,7 @@ const Routes = ({ userRole }) => {
 			<ProtectedRoute
 				path={ROUTE_PATHS.home}
 				exact
-				component={matchProps => (
-					<PageLayout Component={Home} {...matchProps} title="Home page" />
-				)}
+				component={matchProps => <PageLayout Component={Home} {...matchProps} title="Home page" />}
 				roles={[ROLES.ADMIN, ROLES.BRANDS, ROLES.CREATORS]}
 				userRole={userRole}
 			/>
@@ -67,9 +67,7 @@ const Routes = ({ userRole }) => {
 
 			<ProtectedRoute
 				path={ROUTE_PATHS.app.profile}
-				component={matchProps => (
-					<PageLayout Component={Profile} {...matchProps} title="Profile" />
-				)}
+				component={matchProps => <PageLayout Component={Profile} {...matchProps} title="Profile" />}
 				roles={[ROLES.ADMIN, ROLES.BRANDS]}
 				userRole={userRole}
 			/>
@@ -78,11 +76,7 @@ const Routes = ({ userRole }) => {
 				path={ROUTE_PATHS.app.campaign}
 				exact
 				component={matchProps => (
-					<PageLayout
-						Component={Campaigns}
-						{...matchProps}
-						title="Campaigns List"
-					/>
+					<PageLayout Component={Campaigns} {...matchProps} title="Campaigns List" />
 				)}
 				roles={[ROLES.ADMIN, ROLES.BRANDS, ROLES.CREATORS]}
 				userRole={userRole}
@@ -91,11 +85,7 @@ const Routes = ({ userRole }) => {
 				path={ROUTE_PATHS.app.newCampaign}
 				exact
 				component={matchProps => (
-					<PageLayout
-						Component={NewCampaign}
-						{...matchProps}
-						title="Create New Campaign"
-					/>
+					<PageLayout Component={NewCampaign} {...matchProps} title="Create New Campaign" />
 				)}
 				roles={[ROLES.ADMIN, ROLES.BRANDS]}
 				userRole={userRole}
@@ -104,11 +94,7 @@ const Routes = ({ userRole }) => {
 				path={ROUTE_PATHS.app.campaignView}
 				exact
 				component={matchProps => (
-					<PageLayout
-						Component={CampaignView}
-						{...matchProps}
-						title="Campaign Tracking"
-					/>
+					<PageLayout Component={CampaignView} {...matchProps} title="Campaign Tracking" />
 				)}
 				roles={[ROLES.ADMIN, ROLES.BRANDS, ROLES.CREATORS]}
 				userRole={userRole}
@@ -132,13 +118,27 @@ const Routes = ({ userRole }) => {
 				path={ROUTE_PATHS.app.campaignOffer}
 				exact
 				component={matchProps => (
-					<PageLayout
-						Component={CampaignOffer}
-						{...matchProps}
-						title="Campaign Offer"
-					/>
+					<PageLayout Component={CampaignOffer} {...matchProps} title="Campaign Offer" />
 				)}
 				roles={[ROLES.ADMIN, ROLES.CREATORS]}
+				userRole={userRole}
+			/>
+
+			<ProtectedRoute
+				path={ROUTE_PATHS.app.connectIg}
+				component={matchProps => (
+					<PageLayout Component={Connect} {...matchProps} title="Connect Your Instagram Account" />
+				)}
+				roles={[ROLES.ADMIN, ROLES.CREATORS]}
+				userRole={userRole}
+			/>
+
+			<ProtectedRoute
+				path={ROUTE_PATHS.app.notifications}
+				component={matchProps => (
+					<PageLayout Component={Notifications} {...matchProps} title="My Notifications" />
+				)}
+				roles={[ROLES.ADMIN, ROLES.CREATORS, ROLES.BRANDS]}
 				userRole={userRole}
 			/>
 
@@ -146,25 +146,8 @@ const Routes = ({ userRole }) => {
 				path={ROUTE_PATHS.auth.brands}
 				exact
 				render={matchProps => (
-					<AuthPageLayout
-						Component={Signup}
-						title="Signup As Brand"
-						{...matchProps}
-					/>
+					<AuthPageLayout Component={Signup} title="Signup As Brand" {...matchProps} />
 				)}
-			/>
-
-			<ProtectedRoute
-				path={ROUTE_PATHS.app.connectIg}
-				component={matchProps => (
-					<PageLayout
-						Component={Connect}
-						{...matchProps}
-						title="Connect Your Instagram Account"
-					/>
-				)}
-				roles={[ROLES.ADMIN, ROLES.CREATORS]}
-				userRole={userRole}
 			/>
 
 			<Route
@@ -183,9 +166,7 @@ const Routes = ({ userRole }) => {
 			<Route
 				path={ROUTE_PATHS.auth.login}
 				exact
-				render={matchProps => (
-					<AuthPageLayout Component={Login} title="Log In" {...matchProps} />
-				)}
+				render={matchProps => <AuthPageLayout Component={Login} title="Log In" {...matchProps} />}
 			/>
 			{/* <ProtectedRoute
       path={ROUTE_PATHS.blog.create}

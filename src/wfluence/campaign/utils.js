@@ -70,14 +70,14 @@ export const findMediaMetrics = medias => {
 		}
 
 		totalEngagementRate = totalEngagementRate / newMediasObject.length;
-		return {
-			medias,
-			totalEngagementRate,
-			totalLikes,
-			totalComments,
-			totalViews
-		};
 	}
+	return {
+		medias,
+		totalEngagementRate,
+		totalLikes,
+		totalComments,
+		totalViews
+	};
 };
 
 export const getCostPerEachEngagement = (
@@ -197,7 +197,7 @@ export const getTopCountriesData = metrics => {
 			let value = (topCountries[key] * 100).toFixed(0);
 			let labelValue = (
 				<span>
-					<ReactCountryFlag countryCode={key} />
+					<ReactCountryFlag countryCode={key} /> <br />
 					{key}
 				</span>
 			);
@@ -221,7 +221,11 @@ export const getCitiesData = metrics => {
 		let sortedKeys = Object.keys(topCities).sort((a, b) => topCities[b] - topCities[a]);
 		for (let key of sortedKeys) {
 			let value = (topCities[key] * 100).toFixed(0);
-			xLabels.push(key);
+			let keySplit = key;
+			if (key.includes(',')) {
+				keySplit = key.split(',');
+			}
+			xLabels.push(keySplit[0]);
 			yData.push(parseInt(value));
 		}
 	}

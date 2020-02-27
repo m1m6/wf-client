@@ -348,7 +348,9 @@ const Profile = ({ match }) => {
 					</div>
 					<div className="stats-item">
 						<div className="label">ER</div>
-						<div className="value">{`${profile.engRateValue.toFixed(2)}%`}</div>
+						<div className="value">
+							{profile.engRateValue ? `${profile.engRateValue.toFixed(2)}%` : 'N/A'}
+						</div>
 					</div>
 				</div>
 			</div>

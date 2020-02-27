@@ -1,11 +1,11 @@
-import React from "react";
-import { Icon, Skeleton } from "antd";
-import uniq from "lodash/uniq";
-import ReactCountryFlag from "react-country-flag";
-import { getCountryCode } from "../../../assets/js/countries";
-import { nFormatter } from "../../../utils/numberUtils";
-import { Link } from "react-router-dom";
-import { parseProfileCategories, getProfileTags } from "../utils";
+import React from 'react';
+import { Icon, Skeleton } from 'antd';
+import uniq from 'lodash/uniq';
+import ReactCountryFlag from 'react-country-flag';
+import { getCountryCode } from '../../../assets/js/countries';
+import { nFormatter } from '../../../utils/numberUtils';
+import { Link } from 'react-router-dom';
+import { parseProfileCategories, getProfileTags } from '../utils';
 
 const ProfileCard = ({ loading, profile }) => {
 	if (loading) {
@@ -43,17 +43,20 @@ const ProfileCard = ({ loading, profile }) => {
 				</div>
 				<div className="top-tags">
 					<React.Fragment>
-						{tagsKeys.length > 0 && [0, 1, 2].map(i => {
-							const key = tagsKeys[i];
-							return mostUsedTags[key] && (
-								<span className="tag-item" onClick={e => {}}>
-									{ mostUsedTags[key].substring(0, 6)}
-								</span>
-							);
-						})}
+						{tagsKeys.length > 0 &&
+							[0, 1, 2].map(i => {
+								const key = tagsKeys[i];
+								return (
+									mostUsedTags[key] && (
+										<span className="tag-item" onClick={e => {}}>
+											{mostUsedTags[key].substring(0, 6)}
+										</span>
+									)
+								);
+							})}
 						{tagsKeys.length > 3 && (
 							<span
-								style={{ cursor: "pointer" }}
+								style={{ cursor: 'pointer' }}
 								onClick={() => {}}
 								className="more-counter"
 							>{`+${tagsKeys.length - 3} more`}</span>
@@ -71,7 +74,9 @@ const ProfileCard = ({ loading, profile }) => {
 						<div className="label">Posts</div>
 					</div>
 					<div className="footer-item">
-						<div className="count">{nFormatter(profile.engRateValue.toFixed(2))}%</div>
+						<div className="count">
+							{profile.engRateValue ? `${nFormatter(profile.engRateValue.toFixed(2))}%` : 'N/A'}
+						</div>
 						<div className="label">Eng. Rate</div>
 					</div>
 				</div>

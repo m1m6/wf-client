@@ -1,9 +1,9 @@
-import React from "react";
-import { Layout, Menu, Icon, Skeleton } from "antd";
-import headerLogo from "../assets/imgs/sidebar/header-logo@3x.png";
-import { Link } from "react-router-dom";
-import { useMeQueryClient } from "../rootUseQuery";
-import { isAdmin, isBrand, isCreator } from "../signupLogin/utils";
+import React from 'react';
+import { Layout, Menu, Icon, Skeleton, Badge } from 'antd';
+import headerLogo from '../assets/imgs/sidebar/header-logo@3x.png';
+import { Link } from 'react-router-dom';
+import { useMeQueryClient, useMyNotificaitonsQuery } from '../rootUseQuery';
+import { isAdmin, isBrand, isCreator } from '../signupLogin/utils';
 
 const { Sider } = Layout;
 
@@ -15,7 +15,11 @@ const HeaderLogo = () => (
 
 const Sidebar = () => {
 	const { loading, error, data } = useMeQueryClient();
-
+	const {
+		loading: notificationsLoading,
+		error: notificationsError,
+		data: notificationsData
+	} = useMyNotificaitonsQuery();
 	if (loading) {
 		return <Skeleton active loading paragraph />;
 	}
@@ -28,15 +32,34 @@ const Sidebar = () => {
 	const isBrandUser = isBrand(role);
 	const isCreatorUser = isCreator(role);
 
+	console.log('notificationsLoading', notificationsData);
 	return (
 		<Sider width={270} className="sidebar-wrapper">
 			<HeaderLogo />
-			<Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
+			<Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
 				<Menu.Item key="1">
 					<Icon type="bell" />
-					<Link to="/notifications">
-						<span className="nav-text">Notifications</span>
-					</Link>
+					{notificationsLoading ? (
+						<Link to="/notifications">
+							<span className="nav-text">Notifications</span>
+						</Link>
+					) : (
+						<Badge
+							count={notificationsData.myNotifications.filter(i => !i.isRead).length}
+							showZero
+							style={{
+								backgroundColor: 'red',
+								color: '#fff',
+								boxShadow: '0 0 0 0px #d9d9d9',
+								marginTop: '25px',
+								marginRight: '-15px'
+							}}
+						>
+							<Link to="/notifications">
+								<span className="nav-text">Notifications</span>
+							</Link>
+						</Badge>
+					)}
 				</Menu.Item>
 				{(isBrandUser || isAdminUser) && (
 					<Menu.Item key="21">
@@ -46,7 +69,6 @@ const Sidebar = () => {
 						</Link>
 					</Menu.Item>
 				)}
-
 
 				{(isCreatorUser || isAdminUser) && (
 					<Menu.Item key="2">
