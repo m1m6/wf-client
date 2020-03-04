@@ -1,18 +1,97 @@
+@mixin influencer-details-styles {
+	
+	> .profile-image-container {
+		position: relative;
+
+		> img {
+			display: inline-block;
+			background-size: cover;
+			border-radius: 4px;
+			margin: 6px 5px 11px 3px;
+			height: 2.5em;
+			width: 2.5em;
+			align-self: center;
+		}
+	}
+
+	> .influencer-details {
+		display: flex;
+		flex-direction: row;
+		text-align: left;
+		color: #03739e;
+		justify-content: space-between;
+		width: 70%;
+
+		> .influencer-info {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			box-sizing: border-box;
+			padding: 2.4px 0;
+			font-size: 1rem;
+			width: 107px;
+			font-size: 14px;
+			> .influencer-name {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				width: 100%;
+				color: #181320;
+			}
+
+			> .influencer-data {
+				display: flex;
+
+				> .status {
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					width: 80%;
+					color: #181320;
+					margin-left: 4px;
+					background-color: #1c3a6a;
+					color: white;
+					padding-left: 4px;
+					border-radius: 20px;
+				}
+
+				> .pending {
+					background-color: rgb(111, 111, 111);
+				}
+
+				> .accepted {
+					background-color: rgb(49, 126, 171);
+				}
+
+				> .completed {
+					background-color: rgb(49, 126, 171);
+				}
+			}
+		}
+	}
+}
+
 .campaign-view {
 	> .header {
 		display: flex;
-		justify-content: flex-start;
+		justify-content: center;
 		padding-right: 20px;
 		padding-bottom: 10px;
-		> .wf-btn-primary {
-			margin-top: 0px;
-			width: 20%;
-			font-size: 18px;
+		margin-top: 30px;
+		> .invitation {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			> .wf-btn-primary {
+				margin-top: 0px;
+				font-size: 18px;
+			}
+	
+			> .wf-btn-primary:hover {
+				color: #1c3a6a;
+			}
 		}
-
-		> .wf-btn-primary:hover {
-			color: #878787;
-		}
+		
 
 		> .campaign-info {
 			margin-left: 20px;
@@ -190,75 +269,7 @@
 					width: 150px;
 					max-width: 100%;
 					margin-bottom: 5px;
-					> .profile-image-container {
-						position: relative;
-
-						> img {
-							display: inline-block;
-							background-size: cover;
-							border-radius: 4px;
-							margin: 6px 5px 11px 3px;
-							height: 2.5em;
-							width: 2.5em;
-							align-self: center;
-						}
-					}
-
-					> .influencer-details {
-						display: flex;
-						flex-direction: row;
-						text-align: left;
-						color: #03739e;
-						justify-content: space-between;
-						width: 70%;
-
-						> .influencer-info {
-							display: flex;
-							flex-direction: column;
-							justify-content: space-around;
-							box-sizing: border-box;
-							padding: 2.4px 0;
-							font-size: 1rem;
-							width: 107px;
-							font-size: 14px;
-							> .influencer-name {
-								white-space: nowrap;
-								overflow: hidden;
-								text-overflow: ellipsis;
-								width: 100%;
-								color: #181320;
-							}
-
-							> .influencer-data {
-								display: flex;
-
-								> .status {
-									white-space: nowrap;
-									overflow: hidden;
-									text-overflow: ellipsis;
-									width: 80%;
-									color: #181320;
-									margin-left: 4px;
-									background-color: #1c3a6a;
-									color: white;
-									padding-left: 4px;
-									border-radius: 20px;
-								}
-
-								> .pending {
-									background-color: rgb(111, 111, 111);
-								}
-
-								> .accepted {
-									background-color: rgb(49, 126, 171);
-								}
-
-								> .completed {
-									background-color: rgb(49, 126, 171);
-								}
-							}
-						}
-					}
+					@include influencer-details-styles()
 				}
 			}
 		}
@@ -320,5 +331,24 @@
 				}
 			}
 		}
+	}
+}
+
+
+.invite-by-email{
+	display: flex;
+	@include influencer-details-styles();
+
+	> .influencer-details{
+		width: 40%;
+
+		> .influencer-info{
+			width: auto;
+		}
+	}
+
+	>.email-input{
+		width: 50%;
+		margin-top: 10px;
 	}
 }

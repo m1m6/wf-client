@@ -139,6 +139,13 @@ export const updateCampaignCreatorStatusMutation = gql`
 	}
 `;
 
+export const updateCampaignCreatorEmailMutation = gql`
+	mutation updateCampaignCreatorEmail($id: ID!, $email: String!) {
+		updateCampaignCreatorEmail(id: $id, email: $email)
+	}
+`;
+
+
 export const campaignMetricsQuery = gql`
 	query getCampaignMetrics($campaignId: ID!) {
 		campaignMetrics(campaignId: $campaignId) {
