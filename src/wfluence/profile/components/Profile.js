@@ -50,6 +50,12 @@ const AudienceCountryAndCity = ({
     const uniqMediaType = uniqBy(media, 'mediaType');
     const postsHeatmap = getPostsHeatMap(media);
     const suggestedPostTime = getSuggestedPostTime(postsHeatmap);
+
+    console.log(
+        'getFollowersFollowingData(followersChart)',
+        getFollowersFollowingData(followersChart)
+    );
+
     return (
         <div className="profile-full-row">
             <div className="chart-header">
@@ -129,12 +135,14 @@ const AudienceCountryAndCity = ({
                             color: 'black'
                         }}
                     >
-                        The best time to post is{' '}
+                        The best time to post is the followeing day/hour{': '}
                         {suggestedPostTime.map((item, i) => {
                             return (
-                                <span>{`${DAYS[item[1]]} at ${item[0]}${
-                                    i < suggestedPostTime.length - 1 ? ', ' : '.'
-                                }`}</span>
+                                <span>
+                                    {`${DAYS[item[1]]} at ${item[0]}${` (GMT)`}${
+                                        i < suggestedPostTime.length - 1 ? ', ' : '.'
+                                    }`}
+                                </span>
                             );
                         })}
                     </div>
@@ -404,6 +412,7 @@ const Profile = ({ match }) => {
                     followersReach={getMetricValue(profile, 'followersReach')}
                     erValue={profile.engRateValue}
                     followersCount={profile.followersCount}
+                    contactDetials={profile.contactDetials}
                 />
 
                 <AQS

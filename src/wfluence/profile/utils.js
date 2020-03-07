@@ -1,6 +1,7 @@
 import capitalize from 'lodash/capitalize';
 import groupBy from 'lodash/groupBy';
 import { colors } from '../../charts/HighChartTheme';
+import moment from 'moment';
 
 export const parseProfileCategories = catItem => {
 	if (catItem) {
@@ -65,7 +66,9 @@ export const getFollowersFollowingData = followersOrFollowing => {
 
 	if (followersOrFollowing) {
 		followersOrFollowing.forEach(item => {
-			results.push([item.date, item.count]);
+			let formattedDate = moment.unix(item.date)
+			let utcDate = moment.utc(formattedDate).valueOf()
+			results.push([utcDate, item.count]);
 		});
 	}
 

@@ -55,6 +55,9 @@ export const PROFILE_QUERY = gql`
 				advertisingData
 				demographyByAge
 				geoQuality
+				contactDetails
+				postPrice
+				storiesPrice
 			}
 		}
 	}

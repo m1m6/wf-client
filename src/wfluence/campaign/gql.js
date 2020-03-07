@@ -36,6 +36,9 @@ export const campaignsQuery = gql`
 			id
 			name
 			description
+			influencers {
+				id
+			}
 		}
 	}
 `;

@@ -13,7 +13,7 @@ const options = (title, data) => ({
 	xAxis: {
 		type: "datetime",
 		// startOnTick: false,
-		// endOnTick: false
+		endOnTick: true
 	},
     yAxis: {
         title: {
