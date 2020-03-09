@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCreatorCampaignQuery } from '../useQueries';
-import { Skeleton, Icon, message } from 'antd';
+import { Skeleton, Icon, message, Divider } from 'antd';
 import Button from '../../../form/components/Button';
 import { useUpdateCampaignCreatorStatusMutation } from '../useMutations';
 
@@ -22,7 +22,7 @@ const CampaignOffer = ({ routerHistory, match }) => {
 	console.log('data', data);
 
 	const {
-		creatorCampaign: { campaign, status }
+		creatorCampaign: { campaign, status, requiredPostsCount, budget }
 	} = data;
 
 	let isAcceptedOrDeclined = status === 'ACCEPTED' || status === 'DECLINED';
@@ -30,13 +30,33 @@ const CampaignOffer = ({ routerHistory, match }) => {
 	return (
 		<div className="campaign-offer">
 			<div className="details">
+				<label className="label">Title:</label>
 				<div className="name">{campaign.name}</div>
+				<Divider />
+				<label className="label"> Description:</label>
 				<div className="description">{campaign.description}</div>
+				<Divider />
+				<label className="label"> Tags And Mentions:</label>
 				<div className="tags-mentions">{campaign.tagsAndMentions[0]}</div>
+
+				<Divider />
+				<label className="label">Number of Posts/Stories:</label>
+				<div className="tags-mentions">{requiredPostsCount}</div>
+
+				<Divider />
+				<label className="label">Budget:</label>
+				<div className="tags-mentions">${budget}</div>
+
+				<Divider />
+				<label className="label"> Media:</label>
 				<div className="media-preview">
 					{campaign.media &&
 						campaign.media.map(media => {
-							return <img src={media} width={80} height={80} />;
+							return (
+								<a href={media} target="_blank">
+									<img src={media} width={80} height={80} />
+								</a>
+							);
 						})}
 				</div>
 			</div>

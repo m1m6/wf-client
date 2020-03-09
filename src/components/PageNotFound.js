@@ -1,11 +1,16 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Result } from 'antd';
 
 const PageNotFound = ({ location }) => (
-  <div>
-    <p>Sorry, no page found at {location.pathname}</p>
-    <Link to="/">Go Home</Link>
-  </div>
-)
+	<div>
+		<Result
+			status="500"
+			title="404"
+			subTitle="Sorry, the page you visited does not exist."
+			extra={<Link to="/">Back Home</Link>}
+		/>
+	</div>
+);
 
-export default PageNotFound
+export default PageNotFound;

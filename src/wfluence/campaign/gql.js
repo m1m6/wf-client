@@ -36,6 +36,9 @@ export const campaignsQuery = gql`
 			id
 			name
 			description
+			influencers {
+				id
+			}
 		}
 	}
 `;
@@ -119,6 +122,8 @@ export const creatorCampaignQuery = gql`
 		creatorCampaign(id: $id) {
 			id
 			status
+			budget
+			requiredPostsCount
 			campaign {
 				id
 				tagsAndMentions
@@ -136,6 +141,13 @@ export const updateCampaignCreatorStatusMutation = gql`
 		updateCampaignCreatorStatus(id: $id, status: $status)
 	}
 `;
+
+export const updateCampaignCreatorEmailMutation = gql`
+	mutation updateCampaignCreatorEmail($id: ID!, $email: String!) {
+		updateCampaignCreatorEmail(id: $id, email: $email)
+	}
+`;
+
 
 export const campaignMetricsQuery = gql`
 	query getCampaignMetrics($campaignId: ID!) {

@@ -2,11 +2,9 @@ import React from 'react';
 import { Layout, Menu, Icon, Skeleton, Avatar, Dropdown, Button } from 'antd';
 import headerLogo from '../assets/imgs/sidebar/header-logo@3x.png';
 import { Link } from 'react-router-dom';
-import { useMeQueryClient } from '../rootUseQuery';
-import { isAdmin, isBrand, isCreator } from '../signupLogin/utils';
 import { titleCase } from 'title-case';
-
-import { SubMenu } from 'rc-menu';
+import { useMeQueryClient, useMyNotificaitonsQuery } from '../rootUseQuery';
+import { isAdmin, isBrand, isCreator } from '../signupLogin/utils';
 
 const { Sider } = Layout;
 
@@ -17,7 +15,15 @@ const HeaderLogo = () => (
 );
 
 const Sidebar = () => {
-    const { loading, error, data } = useMeQueryClient();
+	const { loading, error, data } = useMeQueryClient();
+	const {
+		loading: notificationsLoading,
+		error: notificationsError,
+		data: notificationsData
+	} = useMyNotificaitonsQuery();
+	if (loading) {
+		return <Skeleton active loading paragraph />;
+	}
 
     if (loading) {
         return <Skeleton active loading paragraph />;
@@ -27,15 +33,11 @@ const Sidebar = () => {
         me: { role, email, name }
     } = data;
 
-    const isAdminUser = isAdmin(role);
-    const isBrandUser = isBrand(role);
-    const isCreatorUser = isCreator(role);
-
-    return (
-        <Sider width={270} className="sidebar-wrapper">
-            <HeaderLogo />
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-                <Dropdown
+	return (
+		<Sider width={270} className="sidebar-wrapper">
+			<HeaderLogo />
+			<Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
+            <Dropdown
                     trigger={['click']}
                     overlayClassName="profile-submenu-overlay"
                     overlay={() => (
@@ -57,29 +59,48 @@ const Sidebar = () => {
                         <Icon type="down" className="arrow-down-angle" />
                     </div>
                 </Dropdown>
-                <Menu.Item key="1">
-                    <Icon type="bell" />
-                    <Link to="/notifications">
-                        <span className="nav-text">Notifications</span>
-                    </Link>
-                </Menu.Item>
-                {(isBrandUser || isAdminUser) && (
-                    <Menu.Item key="21">
-                        <Icon type="profile" />
-                        <Link to="/discover">
-                            <span className="nav-text">Discover</span>
-                        </Link>
-                    </Menu.Item>
-                )}
+                
+				<Menu.Item key="1">
+					<Icon type="bell" />
+					{notificationsLoading ? (
+						<Link to="/notifications">
+							<span className="nav-text">Notifications</span>
+						</Link>
+					) : (
+						<Badge
+							count={notificationsData.myNotifications.filter(i => !i.isRead).length}
+							showZero
+							style={{
+								backgroundColor: 'red',
+								color: '#fff',
+								boxShadow: '0 0 0 0px #d9d9d9',
+								marginTop: '25px',
+								marginRight: '-15px'
+							}}
+						>
+							<Link to="/notifications">
+								<span className="nav-text">Notifications</span>
+							</Link>
+						</Badge>
+					)}
+				</Menu.Item>
+				{(isBrandUser || isAdminUser) && (
+					<Menu.Item key="21">
+						<Icon type="profile" />
+						<Link to="/discover">
+							<span className="nav-text">Discover</span>
+						</Link>
+					</Menu.Item>
+				)}
 
-                {(isCreatorUser || isAdminUser) && (
-                    <Menu.Item key="2">
-                        <Icon type="profile" />
-                        <Link to="/creator-campaigns">
-                            <span className="nav-text">My Campaigns</span>
-                        </Link>
-                    </Menu.Item>
-                )}
+				{(isCreatorUser || isAdminUser) && (
+					<Menu.Item key="2">
+						<Icon type="profile" />
+						<Link to="/creator-campaigns">
+							<span className="nav-text">My Campaigns</span>
+						</Link>
+					</Menu.Item>
+				)}
 
                 {(isBrandUser || isAdminUser) && (
                     <Menu.Item key="7">

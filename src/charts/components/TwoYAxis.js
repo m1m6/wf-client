@@ -1,19 +1,51 @@
-import React from "react";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
+import React from 'react';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import { format } from 'date-fns';
+import { getDayOfTheWeekAsString } from '../../utils/dateUtils';
 
 const options = (title, data, startDate, endDate) => ({
 	chart: {
-		zoomType: "x",
+		zoomType: 'x',
 		marginTop: 20,
 		marginLeft: 45,
 		marginRight: 45
 	},
 	title: {
-		text: ""
+		text: ''
+	},
+	tooltip: {
+		enabled: true,
+		shared: true,
+		hideDelay: 0,
+		followTouchMove: true,
+		formatter: function() {
+			let date = new Date(this.x);
+			let fdate = format(date, 'MMM d, HH:mm');
+			console.log(this);
+			if (this.points.length === 1) {
+				return `<div>
+				<b>Date: </b>
+				<span>${getDayOfTheWeekAsString(date.getDay())}, ${fdate}</span>
+				<br>
+				<b>${this.points[0].series.name}: </b>
+				<span>${this.points[0].y}</span>
+			</div>`;
+			} else
+				return `<div>
+					<b>Date: </b>
+					<span>${getDayOfTheWeekAsString(date.getDay())}, ${fdate}</span>
+					<br>
+					<b>Likes: </b>
+					<span>${this.points[0].y}</span>
+					<br>
+					<b>Comments: </b>
+					<span>${this.points[1].y}</span>
+				</div>`;
+		}
 	},
 	xAxis: {
-		type: "datetime",
+		type: 'datetime',
 		min: startDate,
 		max: endDate,
 		endOnTick: true
@@ -22,8 +54,8 @@ const options = (title, data, startDate, endDate) => ({
 		{
 			margin: 0,
 			title: {
-				text: "Likes",
-				align: "high",
+				text: 'Likes',
+				align: 'high',
 				offset: 0,
 				rotation: 0,
 				y: -10,
@@ -33,8 +65,8 @@ const options = (title, data, startDate, endDate) => ({
 		{
 			margin: 0,
 			title: {
-				text: "Comments",
-				align: "high",
+				text: 'Comments',
+				align: 'high',
 				offset: 0,
 				rotation: 0,
 				y: -10,
@@ -48,14 +80,14 @@ const options = (title, data, startDate, endDate) => ({
 			data: data.likesArray,
 			pointStart: startDate,
 			pointInterval: 24 * 3600 * 1000,
-			name: "Likes"
+			name: 'Likes'
 		},
 		{
 			data: data.commentsArray,
 			pointStart: startDate,
 			yAxis: 1,
 			pointInterval: 24 * 3600 * 1000,
-			name: "Comments"
+			name: 'Comments'
 		}
 	]
 });

@@ -1,24 +1,23 @@
-import React from "react";
-import { Row, Icon, Col } from "antd";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import InputField from "../../../form/components/InputField";
-import Button from "../../../form/components/Button";
-import Link from "../../../form/components/Link";
-import { useLogin } from "../useLogin";
-import { showAllGraphQLErrors } from "../../../helper/graphqlErrors";
-import { auth } from "../../auth";
-import { useUserData } from "../useUserDataMutations";
-const background = require("../../../assets/imgs/signupLogin/signin_background.jpg");
+import React from 'react';
+import { Row, Icon } from 'antd';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import InputField from '../../../form/components/InputField';
+import Button from '../../../form/components/Button';
+import Link from '../../../form/components/Link';
+import { useLogin } from '../useLogin';
+import { showAllGraphQLErrors } from '../../../helper/graphqlErrors';
+import { auth } from '../../auth';
+import { useUserData } from '../useUserDataMutations';
 
 const initialValues = {
-    email: "",
-    password: ""
+    email: '',
+    password: ''
 };
 
 const loginSchema = Yup.object().shape({
-    email: Yup.string().required("*Required"),
-    password: Yup.string().required("*Required")
+    email: Yup.string().required('*Required'),
+    password: Yup.string().required('*Required')
 });
 
 const Login = ({ routerHistory }) => {
@@ -26,20 +25,17 @@ const Login = ({ routerHistory }) => {
     return (
         <div className="login-wrapper">
             <p>
-                Don’t have an account?{" "}
-                <Link to="/brands" label="Create an account" />
+                Don’t have an account? <Link to="/brands" label="Create an account" />
             </p>
             <Formik
                 initialValues={initialValues}
                 validationSchema={loginSchema}
                 onSubmit={async (values, { setSubmitting }) => {
                     try {
-                        const result = await login({
-                            variables: { ...values }
-                        });
+                        const result = await login({ variables: { ...values } });
                         if (result) {
                             auth.logIn(result.data.login.token);
-                            window.location.assign("/");
+                            window.location.assign('/discover');
                         }
                     } catch (error) {
                         setSubmitting(false);
@@ -69,10 +65,7 @@ const Login = ({ routerHistory }) => {
                         </Row>
                         <Row className="forgot-pwd-link">
                             <p>
-                                <Link
-                                    to="/signup"
-                                    label="Forgot your password?"
-                                />
+                                <Link to="/signup" label="Forgot your password?" />
                             </p>
                         </Row>
                         <Row>
@@ -83,7 +76,7 @@ const Login = ({ routerHistory }) => {
                                 className="wf-btn-primary"
                             >
                                 {isSubmitting ? (
-                                    "LOGGING IN..."
+                                    'LOGGING IN...'
                                 ) : (
                                     <>
                                         LOG IN
