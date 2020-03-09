@@ -49,7 +49,7 @@ const CampaignView = ({ routerHistory, match }) => {
 	const allProfiles = [...influencers, ...invitedInfluencers];
 
 	const { mediaPosts, startDate, endDate, name, status } = campaign;
-	const { medias, totalEngagementRate, totalLikes, totalComments, totalViews } = findMediaMetrics(
+	const { totalEngagementRate, totalLikes, totalComments, totalViews } = findMediaMetrics(
 		mediaPosts
 	);
 

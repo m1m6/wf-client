@@ -42,7 +42,7 @@ export const ROUTE_PATHS = {
         passwordReset: "/password-reset/:token", // TODO add
         brands: "/brands",
         creators: "/creators",
-        profile: "/profile"
+        accountSettings: "/account-settings"
     }
 };
 
@@ -89,7 +89,7 @@ const Routes = ({ userRole }) => {
             />
 
             <ProtectedRoute
-                path={ROUTE_PATHS.auth.profile}
+                path={ROUTE_PATHS.auth.accountSettings}
                 component={matchProps => (
                     <PageLayout
                         Component={UserProfile}

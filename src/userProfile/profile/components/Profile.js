@@ -1,7 +1,7 @@
-import React from "react";
-import { Col, Row, Avatar, Tabs } from "antd";
-import GeneralInformation from "./GeneralInformation";
-import ChangePassword from "./ChangePassword";
+import React from 'react';
+import { Col, Row, Avatar, Tabs } from 'antd';
+import GeneralInformation from './GeneralInformation';
+import ChangePassword from './ChangePassword';
 const { TabPane } = Tabs;
 
 const Profile = ({}) => {
@@ -22,49 +22,15 @@ const Profile = ({}) => {
                             <TabPane tab="General Information" key="1">
                                 <GeneralInformation />
                             </TabPane>
-                            <TabPane tab="Payment" key="2">
-                                Coming Soon...
-                            </TabPane>
                             <TabPane tab="Password" key="3">
                                 <ChangePassword />
+                            </TabPane>
+                            <TabPane tab="Payments" key="2">
+                                Coming Soon...
                             </TabPane>
                         </Tabs>
                     </Col>
                 </Col>
-                <Row type="flex">
-                    {/* <Col lg={7}>
-                        <Divider orientation="left">Work</Divider>
-                        <div className="contact-info-rows-wrapper">
-                            <Col class="profile-title">
-                                <Title level={4}>
-                                    Introduction <Text code>Primary</Text>
-                                </Title>
-                                <Paragraph> Gaza </Paragraph>
-                                <Paragraph> 122 william street </Paragraph>
-
-                                <Title level={4}>
-                                    Introduction <Text code>secondary</Text>
-                                </Title>
-                                <Paragraph> Gaza </Paragraph>
-                                <Paragraph> 122 william street </Paragraph>
-                            </Col>
-                            <Divider orientation="left">Interests</Divider>
-                            {["Photography", "Running", "Sports"].map(
-                                interest => (
-                                    <Tag
-                                        class="profile-skills"
-                                        color={"lightgrey"}
-                                        className="interest-tag"
-                                    >
-                                        {interest}
-                                        {"\n"}
-                                    </Tag>
-                                )
-                            )}
-                        </div>
-                    </Col> */}
-                    <Col lg={17}></Col>
-                </Row>
             </Col>
         </Row>
     );

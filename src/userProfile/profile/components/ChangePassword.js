@@ -1,15 +1,5 @@
-import React, { useState } from "react";
-import {
-    Col,
-    Row,
-    Typography,
-    Divider,
-    Form,
-    Button,
-    Input,
-    message
-} from "antd";
-const { Title, Paragraph, Text } = Typography;
+import React, { useState } from 'react';
+import { Col, Typography, Divider, Form, Button, Input, message } from 'antd';
 
 const formItemLayout = {
     labelCol: { lg: 5, xs: 8, sm: 8 },
@@ -28,7 +18,7 @@ const ChangePassword = props => {
         props.form.validateFields((err, values) => {
             if (!err) {
                 onChangePassword(values);
-                console.info("success");
+                console.info('success');
             } else {
             }
         });
@@ -38,10 +28,9 @@ const ChangePassword = props => {
         setSendingChangePassowrdRequest(true);
         setTimeout(() => {
             setSendingChangePassowrdRequest(false);
-            message.success("password successfully changed");
+            message.success('password successfully changed');
             props.form.resetFields();
         }, 1000);
-        //TODO:  Should add API call here
     };
 
     const { getFieldDecorator } = props.form;
@@ -50,31 +39,27 @@ const ChangePassword = props => {
             <Divider orientation="left">Change Password</Divider>
             <Form onSubmit={validateValues}>
                 <Form.Item {...formItemLayout} label="Old Password">
-                    {getFieldDecorator("oldPassword", {
+                    {getFieldDecorator('oldPassword', {
                         rules: [
                             {
                                 required: true,
-                                message: "Please input your password"
+                                message: 'Please input your password'
                             }
                         ]
                     })(<Input placeholder="" />)}
                 </Form.Item>
                 <Form.Item {...formItemLayout} label="New Password">
-                    {getFieldDecorator("newPassword", {
+                    {getFieldDecorator('newPassword', {
                         rules: [
                             {
                                 required: true,
-                                message: "Please input your new password"
+                                message: 'Please input your new password'
                             }
                         ]
                     })(<Input placeholder="" />)}
                 </Form.Item>
                 <Form.Item {...formTailLayout}>
-                    <Button
-                        type="primary"
-                        loading={sendingRequest}
-                        htmlType="submit"
-                    >
+                    <Button type="primary" loading={sendingRequest} htmlType="submit">
                         Change
                     </Button>
                 </Form.Item>
@@ -83,4 +68,4 @@ const ChangePassword = props => {
     );
 };
 
-export default Form.create({ name: "change_password" })(ChangePassword);
+export default Form.create({ name: 'change_password' })(ChangePassword);

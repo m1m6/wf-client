@@ -1,12 +1,12 @@
-import React from "react";
-import { Layout, Menu, Icon, Skeleton, Avatar, Dropdown, Button } from "antd";
-import headerLogo from "../assets/imgs/sidebar/header-logo@3x.png";
-import { Link } from "react-router-dom";
-import { useMeQueryClient } from "../rootUseQuery";
-import { isAdmin, isBrand, isCreator } from "../signupLogin/utils";
-import { titleCase } from "title-case";
+import React from 'react';
+import { Layout, Menu, Icon, Skeleton, Avatar, Dropdown, Button } from 'antd';
+import headerLogo from '../assets/imgs/sidebar/header-logo@3x.png';
+import { Link } from 'react-router-dom';
+import { useMeQueryClient } from '../rootUseQuery';
+import { isAdmin, isBrand, isCreator } from '../signupLogin/utils';
+import { titleCase } from 'title-case';
 
-import { SubMenu } from "rc-menu";
+import { SubMenu } from 'rc-menu';
 
 const { Sider } = Layout;
 
@@ -34,46 +34,29 @@ const Sidebar = () => {
     return (
         <Sider width={270} className="sidebar-wrapper">
             <HeaderLogo />
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
                 <Dropdown
-                    trigger="click"
+                    trigger={['click']}
                     overlayClassName="profile-submenu-overlay"
                     overlay={() => (
                         <Menu className="user-menu">
-                            <Menu.Item
-                                key="01"
-                                className="profile-submenu-item"
-                            >
-                                <Link to="/profile">Profile</Link>
+                            <Menu.Item key="011" className="profile-submenu-item">
+                                <Link to="/account-settings">Account Settings</Link>
                             </Menu.Item>
-                            <Menu.Item
-                                key="02"
-                                className="profile-submenu-item"
-                            >
+                            <Menu.Item key="022" className="profile-submenu-item">
                                 Sign out
-                            </Menu.Item>
-                            <Menu.Item
-                                key="03"
-                                className="profile-submenu-item"
-                            >
-                                Reset Password
                             </Menu.Item>
                         </Menu>
                     )}
                 >
-                    <Menu.Item className="user-menu-item">
-                        <Avatar
-                            shape="square"
-                            icon="user"
-                            className="siderbar-avatar"
-                        />
-                        <span className="siderbar-username">
-                            {titleCase(name + " Alshaer")}
+                    <div className="pointer user-menu-wrapper">
+                        <Avatar shape="square" icon="user" className="siderbar-avatar" />
+                        <span onClick={e => e.isPropagationStopped()} className="siderbar-username">
+                            {titleCase(name)}
                         </span>
                         <Icon type="down" className="arrow-down-angle" />
-                    </Menu.Item>
+                    </div>
                 </Dropdown>
-
                 <Menu.Item key="1">
                     <Icon type="bell" />
                     <Link to="/notifications">
