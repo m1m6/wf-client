@@ -17,6 +17,7 @@ import { auth } from './signupLogin/auth';
 import Connect from './socialIntegration/instagram/components/Connect';
 import CreatorCampaigns from './wfluence/campaign/components/CreatorCampaigns';
 import CampaignOffer from './wfluence/campaign/components/CampaignOffer';
+import UserProfile from './userProfile/profile/components/UserProfile';
 import Notifications from './user/notifications/Notifications';
 
 export const ROUTE_PATHS = {
@@ -159,6 +160,19 @@ const Routes = ({ userRole }) => {
                 userRole={userRole}
             />
 
+            <ProtectedRoute
+                path={ROUTE_PATHS.app.notifications}
+                component={matchProps => (
+                    <PageLayout
+                        Component={Notifications}
+                        {...matchProps}
+                        title="My Notifications"
+                    />
+                )}
+                roles={[ROLES.ADMIN, ROLES.CREATORS, ROLES.BRANDS]}
+                userRole={userRole}
+            />
+
             <Route
                 path={ROUTE_PATHS.auth.brands}
                 exact
@@ -220,14 +234,7 @@ const Routes = ({ userRole }) => {
 				userRole={userRole}
 			/>
 
-			<ProtectedRoute
-				path={ROUTE_PATHS.app.notifications}
-				component={matchProps => (
-					<PageLayout Component={Notifications} {...matchProps} title="My Notifications" />
-				)}
-				roles={[ROLES.ADMIN, ROLES.CREATORS, ROLES.BRANDS]}
-				userRole={userRole}
-			/>
+			
 
 			<Route
 				path={ROUTE_PATHS.auth.brands}
