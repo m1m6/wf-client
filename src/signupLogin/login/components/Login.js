@@ -8,7 +8,7 @@ import Link from '../../../form/components/Link';
 import { useLogin } from '../useLogin';
 import { showAllGraphQLErrors } from '../../../helper/graphqlErrors';
 import { auth } from '../../auth';
-import { useUserData } from '../useUserDataMutations';
+import { isBrand, isAdmin } from '../../utils';
 
 const initialValues = {
     email: '',
@@ -35,7 +35,14 @@ const Login = ({ routerHistory }) => {
                         const result = await login({ variables: { ...values } });
                         if (result) {
                             auth.logIn(result.data.login.token);
-                            window.location.assign('/discover');
+                            if (
+                                isBrand(result.data.login.user.role) ||
+                                isAdmin(result.data.login.user.role)
+                            )
+                                window.location.assign('/discover');
+                            else {
+                                window.location.assign('/discover');
+                            }
                         }
                     } catch (error) {
                         setSubmitting(false);

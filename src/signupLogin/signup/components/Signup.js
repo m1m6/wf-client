@@ -1,28 +1,29 @@
-import React from "react";
-import { Row, Icon, Layout, Col } from "antd";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import InputField from "../../../form/components/InputField";
-import Button from "../../../form/components/Button";
-import Link from "../../../form/components/Link";
-import { useBrandSignup } from "../useMutations";
-import { auth } from "../../auth";
-import { showAllGraphQLErrors } from "../../../helper/graphqlErrors";
-import { ROUTE_PATHS } from "../../../routes";
+import React from 'react';
+import { Row, Icon, Layout, Col } from 'antd';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import InputField from '../../../form/components/InputField';
+import Button from '../../../form/components/Button';
+import Link from '../../../form/components/Link';
+import { useBrandSignup } from '../useMutations';
+import { auth } from '../../auth';
+import { showAllGraphQLErrors } from '../../../helper/graphqlErrors';
+import { ROUTE_PATHS } from '../../../routes';
+import { isCreator } from '../../utils';
 
-const background = require("../../../assets/imgs/signupLogin/signin_background.jpg");
+const background = require('../../../assets/imgs/signupLogin/signin_background.jpg');
 
 const initialValues = {
-    email: "",
-    password: "",
-    name: "",
-    role: "BRAND"
+    email: '',
+    password: '',
+    name: '',
+    role: 'BRAND'
 };
 
 const signupSchema = Yup.object().shape({
-    email: Yup.string().required("*Required"),
-    password: Yup.string().required("*Required"),
-    name: Yup.string().required("*Required")
+    email: Yup.string().required('*Required'),
+    password: Yup.string().required('*Required'),
+    name: Yup.string().required('*Required')
 });
 
 const Signup = ({ routerHistory, role }) => {
@@ -44,9 +45,13 @@ const Signup = ({ routerHistory, role }) => {
                             variables: { ...values }
                         });
                         if (result) {
-                            auth.logIn(result.data.signup.token);
-                            auth.creatorFirstTime(true);
-                            window.location.assign(ROUTE_PATHS.app.connectIg);
+                            if (isCreator(result.data.signup.user.role)) {
+                                auth.logIn(result.data.signup.token);
+                                auth.creatorFirstTime(true);
+                                window.location.assign(ROUTE_PATHS.app.connectIg);
+                            } else {
+                                window.location.assign(ROUTE_PATHS.app.discover);
+                            }
                         }
                     } catch (error) {
                         setSubmitting(false);
@@ -92,7 +97,7 @@ const Signup = ({ routerHistory, role }) => {
                                 className="wf-btn-primary"
                             >
                                 {isSubmitting ? (
-                                    "SIGNING UP..."
+                                    'SIGNING UP...'
                                 ) : (
                                     <>
                                         SIGN UP

@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { Col, Typography, Divider, Form, Button, Input, message } from 'antd';
+import { Col, Divider, Row, Icon, Button } from 'antd';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import { showAllGraphQLErrors } from '../../../helper/graphqlErrors';
+import InputField from '../../../form/components/InputField';
+import { useChangePasswordMutation } from '../useMutations';
+import { auth } from '../../../signupLogin/auth';
+import { useMeQueryClient } from '../../../rootUseQuery';
 
 const formItemLayout = {
     labelCol: { lg: 5, xs: 8, sm: 8 },
@@ -10,62 +17,101 @@ const formTailLayout = {
     wrapperCol: { span: 8, offset: 2 }
 };
 
+const initialValues = {
+    oldPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+};
+
+const changePasswordSchema = Yup.object().shape({
+    oldPassword: Yup.string().required('*Required'),
+    newPassword: Yup.string()
+        .min(6, 'Password must be minimum 6 characters')
+        .required('*Required'),
+    confirmPassword: Yup.string().oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
+});
+
 const ChangePassword = props => {
-    const [payload, setPayload] = useState({});
-    const [sendingRequest, setSendingChangePassowrdRequest] = useState(false);
-    const validateValues = e => {
-        e.preventDefault();
-        props.form.validateFields((err, values) => {
-            if (!err) {
-                onChangePassword(values);
-                console.info('success');
-            } else {
-            }
-        });
-    };
+    const [changePassword] = useChangePasswordMutation();
+    const { loading, error, data } = useMeQueryClient();
 
-    const onChangePassword = values => {
-        setSendingChangePassowrdRequest(true);
-        setTimeout(() => {
-            setSendingChangePassowrdRequest(false);
-            message.success('password successfully changed');
-            props.form.resetFields();
-        }, 1000);
-    };
-
-    const { getFieldDecorator } = props.form;
     return (
-        <Col lg={24} md={24} sm={22}>
+        <Col lg={16} md={16} sm={12}>
             <Divider orientation="left">Change Password</Divider>
-            <Form onSubmit={validateValues}>
-                <Form.Item {...formItemLayout} label="Old Password">
-                    {getFieldDecorator('oldPassword', {
-                        rules: [
-                            {
-                                required: true,
-                                message: 'Please input your password'
+            <Formik
+                initialValues={initialValues}
+                validationSchema={changePasswordSchema}
+                onSubmit={async (values, { setSubmitting }) => {
+                    try {
+                        const {
+                            me: { email }
+                        } = data;
+
+                        console.log(values, email);
+                        const result = await changePassword({
+                            variables: {
+                                email,
+                                oldPassword: values.oldPassword,
+                                newPassword: values.newPassword
                             }
-                        ]
-                    })(<Input placeholder="" />)}
-                </Form.Item>
-                <Form.Item {...formItemLayout} label="New Password">
-                    {getFieldDecorator('newPassword', {
-                        rules: [
-                            {
-                                required: true,
-                                message: 'Please input your new password'
-                            }
-                        ]
-                    })(<Input placeholder="" />)}
-                </Form.Item>
-                <Form.Item {...formTailLayout}>
-                    <Button type="primary" loading={sendingRequest} htmlType="submit">
-                        Change
-                    </Button>
-                </Form.Item>
-            </Form>
+                        });
+                        debugger;
+                        if (result) {
+                            auth.setAccessToken(result.data.changePassword.token);
+                            window.location.assign('/');
+                        }
+                    } catch (error) {
+                        setSubmitting(false);
+                        showAllGraphQLErrors(error.graphQLErrors);
+                    }
+                }}
+            >
+                {({ values, isSubmitting }) => (
+                    <Form>
+                        <InputField
+                            iconType="lock"
+                            name="oldPassword"
+                            type="password"
+                            label="Password"
+                            placeholder="***********"
+                        />
+                        <InputField
+                            iconType="lock"
+                            name="newPassword"
+                            type="password"
+                            label="New Password"
+                            placeholder="***********"
+                        />
+                        <InputField
+                            iconType="lock"
+                            name="confirmPassword"
+                            type="password"
+                            label="Confirm Password"
+                            placeholder="***********"
+                        />
+
+                        <Button
+                            htmlType="submit"
+                            type="primary"
+                            disabled={isSubmitting}
+                            style={{
+                                marginTop: '10px'
+                            }}
+                        >
+                            {isSubmitting ? (
+                                'SUBMITTING...'
+                            ) : (
+                                <>
+                                    Submit
+                                    <Icon type="arrow-right" />
+                                </>
+                            )}
+                        </Button>
+                    </Form>
+                )}
+            </Formik>
         </Col>
     );
 };
 
-export default Form.create({ name: 'change_password' })(ChangePassword);
+export default ChangePassword;

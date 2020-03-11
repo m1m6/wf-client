@@ -5,14 +5,17 @@ import { Link } from 'react-router-dom';
 import { titleCase } from 'title-case';
 import { useMeQueryClient, useMyNotificaitonsQuery } from '../rootUseQuery';
 import { isAdmin, isBrand, isCreator } from '../signupLogin/utils';
+import { auth } from '../signupLogin/auth';
 
 const { Sider } = Layout;
 
-const HeaderLogo = () => (
-    <div className="header-logo">
-        <img src={headerLogo} />
-    </div>
-);
+const HeaderLogo = () => {
+    return (
+        <div className="header-logo pointer" onClick={() => window.location.assign('/')}>
+            <img src={headerLogo} />
+        </div>
+    );
+};
 
 const Sidebar = () => {
     const { loading, error, data } = useMeQueryClient();
@@ -49,7 +52,14 @@ const Sidebar = () => {
                             <Menu.Item key="011" className="profile-submenu-item">
                                 <Link to="/account-settings">Account Settings</Link>
                             </Menu.Item>
-                            <Menu.Item key="022" className="profile-submenu-item">
+                            <Menu.Item
+                                key="022"
+                                className="profile-submenu-item"
+                                onClick={() => {
+                                    auth.logOut();
+                                    window.location.reload();
+                                }}
+                            >
                                 Sign out
                             </Menu.Item>
                         </Menu>
