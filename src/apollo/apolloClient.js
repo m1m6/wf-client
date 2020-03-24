@@ -10,7 +10,7 @@ import { ACCESS_TOKEN } from "../constants";
 import defaultState from "./defaultState";
 import resolvers from "./resolvers";
 
-const httpLink = createHttpLink({ uri: "http://localhost:4000" });
+const httpLink = createHttpLink({ uri: process.env.REACT_APP_HTTP_GRAPHQL_URL });
 const cache = new InMemoryCache({ freezeResults: true });
 cache.writeData({ data: defaultState });
 
@@ -25,7 +25,7 @@ const middlewareLink = new ApolloLink((operation, forward) => {
 });
 
 const wsLink = new WebSocketLink({
-	uri: `ws://localhost:4000`,
+	uri: process.env.REACT_APP_WS_GRAPHQL_URL,
 	options: {
 		reconnect: true,
 		connectionParams: {
@@ -33,7 +33,7 @@ const wsLink = new WebSocketLink({
 		}
 	}
 });
-const uploadLink =  createUploadLink({ uri: "http://localhost:4000" })
+const uploadLink =  createUploadLink({ uri: process.env.REACT_APP_HTTP_GRAPHQL_URL })
 
 const httpLinkAuth = middlewareLink.concat(uploadLink);
 
