@@ -32,20 +32,20 @@ self.__precacheManifest = [
     "url": "/static/js/main.b3c5ab8c.chunk.js"
   },
   {
-    "revision": "bf8c68daad76c3d32c47c2966522ef02",
-    "url": "/static/media/AvenirLT-Black.bf8c68da.eot"
-  },
-  {
     "revision": "3fcc4b81ec88bd8d10ff786f0b911514",
     "url": "/static/media/AvenirLT-Black.3fcc4b81.ttf"
   },
   {
-    "revision": "b6529634b7eec54d710d463bf1bf75de",
-    "url": "/static/media/AvenirLT-Medium.b6529634.eot"
+    "revision": "bf8c68daad76c3d32c47c2966522ef02",
+    "url": "/static/media/AvenirLT-Black.bf8c68da.eot"
   },
   {
     "revision": "5f9c10a5364d69bbe8be2d58b774243c",
     "url": "/static/media/AvenirLT-Medium.5f9c10a5.ttf"
+  },
+  {
+    "revision": "b6529634b7eec54d710d463bf1bf75de",
+    "url": "/static/media/AvenirLT-Medium.b6529634.eot"
   },
   {
     "revision": "83babc8ac36f6f172c2b",
