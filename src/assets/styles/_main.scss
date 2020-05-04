@@ -1,15 +1,16 @@
 @import "~antd/dist/antd.css";
 @import "theme";
 
+@import "./layout/header";
+@import "./layout/layout";
+@import "./layout/sidebar";
+
 @import "./form/input";
 @import "./form/button";
 @import "./form/link";
 
 @import "auth/authWrapper";
 @import "auth/login";
-
-@import "./layout/layout";
-@import "./layout/sidebar";
 
 @import "./userProfile/profile";
 
@@ -63,6 +64,8 @@ body,
 #root {
 	height: 100%;
 	width: 100%;
+	display: flex;
+    flex-direction: column;
 }
 *,
 *:before,
@@ -111,4 +114,37 @@ body,
 
 .underline{
 	text-decoration: underline;
+}
+
+
+.influencers-table{    
+	width: 60%;
+	margin: 0 auto;
+	margin-top: 100px;
+
+	.ant-table-wrapper{
+		background: whitesmoke;
+
+		.ant-table-tbody{
+			font-family: AvenirMedium;
+			font-weight: 500;
+			color: black;
+
+		}
+
+		.ant-table-tbody > tr.ant-table-row-level-0:hover > td {
+			background: rgb(222, 222, 222);
+			transition: unset !important;
+			-webkit-transition: unset !important;
+		  }
+	}
+
+	.search-title{    
+		font-family: AvenirMedium;
+		@include font-size(12px, 24px);
+		font-weight: 500;
+		color: #001529;
+		margin-bottom: 15px;
+		font-weight: 600;
+	}
 }

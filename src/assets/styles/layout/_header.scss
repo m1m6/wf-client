@@ -1,0 +1,22 @@
+.w-header{
+    width: 100%;
+
+    .logo {
+        width: 180px;
+        height: 39px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 11px 22px 14px 0;
+        float: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+
+        .site-name{
+            font-family: AvenirMedium;
+            font-size: 22px;
+            font-weight: 500;
+            color: whitesmoke;
+        }
+      }
+}

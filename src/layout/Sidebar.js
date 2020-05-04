@@ -18,33 +18,33 @@ const HeaderLogo = () => {
 };
 
 const Sidebar = () => {
-    const { loading, error, data } = useMeQueryClient();
-    const {
-        loading: notificationsLoading,
-        error: notificationsError,
-        data: notificationsData
-    } = useMyNotificaitonsQuery();
-    if (loading) {
-        return <Skeleton active loading paragraph />;
-    }
+    // const { loading, error, data } = useMeQueryClient();
+    // const {
+    //     loading: notificationsLoading,
+    //     error: notificationsError,
+    //     data: notificationsData
+    // } = useMyNotificaitonsQuery();
+    // if (loading) {
+    //     return <Skeleton active loading paragraph />;
+    // }
 
-    if (loading) {
-        return <Skeleton active loading paragraph />;
-    }
+    // if (loading) {
+    //     return <Skeleton active loading paragraph />;
+    // }
 
-    const {
-        me: { role, email, name }
-    } = data;
+    // const {
+    //     me: { role, email, name }
+    // } = data;
 
-    let isCreatorUser = isCreator(role);
-    let isAdminUser = isAdmin(role);
-    let isBrandUser = isBrand(role);
+    let isCreatorUser = false; //isCreator(role);
+    let isAdminUser = false; //isAdmin(role);
+    let isBrandUser = true; // isBrand(role);
 
     return (
         <Sider width={270} className="sidebar-wrapper">
             <HeaderLogo />
             <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-                <Dropdown
+                {/* <Dropdown
                     trigger={['click']}
                     overlayClassName="profile-submenu-overlay"
                     overlay={() => (
@@ -72,8 +72,8 @@ const Sidebar = () => {
                         </span>
                         <Icon type="down" className="arrow-down-angle" />
                     </div>
-                </Dropdown>
-
+                </Dropdown> */}
+                {/* 
                 <Menu.Item key="1">
                     <Icon type="bell" />
                     {notificationsLoading ? (
@@ -97,7 +97,7 @@ const Sidebar = () => {
                             </Link>
                         </Badge>
                     )}
-                </Menu.Item>
+                </Menu.Item> */}
                 {(isBrandUser || isAdminUser) && (
                     <Menu.Item key="21">
                         <Icon type="profile" />

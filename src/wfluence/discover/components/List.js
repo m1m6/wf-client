@@ -1,70 +1,51 @@
-import React, { useState } from 'react';
-import { Row, Col, Skeleton, Spin, Result } from 'antd';
-import ProfileCard from '../../profile/components/ProfileCard';
-import Button from '../../../form/components/Button';
-import useProfilesQuery from '../useProfiles';
-import { useFiltersQuery } from '../../../core/filter/useQueries';
-import { buildWhereFilter } from '../../../core/filter/utils';
+import React from 'react';
+import { Table } from 'antd';
+import capitalize from 'lodash/capitalize';
+import BounceLoader from 'react-spinners/BounceLoader';
 
-const List = () => {
-	const { loading: fLoading, data: fData, error: fError } = useFiltersQuery();
-	const whereFilter = buildWhereFilter(fData);
-	console.log(whereFilter);
-	const { data, loading, loadMore, error } = useProfilesQuery(9, 0, whereFilter);
-	const [btnLoading, setBtnLoading] = useState(false);
-	if (loading && !data) return <Skeleton active paragraph title loading />;
+import { useBrandAppearanceQuery } from '../../../rootUseQuery';
+import { getInfluencersRows, getInfluencersTableColumns } from '../../campaign/tabs/utils';
 
-	if (error) {
-		return <p>`Error: ${error.message}`</p>;
-	}
+const List = ({ searchTerm, setLoading }) => {
+    const { data, loading, loadMore, error } = useBrandAppearanceQuery(searchTerm, 10, 0);
 
-	const { profiles } = data;
+    if (loading) {
+        setLoading(true);
+        return (
+            <BounceLoader
+                css={`
+                    display: block;
+                    margin: 0 auto;
+                    border-color: red;
+                    background-color: whitesmoke;
+                `}
+                size={100}
+                color={'#001529'}
+                loading={true}
+            />
+        );
+    }
 
-	return (
-		<>
-			<div className="dicover-profiles-wrapper">
-				<Row className="profiles-row">
-					{profiles && profiles.length > 0 ? (
-						profiles.map((profile, i) => {
-							return (
-								<Col className="profile-card-wrapper">
-									<ProfileCard loading={loading} profile={profile} />
-								</Col>
-							);
-						})
-					) : (
-						<Result
-							status="404"
-							title="Ooops!"
-							subTitle="Sorry, there's no results matching your criteria."
-						/>
-					)}
-				</Row>
-			</div>
-			<div className="footer">
-				{btnLoading ? (
-					<Spin size="large" style={{ marginTop: '40px' }} />
-				) : (
-					profiles.length === 9 && (
-						<Button
-							className="wf-btn-primary"
-							onClick={e => {
-								setBtnLoading(true);
-								loadMore(9, profiles.length, whereFilter);
+    console.log("data", data)
+    let {
+        brandAppearance: { brandAppearance, count },
+    } = data;
 
-								setTimeout(() => {
-									setBtnLoading(false);
-								}, 1000);
-							}}
-							disabled={btnLoading}
-						>
-							Load More
-						</Button>
-					)
-				)}
-			</div>
-		</>
-	);
+    setLoading && setLoading(false);
+
+    return (
+        <div>
+            <div className="search-title">
+                The following influencers/creators mentioned {capitalize(searchTerm)} in their
+                posts:
+            </div>
+            <Table
+                dataSource={getInfluencersRows(brandAppearance)}
+                columns={getInfluencersTableColumns()}
+                pagination={{total: count}}
+            />
+        </div>
+    );
 };
 
 export default List;

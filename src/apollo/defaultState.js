@@ -15,5 +15,6 @@ export default {
 		name: "",
 		email: "",
 		role: ""
-	}
+	},
+	brandSearchTerm: null
 };

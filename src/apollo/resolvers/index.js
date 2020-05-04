@@ -5,6 +5,7 @@ import updateFolllowersFilter from './updateFolllowersFilter';
 import updateSelectedLanguages from './updateSelectedLanguages';
 import updateSelectedCategories from './updateSelectedCategories';
 import updateSelectedCreatorsSize from './updateSelectedCreatorsSize';
+import setSearchTerm from './setSearchTerm';
 
 export default {
 	Mutation: {
@@ -14,6 +15,7 @@ export default {
 		setUserData,
 		updateSelectedLanguages,
 		updateSelectedCategories,
-		updateSelectedCreatorsSize
+		updateSelectedCreatorsSize,
+		setSearchTerm
 	}
 };

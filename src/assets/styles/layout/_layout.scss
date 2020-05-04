@@ -1,19 +1,75 @@
 .ant-layout-has-sider,
 .ant-layout {
 	height: 100%;
-	margin-left: 270px;
+	background: whitesmoke;
+	// margin-left: 270px;
 
 	&.app-page-wrapper,
 	&.ant-layout-content {
 		height: 100%;
 		width: 100%;
-		background-color: $pale-grey;
+		background-color: whitesmoke;
 	}
 
 	.page-layout {
-		margin-left: 67px;
-		margin-top: 40px;
+		// margin-left: 67px;
+		// margin-top: 40px;
+		background-color: whitesmoke;
+		.sub-header{
+			background: rgb(0,21,41);
+			background: linear-gradient(337deg, rgba(0,21,41,1) 12%, rgba(0,147,163,1) 100%);
+			height: 280px;
+			top: 0;
+			left: 0;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
 
+			.search-form-wrapper{
+				width: 40%;
+				display: flex;
+				flex-direction: column;
+				margin: 0 auto;
+				justify-content: center;
+
+				.title{
+					font-family: AvenirMedium;
+					font-size: 40px;
+					font-weight: 500;
+					text-align: center;
+					color: whitesmoke;
+				}
+
+				.ant-input-search{
+					.ant-input-wrapper{
+						.ant-input{
+							height: 50px;
+						}
+						.ant-input:focus{
+							border-right-width: 0px !important;
+							border-color: transparent !important;
+							box-shadow: unset;
+						}
+
+						.ant-input:hover{
+							border-right-width: 0px !important;
+							border-color: transparent !important;
+							box-shadow: unset;
+						}
+						.ant-input-group-addon{
+							.ant-input-search-button{
+								height: 50px;
+								background-color:  #001529;
+								// border-color: #001529;
+								border: 0px;
+								border-radius: 0px;
+							}
+						}
+					}
+				}
+			}
+		}
 		.page-title {
 			font-family: AvenirMedium;
 			font-size: 32px;
