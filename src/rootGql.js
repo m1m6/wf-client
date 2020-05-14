@@ -63,6 +63,7 @@ export const brandAppearanceQuery = gql`
                     timestamp
                     video_views
                     location
+                    mediaUrl
                     profile {
                         id
                         name
@@ -84,4 +85,28 @@ export const brandAppearanceQuery = gql`
             count
         }
     }
+`;
+
+export const SET_ERROR_MODAL_STATUS = gql`
+    mutation setErrorModalStatus($status: Boolean!) {
+        setErrorModalStatus(status: $status) @client
+    }
+`;
+
+export const ERROR_MODAL_STATUS = gql`
+    query errorModalStatus {
+        status @client
+    }
+`;
+
+export const VISITON_SUBSCRIPTION = gql`
+    mutation visitorSubscription($email: String!, $brand: String!) {
+        visitorSubscription(email: $email, brand: $brand)
+    }
+`;
+
+export const CONTACT_FORM_MUTATION = gql`
+	mutation contactForm($email: String!, $message: String!) {
+		contactForm(email: $email, message: $message)
+	}
 `;

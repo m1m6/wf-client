@@ -148,3 +148,125 @@ body,
 		font-weight: 600;
 	}
 }
+
+
+.ant-drawer.post-popover {
+	.ant-drawer-content-wrapper {
+	  width: 450px !important;
+	  max-width: 100vw !important;
+	  .ant-drawer-body {
+		padding: 0;
+	  }
+	}
+  
+	.ant-modal-header,
+	.ant-modal-footer {
+	  display: none;
+	}
+	.ant-modal-content {
+	  height: 100%;
+	  border-radius: 0;
+	  overflow-y: scroll;
+	}
+  }
+  
+  .post-details {
+	padding: 0 38px;
+	.profile-header {
+	  padding: 15px 25px 15px 60px;
+	  position: relative;
+	  margin-bottom: 5px;
+	  .profile-img {
+		width: 45px;
+		height: 45px;
+		border-radius: 50%;
+		border: 1px solid lightgray;
+		background-size: cover;
+		background-repeat: no-repeat;
+		position: absolute;
+		left: 5px;
+		top: 15px;
+	  }
+	  .name {
+		font-weight: bold;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		padding-top: 4px;
+	  }
+	  .link {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: #000;
+		span {
+		  color: gray;
+		}
+	  }
+	  .close-btn {
+		position: absolute;
+		right: 2px;
+		top: 17px;
+		font-size: 22px;
+	  }
+	}
+  
+	.post-img-container {
+	  width: 100%;
+	  padding-top: 100%;
+	  position: relative;
+	  .post-img {
+		border-radius: 4px;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center center;
+		border: 1px solid #d3d3d3;
+	  }
+	}
+	.interactions-box {
+	  overflow: hidden;
+	  padding: 10px 20px;
+	  .interaction {
+		width: 45%;
+		float: left;
+		div {
+		  display: inline-block;
+		  vertical-align: top;
+		  margin-right: 12px;
+		  .gray {
+			color: #b0b0b0;
+		  }
+		  .bold {
+			color: #000;
+			font-weight: bold;
+			display: inline-block;
+			margin-bottom: -5px;
+			font-size: 20px;
+		  }
+		  i {
+			font-size: 26px;
+		  }
+		}
+	  }
+	}
+	.post-description {
+	  margin-bottom: 20px;
+	}
+	.post-tags {
+	  margin-bottom: 30px;
+	  span {
+		display: inline-block;
+		margin-bottom: 10px;
+		padding: 3px 10px;
+		// background-color: #f2f2f2;
+		margin-right: 5px;
+		border-radius: 25px;
+		color: gray;
+	  }
+	}
+  }

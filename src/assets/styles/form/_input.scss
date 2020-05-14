@@ -26,6 +26,14 @@
 		display: inline-flex;
 	}
 
+	.form-label-v2 {
+		font-family: Montserrat;
+		@include font-size(16px);
+		font-weight: 500;
+		color: whitesmoke;
+		display: inline-flex;
+	}
+
 	.error-message {
 		color: red;
 		font-size: 12px;

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Input, message } from 'antd';
 import { useSearchTermMutation } from '../rootUseMutation';
-import { brandAppearanceQuery } from '../rootGql';
-import { useBrandAppearanceQuery } from '../rootUseQuery';
+import { ErrorModal } from '../wfluence/discover/components/List';
+import RecentlySearched from './RecentlySearched';
+import Footer from './Footer';
 
 const { Search } = Input;
 
@@ -20,20 +21,23 @@ const PageLayout = ({ history, Component, title, ...rest }) => {
                     <div className="title">Find Instagram Brand Influencers</div>
 
                     <Search
-                        placeholder="Eg: Zara"
+                        placeholder="Enter any brand instagram accoount. Eg: Zara"
                         enterButton="Search"
                         size="large"
+                        inputMode="search"
+                        // value={searchTerm}
+                        // onChange={(e)=> setSearchTerm(e.target.value)}
                         onSearch={async (value) => {
                             if (value) {
                                 setSearchTerm(value);
                                 await setSearchTermMutation({
                                     variables: { searchTerm: value },
-                                    refetchQueries: [
-                                        {
-                                            query: brandAppearanceQuery,
-                                            variables: { searchTerm: value, first: 10, skip: 0 },
-                                        },
-                                    ],
+                                    // refetchQueries: [
+                                    //     {
+                                    //         query: brandAppearanceQuery,
+                                    //         variables: { searchTerm: value, first: 10, skip: 0 },
+                                    //     },
+                                    // ],
                                 });
                             } else {
                                 message.warn('Brand name is Required.');
@@ -43,8 +47,23 @@ const PageLayout = ({ history, Component, title, ...rest }) => {
                     />
                 </div>
             </div>
+            <RecentlySearched setSearchTerm={async e => {
+                 setSearchTerm(e);
+                 await setSearchTermMutation({
+                     variables: { searchTerm: e },
+                 });
+            }}/>
 
-            <Component routerHistory={history} {...rest} setLoading={setLoading} />
+            <Component
+                routerHistory={history}
+                {...rest}
+                setLoading={setLoading}
+                searchTerm={searchTerm}
+                globalLoading={loading}
+            />
+            <ErrorModal />
+
+            <Footer />
         </div>
     );
 };

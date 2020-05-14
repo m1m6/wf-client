@@ -4,6 +4,8 @@ import ReactCountryFlag from 'react-country-flag';
 import capetalize from 'lodash/capitalize';
 import { numberFormat } from 'highcharts';
 import { nFormatter } from '../../../utils/numberUtils';
+import moment from 'moment';
+import PostModal from '../../discover/components/PostModal';
 
 export const getPostsTableColumns = () => {
     return [
@@ -93,19 +95,33 @@ export const getInfluencersTableColumns = () => {
             key: 'influencer',
         },
         {
-            title: '# Posts',
-            dataIndex: 'numberofposts',
-            key: 'numberofposts',
+            title: 'Post Date',
+            dataIndex: 'postDate',
+            key: 'postDate',
+        },
+        {
+            title: 'Post Type',
+            dataIndex: 'posttype',
+            key: 'posttype',
+            // filters: [
+            //     { text: 'Images', value: 'IMAGE' },
+            //     { text: 'Videos', value: 'VIDEO' },
+            //     { text: 'Carousel Album', value: 'CAROUSEL_ALBUM' },
+            // ],
         },
         {
             title: 'Eng. Rate',
             dataIndex: 'engagementrate',
             key: 'engagementrate',
+            sorter: (a, b) => {
+                return a.er - b.er
+            },
         },
         {
             title: 'Followers',
             dataIndex: 'followers',
             key: 'followers',
+            sorter: (a, b) => a.followersCount - b.followersCount,
         },
         // {
         // 	title: 'Impressions',
@@ -116,11 +132,13 @@ export const getInfluencersTableColumns = () => {
             title: 'Avg. Likes',
             dataIndex: 'likes',
             key: 'likes',
+            sorter: (a, b) => a.avgLikes - b.avgLikes,
         },
         {
             title: 'Avg. Comments',
             dataIndex: 'comments',
             key: 'comments',
+            sorter: (a, b) => a.avgComments - b.avgComments,
         },
         // {
         //     title: 'Views',
@@ -217,34 +235,26 @@ export const getInfluencersRows = (list) => {
     let rows = [];
     if (list && list.length) {
         try {
-            // get profiles
-            let profiles = new Set(list.map((listItem) => listItem.media.profile));
-            let profileWithMedia = [];
-
-            let index = 1;
-            for (let profile of profiles) {
-                let listLength = profileWithMedia.push({
-                    media: new Set(),
-                    ...profile,
-                });
-                for (let mentionItem of list) {
-                    if (mentionItem.media.profile.id === profile.id) {
-                        profileWithMedia[listLength - 1].media.add(mentionItem.media);
-                    }
-                }
+            list.map((listItem, index) => {
+                let { likesCount, commentsCount } = listItem.media;
+                let { followersCount } = listItem.media.profile;
+                let er = ((likesCount + commentsCount) / followersCount) * 100;
                 rows.push({
                     key: index,
-                    influencer: getPostBy(profile),
-                    numberofposts: profileWithMedia[listLength - 1].media.size,
-                    engagementrate: `${profile.engRateValue.toFixed(2)}%`,
-                    followers: nFormatter(profile.followersCount),
-                    likes: nFormatter(profile.avgLikes),
-                    comments: nFormatter(profile.avgComments),
-                    // views: 30,
-                    viewposts: 'Link goes here ',
+                    influencer: getPostBy(listItem.media.profile),
+                    postDate: moment.unix(listItem.media.timestamp).format('DD/MM/YYYY hh:mm a'),
+                    posttype: listItem.media.mediaType,
+                    engagementrate: `${er.toFixed(2)}%`,
+                    er,
+                    followers: nFormatter(listItem.media.profile.followersCount),
+                    followersCount: listItem.media.profile.followersCount,
+                    likes: nFormatter(listItem.media.profile.avgLikes),
+                    avgLikes: listItem.media.profile.avgLikes,
+                    comments: nFormatter(listItem.media.profile.avgComments),
+                    avgComments: listItem.media.profile.avgComments,
+                    viewposts: <PostModal media={listItem} er={er} />,
                 });
-                index++;
-            }
+            });
         } catch (e) {
             console.log(e);
             message.warning(e);
@@ -258,15 +268,20 @@ const getPostBy = (profile, item) => {
     return (
         <div>
             <span>
-                <img src={profile.profilePic} width={56} height={56} style={{borderRadius: '4px'}}/>
+                <img
+                    src={profile.profilePic}
+                    width={56}
+                    height={56}
+                    style={{ borderRadius: '4px' }}
+                />
             </span>
             <span style={{ marginLeft: '6px' }}>
                 <a
                     target="_blank"
-					href={item ? item.permalink : `https://instagram.com/${profile.username}`}
-					style={{
-						fontSize: '15px'
-					}}
+                    href={item ? item.permalink : `https://instagram.com/${profile.username}`}
+                    style={{
+                        fontSize: '15px',
+                    }}
                 >
                     {profile.name}
                 </a>

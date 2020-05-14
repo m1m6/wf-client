@@ -1,23 +1,25 @@
-import React from 'react';
-import List from '../wfluence/discover/components/List';
-import { useSearchTermQueryClient } from '../rootUseQuery';
+import React, { useState } from 'react';
 import { Result } from 'antd';
+import { SmileOutlined } from '@ant-design/icons';
+import List from '../wfluence/discover/components/List';
 
-const Home = ({ setLoading }) => {
-    const { loading: sLoading, data: sData, error: sError } = useSearchTermQueryClient();
+const Home = ({ setLoading, searchTerm }) => {
+    let [error, setError] = useState(null);
     return (
-        <div className="influencers-table">
-            {sData && sData.searchTerm ? (
-                <div className="home">
-                    <List searchTerm={sData.searchTerm} setLoading={setLoading} />
-                </div>
-            ) : (
-                <Result
-                    status="404"
-                    title="Find your brand competitors by only one click!"
-                    subTitle="Results will appear here..."
-                />
-            )}
+        <div>
+            <div className="influencers-table">
+                {searchTerm ? (
+                    <div className="home">
+                        <List searchTerm={searchTerm} setLoading={setLoading} setError={setError} />
+                    </div>
+                ) : (
+                    <Result
+                        status="404"
+                        title="Find your brand competitors by only one click!"
+                        subTitle="Results will appear here..."
+                    />
+                )}
+            </div>
         </div>
     );
 };
