@@ -45,8 +45,8 @@
     "yup": "^0.28.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build && gzipper --verbose ./build",
+    "start": "craco start",
+    "build": "GENERATE_SOURCEMAP=false craco build && gzipper --verbose ./build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
