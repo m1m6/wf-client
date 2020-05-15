@@ -11,15 +11,16 @@ import { browserHistory } from './browserHistory';
 // import './charts/HighChartTheme';
 // todod https://reacttraining.com/react-router/web/guides/code-splitting
 
-console.log(process.env.NODE_ENV)
-console.log(process.env.REACT_APP_HTTP_GRAPHQL_URL)
+console.log(process.env.NODE_ENV);
+console.log(process.env.REACT_APP_HTTP_GRAPHQL_URL);
+
 ReactDOM.render(
-	<ApolloProvider client={apolloClient}>
-		<ApolloHooksProvider client={apolloClient}>
-			<Router history={browserHistory}>
-				<App />
-			</Router>
-		</ApolloHooksProvider>
-	</ApolloProvider>,
-	document.getElementById('root')
+    <ApolloProvider client={apolloClient}>
+        <ApolloHooksProvider client={apolloClient}>
+            <Router history={browserHistory}>
+                <App />
+            </Router>
+        </ApolloHooksProvider>
+    </ApolloProvider>,
+    document.getElementById('root')
 );

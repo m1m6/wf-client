@@ -2,7 +2,7 @@
 	.ant-input {
 		border-radius: 0 !important;
 		border: solid 1px #dbdbdb;
-		font-family: Montserrat;
+		font-family: AvenirMedium;
 		font-size: 14px;
 		font-weight: 500;
 		color: $black;
@@ -19,7 +19,7 @@
 	}
 
 	.form-label {
-		font-family: Montserrat;
+		font-family: AvenirMedium;
 		@include font-size(14px);
 		font-weight: 500;
 		color: $black;
@@ -27,7 +27,7 @@
 	}
 
 	.form-label-v2 {
-		font-family: Montserrat;
+		font-family: AvenirMedium;
 		@include font-size(16px);
 		font-weight: 500;
 		color: whitesmoke;

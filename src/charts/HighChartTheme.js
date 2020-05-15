@@ -44,19 +44,19 @@ Highcharts.theme = {
 	title: {
 		style: {
 			color: "#000",
-			font: 'bold 16px "Montserrat", Verdana, sans-serif'
+			font: 'bold 16px "AvenirMedium", Verdana, sans-serif'
 		}
 	},
 	subtitle: {
 		style: {
 			color: "#666666",
-			font: 'bold 12px "Montserrat", Verdana, sans-serif'
+			font: 'bold 12px "AvenirMedium", Verdana, sans-serif'
 		}
 	},
 
 	legend: {
 		itemStyle: {
-			font: "9pt Montserrat, Trebuchet MS, Verdana, sans-serif",
+			font: "9pt AvenirMedium, Trebuchet MS, Verdana, sans-serif",
 			color: "black"
 		},
 		itemHoverStyle: {
