@@ -12,7 +12,7 @@ import defaultState from './defaultState';
 import resolvers from './resolvers';
 import { SET_ERROR_MODAL_STATUS } from '../rootGql';
 
-const httpLink = createHttpLink({ uri: process.env.REACT_APP_HTTP_GRAPHQL_URL });
+// const httpLink = createHttpLink({ uri: process.env.REACT_APP_HTTP_GRAPHQL_URL });
 const cache = new InMemoryCache({ freezeResults: true });
 cache.writeData({ data: defaultState });
 

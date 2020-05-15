@@ -2,7 +2,6 @@ import React from 'react';
 import { message } from 'antd';
 import ReactCountryFlag from 'react-country-flag';
 import capetalize from 'lodash/capitalize';
-import { numberFormat } from 'highcharts';
 import { nFormatter } from '../../../utils/numberUtils';
 import moment from 'moment';
 import PostModal from '../../discover/components/PostModal';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Modal, Result, Input, Button, Tooltip, Icon, message } from 'antd';
+import { Table, Modal, Result, Input,  Tooltip, Icon, message } from 'antd';
 import capitalize from 'lodash/capitalize';
 import BounceLoader from 'react-spinners/BounceLoader';
 
@@ -23,7 +23,6 @@ const List = ({ searchTerm, setLoading, setError , globalLoading}) => {
     const { data, loading, loadMore, error } = useBrandAppearanceQuery(searchTerm, first, skip);
 
     const onChange = async (page) => {
-        console.log("arrive here?", page)
         setTableLoading(true);
         if (page > currentPage) {
             await loadMore(searchTerm, first, (page - 1) * 10);
@@ -34,7 +33,6 @@ const List = ({ searchTerm, setLoading, setError , globalLoading}) => {
 
     useEffect(()=>{
         if (globalLoading){
-            console.log("useEffect")
             setCurrentPage(1);
         }
     })
@@ -46,7 +44,7 @@ const List = ({ searchTerm, setLoading, setError , globalLoading}) => {
                     status: true,
                 },
             })
-            .then(() => console.log('mutation succeed'))
+            .then(() => {})
             .catch((e) => console.log(e));
 
         return <></>;
@@ -80,7 +78,6 @@ const List = ({ searchTerm, setLoading, setError , globalLoading}) => {
 
     setLoading && setLoading(false);
 
-    console.log(loading, brandAppearance, error);
     return (
         <div>
             <div className="search-title">

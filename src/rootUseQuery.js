@@ -16,7 +16,7 @@ export const useSearchTermQueryClient = () => useQuery(SEARCH_TERM_QUERY_CLIENT,
     notifyOnNetworkStatusChange: true
 });
 export const useBrandAppearanceQuery = (searchTerm, first, skip) => {
-    const { data, loading, fetchMore, updateQuery, error, networkStatus } = useQuery(brandAppearanceQuery, {
+    const { data, loading, fetchMore, updateQuery, error } = useQuery(brandAppearanceQuery, {
         variables: {
             searchTerm,
             first,

@@ -1,10 +1,9 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import * as Yup from 'yup';
 import InputField from '../form/components/InputField';
 import { Formik } from 'formik';
 import { Form, Row, Icon, message } from 'antd';
 import Button from '../form/components/Button';
-import { Link } from 'react-router-dom';
 import { useContactForm } from '../rootUseMutation';
 import { showAllGraphQLErrors } from '../helper/graphqlErrors';
 

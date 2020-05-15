@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Result } from 'antd';
-import { SmileOutlined } from '@ant-design/icons';
 import List from '../wfluence/discover/components/List';
 
 const Home = ({ setLoading, searchTerm }) => {
