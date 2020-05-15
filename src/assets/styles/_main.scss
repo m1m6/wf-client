@@ -3,30 +3,30 @@
 
 @import "./layout/header";
 @import "./layout/layout";
-@import "./layout/sidebar";
+// @import "./layout/sidebar";
 
-@import "./form/input";
+// @import "./form/input";
 @import "./form/button";
 @import "./form/link";
 
-@import "auth/authWrapper";
-@import "auth/login";
+// @import "auth/authWrapper";
+// @import "auth/login";
 
-@import "./userProfile/profile";
+// @import "./userProfile/profile";
 
-@import "./wfluence/discover/discover";
-@import "./wfluence/profile/profile";
+// @import "./wfluence/discover/discover";
+// @import "./wfluence/profile/profile";
 
-@import "./wfluence/campaign/campaigns";
-@import "./wfluence/campaign/newCampaign";
-@import "./wfluence/campaign/campaignView";
-@import "./wfluence/campaign/campaignOffer";
+// @import "./wfluence/campaign/campaigns";
+// @import "./wfluence/campaign/newCampaign";
+// @import "./wfluence/campaign/campaignView";
+// @import "./wfluence/campaign/campaignOffer";
 
-@import "./wfluence/socialIntegration/instagram/connect";
+// @import "./wfluence/socialIntegration/instagram/connect";
 
 
-@import "./core/filter/commonFilters";
-@import "./charts/chartButton";
+// @import "./core/filter/commonFilters";
+// @import "./charts/chartButton";
 
 @font-face {
 	font-family: "AvenirMedium";
@@ -73,39 +73,39 @@ body,
 	box-sizing: inherit;
 }
 
-.ant-skeleton.ant-skeleton-active .ant-skeleton-content .ant-skeleton-title,
-.ant-skeleton.ant-skeleton-active
-	.ant-skeleton-content
-	.ant-skeleton-paragraph
-	> li {
-	background: -webkit-gradient(
-		linear,
-		left top,
-		right top,
-		color-stop(25%, #a32222),
-		color-stop(37%, #a31212),
-		color-stop(63%, #780d0d)
-	);
-	background: linear-gradient(90deg, #c6cbd9 25%, #e6e6e6 37%, #f2f2f2 63%);
-	background-size: 400% 100%;
-	-webkit-animation: ant-skeleton-loading 1.4s ease infinite;
-	animation: ant-skeleton-loading 1.4s ease infinite;
-}
+// .ant-skeleton.ant-skeleton-active .ant-skeleton-content .ant-skeleton-title,
+// .ant-skeleton.ant-skeleton-active
+// 	.ant-skeleton-content
+// 	.ant-skeleton-paragraph
+// 	> li {
+// 	background: -webkit-gradient(
+// 		linear,
+// 		left top,
+// 		right top,
+// 		color-stop(25%, #a32222),
+// 		color-stop(37%, #a31212),
+// 		color-stop(63%, #780d0d)
+// 	);
+// 	background: linear-gradient(90deg, #c6cbd9 25%, #e6e6e6 37%, #f2f2f2 63%);
+// 	background-size: 400% 100%;
+// 	-webkit-animation: ant-skeleton-loading 1.4s ease infinite;
+// 	animation: ant-skeleton-loading 1.4s ease infinite;
+// }
 
-.ant-skeleton.ant-skeleton-active .ant-skeleton-avatar {
-	background: -webkit-gradient(
-		linear,
-		left top,
-		right top,
-		color-stop(25%, #f2f2f2),
-		color-stop(37%, #e6e6e6),
-		color-stop(63%, #f2f2f2)
-	);
-	background: linear-gradient(90deg,  #c6cbd9 25%, #e6e6e6 37%, #f2f2f2 63%);
-	background-size: 400% 100%;
-	-webkit-animation: ant-skeleton-loading 1.4s ease infinite;
-	animation: ant-skeleton-loading 1.4s ease infinite;
-}
+// .ant-skeleton.ant-skeleton-active .ant-skeleton-avatar {
+// 	background: -webkit-gradient(
+// 		linear,
+// 		left top,
+// 		right top,
+// 		color-stop(25%, #f2f2f2),
+// 		color-stop(37%, #e6e6e6),
+// 		color-stop(63%, #f2f2f2)
+// 	);
+// 	background: linear-gradient(90deg,  #c6cbd9 25%, #e6e6e6 37%, #f2f2f2 63%);
+// 	background-size: 400% 100%;
+// 	-webkit-animation: ant-skeleton-loading 1.4s ease infinite;
+// 	animation: ant-skeleton-loading 1.4s ease infinite;
+// }
 
 
 .pointer {
