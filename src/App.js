@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import Layout from './layout/Layout';
-import Sidebar from './layout/Sidebar';
+// import Sidebar from './layout/Sidebar';
 import Content from './layout/Content';
 import Routes from './routes';
-import { auth } from './signupLogin/auth';
-import { useMeQuery } from './rootUseQuery';
-import { Spin } from 'antd';
-import { useUserData } from './signupLogin/login/useUserDataMutations';
+// import { auth } from './signupLogin/auth';
+// import { useMeQuery } from './rootUseQuery';
+// import { Spin } from 'antd';
+// import { useUserData } from './signupLogin/login/useUserDataMutations';
 import WHeader from './layout/Header';
 
-const token = auth.getAccessToken();
+// const token = auth.getAccessToken();
 
 const App = () => {
     // const { loading, data, error } = useMeQuery();
