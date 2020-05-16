@@ -12,8 +12,8 @@ self.__precacheManifest = [
     "url": "/static/js/runtime~main.a8a9905a.js"
   },
   {
-    "revision": "5f9c10a5364d69bbe8be2d58b774243c",
-    "url": "/static/media/AvenirLT-Medium.5f9c10a5.ttf"
+    "revision": "b6529634b7eec54d710d463bf1bf75de",
+    "url": "/static/media/AvenirLT-Medium.b6529634.eot"
   },
   {
     "revision": "6a28f1f39f95fc78c301",
@@ -36,15 +36,15 @@ self.__precacheManifest = [
     "url": "/static/media/AvenirLT-Black.3fcc4b81.ttf"
   },
   {
-    "revision": "b6529634b7eec54d710d463bf1bf75de",
-    "url": "/static/media/AvenirLT-Medium.b6529634.eot"
+    "revision": "5f9c10a5364d69bbe8be2d58b774243c",
+    "url": "/static/media/AvenirLT-Medium.5f9c10a5.ttf"
   },
   {
     "revision": "6a28f1f39f95fc78c301",
     "url": "/static/css/2.00744558.chunk.css"
   },
   {
-    "revision": "21d72f1029265aa882d989d5176cab46",
+    "revision": "bdb140d757828802962b09444513ec12",
     "url": "/index.html"
   }
 ];
