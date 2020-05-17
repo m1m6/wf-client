@@ -4,11 +4,23 @@ import { useSearchTermMutation } from '../rootUseMutation';
 import { ErrorModal } from '../wfluence/discover/components/List';
 import RecentlySearched from './RecentlySearched';
 import Footer from './Footer';
+import { Redirect } from 'react-router-dom';
 
 const { Search } = Input;
 
-const PageLayout = ({ history, Component, title, ...rest }) => {
-    let [searchTerm, setSearchTerm] = useState('');
+const PageLayout = ({ history, Component, title, match, ...rest }) => {
+    let param = match && match.params && match.params.id ? match.params.id : null;
+    let paramSearchTerm = '';
+
+    if (param) {
+        // try{
+        paramSearchTerm = param.split('-')[0];
+        // }catch(e){
+        //     <Redirect to="/"
+        // }
+    }
+
+    let [searchTerm, setSearchTerm] = useState(paramSearchTerm);
     let [loading, setLoading] = useState(false);
 
     const [setSearchTermMutation] = useSearchTermMutation(searchTerm);
@@ -32,12 +44,6 @@ const PageLayout = ({ history, Component, title, ...rest }) => {
                                 setSearchTerm(value);
                                 await setSearchTermMutation({
                                     variables: { searchTerm: value },
-                                    // refetchQueries: [
-                                    //     {
-                                    //         query: brandAppearanceQuery,
-                                    //         variables: { searchTerm: value, first: 10, skip: 0 },
-                                    //     },
-                                    // ],
                                 });
                             } else {
                                 message.warn('Brand name is Required.');
@@ -47,12 +53,14 @@ const PageLayout = ({ history, Component, title, ...rest }) => {
                     />
                 </div>
             </div>
-            <RecentlySearched setSearchTerm={async e => {
-                 setSearchTerm(e);
-                 await setSearchTermMutation({
-                     variables: { searchTerm: e },
-                 });
-            }}/>
+            <RecentlySearched
+                setSearchTerm={async (e) => {
+                    setSearchTerm(e);
+                    await setSearchTermMutation({
+                        variables: { searchTerm: e },
+                    });
+                }}
+            />
 
             <Component
                 routerHistory={history}

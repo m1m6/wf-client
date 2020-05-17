@@ -22,6 +22,7 @@ import { ROLES } from './signupLogin/constants';
 
 export const ROUTE_PATHS = {
     home: '/',
+    brands: '/brands/:id',
     notFound: '*',
     app: {
         discover: '/discover',
@@ -52,7 +53,16 @@ const Routes = ({ userRole }) => {
         <Switch>
             <ProtectedRoute
                 path={ROUTE_PATHS.home}
+                component={matchProps => (
+                    <PageLayout Component={Home} {...matchProps} title="Home page" />
+                )}
                 exact
+                roles={[ROLES.ADMIN, ROLES.BRANDS, ROLES.CREATORS]}
+                userRole={userRole}
+            />
+
+<ProtectedRoute
+                path={ROUTE_PATHS.brands}
                 component={matchProps => (
                     <PageLayout Component={Home} {...matchProps} title="Home page" />
                 )}
@@ -60,6 +70,15 @@ const Routes = ({ userRole }) => {
                 userRole={userRole}
             />
 
+{/* <ProtectedRoute
+                path={ROUTE_PATHS.home}
+                exact
+                component={matchProps => (
+                    <PageLayout Component={Home} {...matchProps} title="Home page" />
+                )}
+                roles={[ROLES.ADMIN, ROLES.BRANDS, ROLES.CREATORS]}
+                userRole={userRole}
+            /> */}
             {/* <ProtectedRoute
                 path={ROUTE_PATHS.app.discover}
                 component={matchProps => (
