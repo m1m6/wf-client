@@ -14,6 +14,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 // import Signup from './signupLogin/signup/components/Signup';
 import { ROLES } from './signupLogin/constants';
 import Privacy from './components/Privacy';
+import Disclaimer from './components/Disclaimer';
+import DMCA from './components/DMCA';
 // import { auth } from './signupLogin/auth';
 // import Connect from './socialIntegration/instagram/components/Connect';
 // import CreatorCampaigns from './wfluence/campaign/components/CreatorCampaigns';
@@ -25,6 +27,8 @@ export const ROUTE_PATHS = {
     home: '/',
     brands: '/brands/:id',
     privacyPolicy: '/privacy-policy',
+    disclaimer: '/disclaimer',
+    dmca: '/dmca',
     notFound: '*',
     app: {
         discover: '/discover',
@@ -75,6 +79,18 @@ const Routes = ({ userRole }) => {
                 path={ROUTE_PATHS.privacyPolicy}
                 component={(matchProps) => (
                     <PageLayout Component={Privacy} {...matchProps} title="Home page" />
+                )}
+            />
+            <ProtectedRoute
+                path={ROUTE_PATHS.disclaimer}
+                component={(matchProps) => (
+                    <PageLayout Component={Disclaimer} {...matchProps} title="Home page" />
+                )}
+            />
+            <ProtectedRoute
+                path={ROUTE_PATHS.dmca}
+                component={(matchProps) => (
+                    <PageLayout Component={DMCA} {...matchProps} title="Home page" />
                 )}
             />
             {/* <ProtectedRoute
