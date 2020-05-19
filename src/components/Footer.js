@@ -88,6 +88,7 @@ const Footer = ({ history, Component, title, ...rest }) => {
             </div>
             <div style={{ width: '50%' }} className="footer-links">
                 2019-2020 © Brand Influencers Social. All rights reserved{' '}
+               <div> <a href="/privacy-policy">Privacy Policy</a></div>
             </div>
         </div>
     );

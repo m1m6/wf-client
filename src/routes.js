@@ -13,6 +13,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 // import CampaignView from './wfluence/campaign/components/CampaignView';
 // import Signup from './signupLogin/signup/components/Signup';
 import { ROLES } from './signupLogin/constants';
+import Privacy from './components/Privacy';
 // import { auth } from './signupLogin/auth';
 // import Connect from './socialIntegration/instagram/components/Connect';
 // import CreatorCampaigns from './wfluence/campaign/components/CreatorCampaigns';
@@ -23,6 +24,7 @@ import { ROLES } from './signupLogin/constants';
 export const ROUTE_PATHS = {
     home: '/',
     brands: '/brands/:id',
+    privacyPolicy: '/privacy-policy',
     notFound: '*',
     app: {
         discover: '/discover',
@@ -33,7 +35,7 @@ export const ROUTE_PATHS = {
         connectIg: '/connect',
         creatorCampaigns: '/creator-campaigns',
         campaignOffer: '/campaign-offer/:id',
-        notifications: '/notifications'
+        notifications: '/notifications',
     },
     auth: {
         me: '/me', // TODO add
@@ -44,8 +46,8 @@ export const ROUTE_PATHS = {
         passwordReset: '/password-reset/:token', // TODO add
         brands: '/brands',
         creators: '/creators',
-        accountSettings: '/account-settings'
-    }
+        accountSettings: '/account-settings',
+    },
 };
 
 const Routes = ({ userRole }) => {
@@ -53,7 +55,7 @@ const Routes = ({ userRole }) => {
         <Switch>
             <ProtectedRoute
                 path={ROUTE_PATHS.home}
-                component={matchProps => (
+                component={(matchProps) => (
                     <PageLayout Component={Home} {...matchProps} title="Home page" />
                 )}
                 exact
@@ -61,16 +63,21 @@ const Routes = ({ userRole }) => {
                 userRole={userRole}
             />
 
-<ProtectedRoute
+            <ProtectedRoute
                 path={ROUTE_PATHS.brands}
-                component={matchProps => (
+                component={(matchProps) => (
                     <PageLayout Component={Home} {...matchProps} title="Home page" />
                 )}
                 roles={[ROLES.ADMIN, ROLES.BRANDS, ROLES.CREATORS]}
                 userRole={userRole}
             />
-
-{/* <ProtectedRoute
+            <ProtectedRoute
+                path={ROUTE_PATHS.privacyPolicy}
+                component={(matchProps) => (
+                    <PageLayout Component={Privacy} {...matchProps} title="Home page" />
+                )}
+            />
+            {/* <ProtectedRoute
                 path={ROUTE_PATHS.home}
                 exact
                 component={matchProps => (
@@ -86,7 +93,7 @@ const Routes = ({ userRole }) => {
                 )}
                 roles={[ROLES.ADMIN, ROLES.BRANDS]}
             /> */}
-{/* 
+            {/* 
             <ProtectedRoute
                 path={ROUTE_PATHS.auth.accountSettings}
                 component={matchProps => (
@@ -95,7 +102,7 @@ const Routes = ({ userRole }) => {
                 roles={[ROLES.ADMIN, ROLES.BRANDS]}
                 userRole={userRole}
             /> */}
-{/* 
+            {/* 
             <ProtectedRoute
                 path={ROUTE_PATHS.app.profile}
                 component={matchProps => (
@@ -104,7 +111,7 @@ const Routes = ({ userRole }) => {
                 roles={[ROLES.ADMIN, ROLES.BRANDS]}
                 userRole={userRole}
             /> */}
-{/* 
+            {/* 
             <ProtectedRoute
                 path={ROUTE_PATHS.app.newCampaign}
                 exact
@@ -178,7 +185,7 @@ const Routes = ({ userRole }) => {
                 roles={[ROLES.ADMIN, ROLES.CREATORS]}
                 userRole={userRole}
             /> */}
-{/* 
+            {/* 
             <ProtectedRoute
                 path={ROUTE_PATHS.app.notifications}
                 component={matchProps => (
@@ -225,7 +232,7 @@ const Routes = ({ userRole }) => {
                     />
                 )}
             /> */}
-{/* 
+            {/* 
             <Route
                 path={ROUTE_PATHS.auth.login}
                 exact
