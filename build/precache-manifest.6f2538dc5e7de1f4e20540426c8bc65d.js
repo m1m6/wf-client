@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "e9d78c5f78aeab25254a8ba4aec921ef",
-    "url": "/static/media/AvenirLT-Medium.e9d78c5f.woff"
+    "revision": "1f42bb229c4e731dc9a9fd657f834bcf",
+    "url": "/static/media/AvenirLT-Black.1f42bb22.woff"
   },
   {
-    "revision": "01d78acb3b3bcd016702",
+    "revision": "d20c0a62fdd15922452d",
     "url": "/static/css/main.84588c58.chunk.css"
   },
   {
@@ -20,12 +20,12 @@ self.__precacheManifest = [
     "url": "/static/js/2.c0442ed7.chunk.js"
   },
   {
-    "revision": "1f42bb229c4e731dc9a9fd657f834bcf",
-    "url": "/static/media/AvenirLT-Black.1f42bb22.woff"
+    "revision": "e9d78c5f78aeab25254a8ba4aec921ef",
+    "url": "/static/media/AvenirLT-Medium.e9d78c5f.woff"
   },
   {
-    "revision": "01d78acb3b3bcd016702",
-    "url": "/static/js/main.63ba9946.chunk.js"
+    "revision": "d20c0a62fdd15922452d",
+    "url": "/static/js/main.d2defa69.chunk.js"
   },
   {
     "revision": "bf8c68daad76c3d32c47c2966522ef02",
@@ -44,7 +44,7 @@ self.__precacheManifest = [
     "url": "/static/css/2.00744558.chunk.css"
   },
   {
-    "revision": "be6561b33243400a58f13666deb090db",
+    "revision": "3ac3150a8791d4979b4f6235242327a3",
     "url": "/index.html"
   }
 ];

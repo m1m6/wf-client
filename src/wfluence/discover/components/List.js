@@ -98,7 +98,7 @@ const List = ({ searchTerm, setLoading, setError , globalLoading}) => {
     );
 };
 
-export const ErrorModal = ({ showModal = true }) => {
+export const ErrorModal = ({ showModal = true, searchTerm }) => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [email, setEmail] = useState(undefined);
@@ -120,7 +120,7 @@ export const ErrorModal = ({ showModal = true }) => {
                     setIsSubmitting(true);
                     // send request
                     await visitonSubscription({
-                        variables: { email, brand: sData.searchTerm },
+                        variables: { email, brand: searchTerm ||( sData ? sData.searchTerm: '') },
                     });
                     setTimeout(async () => {
                         setIsSubmitting(false);
@@ -156,7 +156,7 @@ export const ErrorModal = ({ showModal = true }) => {
             <div>
                 <Result
                     icon={<FrownOutlined />}
-                    title={`Sorry, we couldn't find any results matching brand: ${sData.searchTerm}`}
+                    title={`Sorry, we couldn't find any results matching brand: ${searchTerm || (sData ? sData.searchTerm: '')}`}
                     style={{
                         paddingBottom: '30px',
                     }}

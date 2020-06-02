@@ -69,7 +69,7 @@ const PageLayout = ({ history, Component, title, match, ...rest }) => {
                 searchTerm={searchTerm}
                 globalLoading={loading}
             />
-            <ErrorModal />
+            <ErrorModal searchTerm={searchTerm}/>
 
             <Footer />
         </div>
