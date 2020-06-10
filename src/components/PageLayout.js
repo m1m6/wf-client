@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input, message } from 'antd';
 import { useSearchTermMutation } from '../rootUseMutation';
 import { ErrorModal } from '../wfluence/discover/components/List';
@@ -24,6 +24,11 @@ const PageLayout = ({ history, Component, title, match, ...rest }) => {
     let [loading, setLoading] = useState(false);
 
     const [setSearchTermMutation] = useSearchTermMutation(searchTerm);
+
+    useEffect(() => {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+    }, []);
+
     return (
         <div className="page-layout">
             {/* <span><Icon type="left-circle" onClick={()=> history.goBack()}/></span> */}
@@ -31,7 +36,14 @@ const PageLayout = ({ history, Component, title, match, ...rest }) => {
             <div className="sub-header">
                 <div className="search-form-wrapper">
                     <div className="title">Find Instagram Brand Influencers</div>
-
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                        <ins
+                            class="adsbygoogle"
+                            style={{ display: 'inline-block', width: '900px', height: '120px' }}
+                            data-ad-client="ca-pub-1474383581923344"
+                            data-ad-slot="6538695563"
+                        ></ins>
+                    </div>
                     <Search
                         placeholder="Enter any brand instagram accoount. Eg: Zara"
                         enterButton="Search"
@@ -62,6 +74,21 @@ const PageLayout = ({ history, Component, title, match, ...rest }) => {
                 }}
             />
 
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                <ins
+                    class="adsbygoogle"
+                    style={{ display: 'inline-block', width: '400px', height: '300px' }}
+                    data-ad-client="ca-pub-1474383581923344"
+                    data-ad-slot="6538695563"
+                ></ins>
+                 <ins
+                    class="adsbygoogle"
+                    style={{ display: 'inline-block', width: '400px', height: '300px' }}
+                    data-ad-client="ca-pub-1474383581923344"
+                    data-ad-slot="6538695563"
+                ></ins>
+            </div>
+
             <Component
                 routerHistory={history}
                 {...rest}
@@ -69,8 +96,16 @@ const PageLayout = ({ history, Component, title, match, ...rest }) => {
                 searchTerm={searchTerm}
                 globalLoading={loading}
             />
-            <ErrorModal searchTerm={searchTerm}/>
+            <ErrorModal searchTerm={searchTerm} />
 
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                <ins
+                    class="adsbygoogle"
+                    style={{ display: 'inline-block', width: '900px', height: '120px' }}
+                    data-ad-client="ca-pub-1474383581923344"
+                    data-ad-slot="6538695563"
+                ></ins>
+            </div>
             <Footer />
         </div>
     );

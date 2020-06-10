@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Result } from 'antd';
 import List from '../wfluence/discover/components/List';
 
