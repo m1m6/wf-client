@@ -4,7 +4,6 @@ import { useSearchTermMutation } from '../rootUseMutation';
 import { ErrorModal } from '../wfluence/discover/components/List';
 import RecentlySearched from './RecentlySearched';
 import Footer from './Footer';
-import { Redirect } from 'react-router-dom';
 
 const { Search } = Input;
 
@@ -43,7 +42,11 @@ const PageLayout = ({ history, Component, title, match, ...rest }) => {
                             data-ad-client="ca-pub-1474383581923344"
                             data-ad-slot="6538695563"
                         ></ins>
+                        <br />
+                        <br />
+                        <br />
                     </div>
+
                     <Search
                         placeholder="Enter any brand instagram accoount. Eg: Zara"
                         enterButton="Search"
@@ -74,21 +77,6 @@ const PageLayout = ({ history, Component, title, match, ...rest }) => {
                 }}
             />
 
-            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                <ins
-                    class="adsbygoogle"
-                    style={{ display: 'inline-block', width: '400px', height: '300px' }}
-                    data-ad-client="ca-pub-1474383581923344"
-                    data-ad-slot="6538695563"
-                ></ins>
-                 <ins
-                    class="adsbygoogle"
-                    style={{ display: 'inline-block', width: '400px', height: '300px' }}
-                    data-ad-client="ca-pub-1474383581923344"
-                    data-ad-slot="6538695563"
-                ></ins>
-            </div>
-
             <Component
                 routerHistory={history}
                 {...rest}
@@ -97,6 +85,35 @@ const PageLayout = ({ history, Component, title, match, ...rest }) => {
                 globalLoading={loading}
             />
             <ErrorModal searchTerm={searchTerm} />
+
+            <div
+                style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    'flex-direction': 'column',
+                }}
+            >
+                <div style={{ textAlign: 'center', fontSize: '18px', padding: '20px', paddingLeft: '30px', paddingRight: '30px' }}>
+                    In 2017, 92% of marketers who used influencer marketing found it to be
+                    effective. Influencer marketing has grown steadily in popularity over the past
+                    few years, and for good reason -- oftentimes, customers trust influencers over
+                    celebrities when choosing which products to buy, or which brands to endorse. In
+                    fact, marketers have seen such success from influencer marketing that almost 40%
+                    of them plan to increase their influencer budget in 2018 and beyond.
+                </div>
+                <ins
+                    class="adsbygoogle"
+                    style={{
+                        display: 'inline-block',
+                        width: '400px',
+                        height: '300px',
+                        margin: '0 auto',
+                    }}
+                    data-ad-client="ca-pub-1474383581923344"
+                    data-ad-slot="6538695563"
+                ></ins>
+            </div>
 
             <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                 <ins

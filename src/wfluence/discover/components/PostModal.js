@@ -5,7 +5,6 @@ import extract from 'mention-hashtag';
 import { nFormatter } from '../../../utils/numberUtils';
 import { getColor } from '../utils';
 
-
 const PostModal = ({ media }) => {
     let [visible, setVisible] = useState(false);
 
@@ -127,6 +126,14 @@ const PostModal = ({ media }) => {
                                 {`@${tag}`}
                             </Tag>
                         ))}
+                    </div>
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                        <ins
+                            class="adsbygoogle"
+                            style={{ display: 'inline-block', width: '400px', height: '300px' }}
+                            data-ad-client="ca-pub-1474383581923344"
+                            data-ad-slot="6538695563"
+                        ></ins>
                     </div>
                     <div style={{ fontSize: '16px', fontWeight: 600 }}>Tags: </div>
                     <div className="post-tags">
